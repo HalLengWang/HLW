@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TodoCard extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "todo_list_id")
     private TodoList todoList;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "todo_type_list_id")
     private TodoTypeList todoTypeList;
 
     private String title;

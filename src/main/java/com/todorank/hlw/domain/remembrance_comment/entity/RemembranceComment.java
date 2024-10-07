@@ -21,10 +21,12 @@ import java.util.Set;
 @AllArgsConstructor
 public class RemembranceComment extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "site_user_id")
     //TODO erd 수정이 필요함
     private SiteUser user;
 
+    @ManyToOne
+    @JoinColumn(name = "remembrance_id")
     private Remembrance remembrance;
 
     private String content;

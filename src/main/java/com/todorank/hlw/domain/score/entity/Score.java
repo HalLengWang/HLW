@@ -16,11 +16,11 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Score extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "site_user_id")
     private SiteUser user;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "todo_card_id")
     private TodoCard todoCard;
 
     private String source;

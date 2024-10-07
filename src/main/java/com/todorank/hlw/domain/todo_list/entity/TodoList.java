@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class TodoList extends BaseEntity {
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "site_user_id")
     private SiteUser user;
 
     private String title;
