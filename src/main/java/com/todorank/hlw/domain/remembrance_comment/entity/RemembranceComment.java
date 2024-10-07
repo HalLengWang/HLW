@@ -3,10 +3,8 @@ package com.todorank.hlw.domain.remembrance_comment.entity;
 import com.todorank.hlw.domain.remembrance.entity.Remembrance;
 import com.todorank.hlw.domain.user.entity.SiteUser;
 import com.todorank.hlw.global.jpa.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +20,12 @@ import java.util.Set;
 public class RemembranceComment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "site_user_id")
-    //TODO erd 수정이 필요함
+    @NotNull
     private SiteUser user;
 
     @ManyToOne
     @JoinColumn(name = "remembrance_id")
+    @NotNull
     private Remembrance remembrance;
 
     private String content;

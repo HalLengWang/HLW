@@ -5,6 +5,7 @@ import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import com.todorank.hlw.global.jpa.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +21,12 @@ import java.time.LocalDateTime;
 public class TodoCard extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "todo_list_id")
+    @NotNull
     private TodoList todoList;
 
     @ManyToOne
     @JoinColumn(name = "todo_type_list_id")
+    @NotNull
     private TodoTypeList todoTypeList;
 
     private String title;

@@ -5,6 +5,7 @@ import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.user.entity.SiteUser;
 import com.todorank.hlw.global.jpa.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.Set;
 public class Remembrance extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todo_list_id")
+    @NotNull
     private TodoList todoList;
 
     private String remembrance;
