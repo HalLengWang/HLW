@@ -39,6 +39,11 @@ public class UserController {
             bindingResult.reject("signup error", "이미 가입된 아이디 혹은 이메일입니다.");
             return "signup_form";
         }
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("/login")
+    public String userLogin() {
         return "login_form";
     }
 }
