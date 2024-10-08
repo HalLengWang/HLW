@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.form {
+    background-color: #f8f8f8;
+    padding: 80px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 60px; /* 간격을 조금 넓힘 */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  padding: 15px 20px; /* 위아래 패딩 추가 */
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #888;
+    padding: 20px;
+    color: white;
+    font-size: 24px;
+    border-radius: 5px 5px 0 0;
+}
+
+.navigation a {
+    color: #000;
+    text-decoration: none;
+}
+
+.todo-list-search {
+    margin: 20px 0;
+}
+
+.todo-list-search input {
+    padding: 8px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+
+.todo-item .icon {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.todo-item .text {
+    flex: 1;
+    text-align: left;
+    font-size: 18px;
+}
+
+.todo-item .time {
+    font-size: 14px;
+    color: #666;
+}
+
+.pagination {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.pagination a {
+    margin: 0 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons .button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.edit {
+    background-color: #bfbfbf;
+    color: #333;
+}
+
+.register {
+    background-color: #000;
+    color: #fff;
+}
