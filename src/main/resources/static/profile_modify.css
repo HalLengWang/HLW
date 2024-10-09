@@ -1,0 +1,217 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    font-size: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input[type="text"] {
+    padding: 5px 25px 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}
+
+.ic-search {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    opacity: 0.6;
+}
+
+/* Main container for profile sections */
+.profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    padding: 40px 20px;
+    height: 60vh;
+    box-sizing: border-box;
+}
+
+/* Left side profile section */
+.profile-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Profile photo section */
+.profile-photo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-img-container {
+    position: relative;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-star {
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    width: 30px;
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-text h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.user-role {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Profile actions below profile photo */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.profile-actions .edit-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px; /* 글씨 크기에 맞는 패딩 */
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: auto; /* 글씨 길이에 맞춰서 자동 조정 */
+}
+
+.profile-actions .file-label,
+.profile-actions .save-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* 스타일 설정: 파일 선택 버튼 */
+.file-label {
+    display: block;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.file-input {
+    display: none;
+}
+
+.profile-details {
+    width: 40%;
+}
+
+.profile-details div {
+    margin-bottom: 20px;
+}
+
+.profile-details input[type="text"],
+.profile-details textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.nickname label, .bio label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Footer styling */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
