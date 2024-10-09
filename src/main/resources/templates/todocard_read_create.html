@@ -8,13 +8,16 @@
 </head>
 <body>
 <div class="navbar">
-    <div class="user">이상수 - 군도</div>
+    <div class="user">이상수 - 골드</div>
     <div class="menu">
         <a href="#">홈</a> |
         <a href="#">업무</a> |
         <a href="#">프로필</a> |
         <a href="#">로그인 / 로그아웃</a>
-        <input type="text" placeholder="Search in site">
+        <div class="textfield">
+            <input type="text" class="search-box" placeholder="Search in site">
+            <img class="ic-search" src="lens.png" alt="검색 아이콘" />
+        </div>
     </div>
 </div>
 
@@ -34,11 +37,9 @@
                 <div class="checkbox"><input type="checkbox" checked> 할 일</div>
             </div>
             <div class="progress">
-                <p>진행도</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 60%;"></div>
-                </div>
-                <p>60%</p>
+                <label for="progress-slider">진행도</label>
+                <input type="range" id="progress-slider" min="0" max="100" value="60" oninput="updateProgressValue(this.value)">
+                <p id="progress-value">60%</p>
             </div>
         </div>
 
@@ -52,10 +53,8 @@
             </div>
         </div>
     </div>
-
-    <button class="save-btn">저장</button>
-</div>
-
+        <button class="save-btn">저장</button>
+    </div>
 <div class="memo-card">
     <div class="header">ToDo Card 메모</div>
     <div class="memo-content">
@@ -65,7 +64,16 @@
         <label for="memo">메모</label>
         <textarea id="memo" placeholder="메모 내용을 입력하세요."></textarea>
 
+        <button class="memo-save-btn">저장</button>
+
     </div>
 </div>
 </body>
 </html>
+
+<script>
+    function updateProgressValue(value) {
+        document.getElementById("progress-value").textContent = value + "%";
+    }
+</script>
+
