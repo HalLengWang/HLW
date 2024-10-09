@@ -46,9 +46,4 @@ public class UserController {
     public String userLogin() {
         return "login_form";
     }
-
-    @GetMapping("/signup2")
-    public String root() {
-        return "signup";
-    }
 }
