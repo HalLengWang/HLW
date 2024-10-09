@@ -12,8 +12,4 @@ public class MainController {
     public String index() {
         return "홈입니다.";
     }
-    @GetMapping("/todo/detail")
-    public String detail(){
-        return "todo_list_detail";
-    }
 }
