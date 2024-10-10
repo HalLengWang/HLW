@@ -19,17 +19,17 @@ public class UserController {
 
     @GetMapping("/signup")
     public String userSignup(UserCreateForm userCreateForm) {
-        return "signup_form";
+        return "signup";
     }
 
     @PostMapping("/signup")
     public String userSignup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "signup_form";
+            return "signup";
         }
         if (!userCreateForm.getPassword().equals(userCreateForm.getPasswordCheck())) {
             bindingResult.rejectValue("passwordCheck", "password incorrect", "비밀번호가 다릅니다.");
-            return "signup_form";
+            return "signup";
         }
         try {
             this.userService.create(userCreateForm.getUsername(), userCreateForm.getPassword(),
@@ -44,6 +44,6 @@ public class UserController {
 
     @GetMapping("/login")
     public String userLogin() {
-        return "login_form";
+        return "login";
     }
 }

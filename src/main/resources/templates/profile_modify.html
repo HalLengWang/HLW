@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 수정</title>
+    <link rel="stylesheet" href="/profile_modify.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="back-link">&lt; 프로필</div>
+    <nav class="menu">
+        <div class="nav-links">
+            <a href="#">홈</a>
+            <a href="#">업무</a>
+            <a href="#">로그아웃</a>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search in site">
+            <img src="/lens.png" alt="검색 아이콘" class="ic-search">
+        </div>
+    </nav>
+</header>
+
+<section class="profile-container">
+    <div class="profile-left">
+        <section class="profile-photo">
+            <div class="profile-img-container">
+                <img src="/star_of_bethlehem.png" alt="별 아이콘" class="profile-star">
+                <img src="/avatar.png" alt="프로필 이미지" class="profile-img">
+            </div>
+            <div class="profile-text">
+                <h2>길현수</h2>
+                <p class="user-role">User</p>
+            </div>
+        </section>
+        <section class="profile-actions">
+            <button class="edit-button">프로필 수정</button>
+            <br/>
+            <label for="upload-photo" class="file-label">파일 선택</label>
+            <input type="file" id="upload-photo" class="file-input">
+            <button class="save-button">변경사항 저장</button>
+        </section>
+    </div>
+    <div class="profile-details">
+        <div class="nickname">
+            <label for="nickname">닉네임</label>
+            <input type="text" id="nickname" placeholder="Enter your new nickname">
+            <button class="save-button">변경사항 저장</button>
+        </div>
+        <div class="bio">
+            <label for="bio">자기소개</label>
+            <textarea id="bio" placeholder="Write a new bio"></textarea>
+            <button class="save-button">변경사항 저장</button>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <a href="#">개인정보처리방침</a>
+    <a href="#">정책</a>
+</footer>
+</body>
+</html>
