@@ -27,4 +27,6 @@ public class SiteUser extends BaseEntity {
 
     @Column(columnDefinition = "text")
     private String intro;
+
+    private String nickname;
 }
