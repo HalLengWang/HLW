@@ -9,8 +9,8 @@ public class MainController {
     public String root() {
         return "login_after";
     }
-    @GetMapping("/todo")
-    public String todo(){
-        return "todo_list";
+    @GetMapping("/t")
+    public String t(){
+        return "login_before";
     }
 }
