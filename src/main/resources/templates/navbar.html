@@ -1,11 +1,14 @@
-<nav th:fragment="navbarFragment" class="top-bar">
+<nav th:fragment="navbarFragment">
     <div>
-        <a class="title" href="/">SBB</a>
-        <div class="navigation" id="navbarSupportedContent">
+        <a href="/">SBB</a>
+        <div id="navbarSupportedContent">
             <ul>
                 <li>
-                    <a class="tab" th:href="@{/user/login}" sec:authorize="isAnonymous()">로그인</a>
-                    <a class="tab" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
+                    <a th:href="@{/user/signup}">회원가입</a>
+                </li>
+                <li>
+                    <a th:href="@{/user/login}" sec:authorize="isAnonymous()">로그인</a>
+                    <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
                 </li>
             </ul>
         </div>
