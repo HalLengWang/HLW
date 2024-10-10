@@ -46,51 +46,58 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="input">
-                    <div class="title2">사용자명</div>
-                    <div class="textfield3">
-                        <input class="text3" type="text" placeholder="Enter your username">
+            <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+                <div class="alert alert-danger row" role="alert" th:if="${#fields.hasAnyErrors()}">
+                    <div th:each="err : ${#fields.allErrors()}">
+                        <p th:text="${err}"></p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input">
-                    <div class="title2">비밀번호</div>
-                    <div class="textfield3">
-                        <input class="text3" type="password" placeholder="Enter your password">
+                <div class="row">
+                    <div class="input">
+                        <div class="title2">사용자명</div>
+                        <div class="textfield3">
+                            <input class="text3" type="text" placeholder="Enter your username" th:field="*{username}">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input">
-                    <div class="title2">비밀번호 확인</div>
-                    <div class="textfield3">
-                        <input class="text3" type="password" placeholder="Confirm your password">
+                <div class="row">
+                    <div class="input">
+                        <div class="title2">비밀번호</div>
+                        <div class="textfield3">
+                            <input class="text3" type="password" placeholder="Enter your password" th:field="*{password}">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input">
-                    <div class="title2">이메일</div>
-                    <div class="textfield3">
-                        <input class="text3" type="email" placeholder="Enter your email">
+                <div class="row">
+                    <div class="input">
+                        <div class="title2">비밀번호 확인</div>
+                        <div class="textfield3">
+                            <input class="text3" type="password" placeholder="Confirm your password" th:field="*{passwordCheck}">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input">
-                    <div class="title2">닉네임</div>
-                    <div class="textfield3">
-                        <input class="text3" type="nickname" placeholder="Enter your nickname">
+                <div class="row">
+                    <div class="input">
+                        <div class="title2">이메일</div>
+                        <div class="textfield3">
+                            <input class="text3" type="email" placeholder="Enter your email" th:field="*{email}">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="button">
-                <div class="primary">
-                    <button class="title3">회원가입</button>
+                <div class="row">
+                    <div class="input">
+                        <div class="title2">닉네임</div>
+                        <div class="textfield3">
+                            <input class="text3" type="text" placeholder="Enter your nickname" th:field="*{nickname}">
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="button">
+                    <div class="primary">
+                        <button class="title3">회원가입</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="frame-427318967">
