@@ -9,4 +9,8 @@ public class MainController {
     public String root() {
         return "redirect:/user/signup";
     }
+    @GetMapping("/rankings")
+    public String king(){
+        return "rankings_list_page";
+    }
 }
