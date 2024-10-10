@@ -12,7 +12,7 @@ import java.util.List;
 public class TodoListService {
     private final TodoListRepository todoListRepository;
 
-    public List<TodoList> getLists(Long userId) {
-        return this.todoListRepository.findAll(userId);
-    }
+   /* public List<TodoList> getLists(Long userId) {
+        return this.todoListRepository.findBySiteUserId(userId);
+    }*/
 }

@@ -22,7 +22,7 @@ public class TodoListController {
     private final TodoListService todoListService;
     private final UserService userService;
 
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     @PreAuthorize("isAuthenticated")
     public String list(Principal principal) {
         SiteUser user = this.userService.getUser(principal.getName());
@@ -31,5 +31,5 @@ public class TodoListController {
         }
         List<TodoList> todoLists = this.todoListService.getLists(user.getId());
         return "todo_list";
-    }
+    }*/
 }
