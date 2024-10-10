@@ -21,9 +21,12 @@
   justify-content: flex-end;
   width: 295px;
   position: absolute;
-  left: 856px;
-  top: 239px;
+  left: calc(50% + 270px); /* 부모 요소의 50% 위치에서 20px 오른쪽 이동 */
+  top: 239px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
+
 .text {
   color: rgba(0, 0, 0, 0.5);
   text-align: left;
@@ -45,12 +48,13 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  align-items: flex-end;
+  align-items: center; /* 중앙 정렬 */
   justify-content: flex-start;
-  width: 80%; /* 화면 크기에 따라 유동적으로 늘어나게 함 (80%로 설정) */
-  position: relative; /* relative로 변경하여 화면 흐름에 맞게 위치 */
-  margin: 0 auto; /* 가운데 정렬 */
-  top: 330px; /* 화면 상단에서 떨어진 위치 */
+  width: 863px;
+  position: absolute;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 314px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
 
 .frame-427318969 {
@@ -62,8 +66,8 @@
   gap: 300px;
   align-items: center;
   justify-content: flex-start;
-  align-self: stretch;
   flex-shrink: 0;
+  width: 894px;
   height: 126px;
   position: relative;
 }
@@ -82,7 +86,7 @@
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 81px;
+  width: 113px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -90,32 +94,31 @@
 }
 ._1-min {
   color: #817f7f;
-  text-align: left;
+  text-align: center;
   font-family: "Roboto-Medium", sans-serif;
   font-size: 20px;
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 53px;
-  height: 27px;
+  width: 46px;
+  height: 22px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
-.frame-427318970 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+.frame-427318978 {
   display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center; /* 중앙 정렬 */
   justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
+  width: 863px;
+  position: absolute;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 469px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 .group2 {
   flex-shrink: 0;
   width: 40px;
@@ -131,26 +134,25 @@
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 82px;
+  width: 113px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.frame-427318971 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+.frame-427318979 {
   display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center; /* 중앙 정렬 */
   justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
+  width: 863px;
+  position: absolute;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 624px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 .group3 {
   flex-shrink: 0;
   width: 40px;
@@ -166,26 +168,25 @@
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 81px;
+  width: 113px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.frame-427318972 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+.frame-427318980 {
   display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center; /* 중앙 정렬 */
   justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
+  width: 863px;
+  position: absolute;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 779px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 .group4 {
   flex-shrink: 0;
   width: 40px;
@@ -201,26 +202,25 @@
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 82px;
+  width: 113px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.frame-427318973 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+.frame-427318981 {
   display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center; /* 중앙 정렬 */
   justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
+  width: 863px;
+  position: absolute;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 934px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 .group5 {
   flex-shrink: 0;
   width: 40px;
@@ -236,7 +236,7 @@
   line-height: 22px;
   font-weight: 500;
   position: relative;
-  width: 85px;
+  width: 113px;
   height: 32px;
   display: flex;
   align-items: center;
@@ -245,7 +245,7 @@
 .primary {
   background: #000000;
   border-radius: 20px;
-  padding: 10px 12px 10px 12px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -254,14 +254,17 @@
   width: 188px;
   height: 77px;
   position: absolute;
-  left: 955px;
-  top: 1104px;
+  left: calc(50% + 330px); /* 부모 요소의 중앙 위치에서 오른쪽으로 20px 이동 */
+  top: 1104px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
+
 .title {
   color: #ffffff;
   text-align: left;
   font-family: "Roboto-Medium", sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 22px;
   font-weight: 500;
   position: relative;
@@ -270,7 +273,7 @@
 .primary2 {
   background: rgba(95, 93, 93, 0.76);
   border-radius: 20px;
-  padding: 10px 12px 10px 12px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -279,24 +282,27 @@
   width: 188px;
   height: 77px;
   position: absolute;
-  left: 752px;
-  top: 1104px;
+  left: calc(50% + 130px); /* 중앙에서 오른쪽으로 20px 이동 */
+  top: 1104px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 .section {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 60px 0px 60px 0px;
+  background: rgba(247, 166, 166, 0.6);
+  padding: 60px 0;
   display: flex;
   flex-direction: row;
   gap: 60px;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 132px;
-  position: absolute;
-  left: 0px;
-  top: 67px;
-  overflow: hidden;
+  width: 100%; /* 가로 폭을 100%로 설정 */
+  max-width: 1520px; /* 최대 폭을 설정 */
+  height: 98px;
+  position: relative; /* 부모 요소 기준으로 위치 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  top: 80px; /* 네비바 높이만큼 아래로 이동 */
 }
+
 .container {
   display: flex;
   flex-direction: column;
@@ -332,12 +338,14 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
-  width: 1149px;
+  width: 1149px; /* 너비는 그대로 유지 */
   height: 69px;
   position: absolute;
-  left: 156px;
-  top: 1200px;
+  left: 50%; /* 부모 요소의 중앙 위치 */
+  top: 1200px; /* 필요한 경우 이 값 조정 */
+  transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
 }
+
 ._11-12-13-14-15-16-17-18-19-20 {
   color: #000000;
   text-align: left;
@@ -358,14 +366,17 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
+  width: 100%; /* 화면 전체 너비를 차지 */
+  max-width: 1520px; /* 최대 너비 설정 */
   height: 80px;
   position: absolute;
-  right: 0px;
-  left: 0px;
-  top: 0px;
+  left: 50%; /* 화면 중앙으로 위치 조정 */
+  transform: translateX(-50%); /* 정확한 중앙 정렬 */
+  top: 0px; /* 화면 상단에 고정 */
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
   overflow: hidden;
 }
+
 .rectangle-4137 {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 100px;
@@ -403,3 +414,4 @@
   font-weight: 400;
   position: relative;
 }
+

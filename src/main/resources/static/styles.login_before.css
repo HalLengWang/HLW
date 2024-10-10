@@ -17,67 +17,80 @@
   background: #ffffff; /* 배경 색상 */
   padding: 20px; /* 패딩 */
   display: flex; /* Flexbox 사용 */
+  flex-direction: row; /* 수평 방향으로 배치 */
+  gap: 20px; /* 요소 간의 간격 */
   align-items: center; /* 세로 중앙 정렬 */
-  justify-content: flex-start; /* 왼쪽으로 정렬 */
-  width: 100%; /* 전체 너비 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  flex-shrink: 0; /* 줄어들지 않도록 설정 */
+  width: 1420px; /* 고정 너비 */
   height: 80px; /* 높이 */
   position: absolute; /* 절대 위치 */
-  left: 0; /* 왼쪽 위치 */
+  left: 50%; /* 부모 요소의 중앙 위치 */
   top: 0; /* 위쪽 위치 */
+  transform: translateX(-50%); /* 왼쪽으로 50% 이동시켜 중앙 정렬 */
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12); /* 그림자 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 }
 
 .rectangle-4137 {
-  background: rgba(0, 0, 0, 0.1); /* 원형 배경 색상 */
-  border-radius: 100px; /* 원형 만들기 */
-  width: 40px; /* 너비 */
-  height: 40px; /* 높이 */
-  flex-shrink: 0; /* 줄어들지 않도록 설정 */
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  position: relative;
 }
-
 .title {
-  font-size: 24px; /* 제목 폰트 크기 */
-  margin-left: 10px; /* 원형 요소와의 간격 */
+  color: #000000;
+  text-align: left;
+  font-family: "Roboto-Medium", sans-serif;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 500;
+  position: relative;
+  width: 900px;
+  height: 36px;
 }
-
 .navigation {
-  display: flex; /* Flexbox 사용 */
-  align-items: center; /* 세로 중앙 정렬 */
-  gap: 15px; /* 탭 간격 */
-  margin-left: auto; /* 오른쪽으로 밀어붙여서 네비게이션을 오른쪽 끝으로 이동 */
-}
-
-.tab {
-  cursor: pointer; /* 클릭 가능 표시 */
-}
-
-.ic-search {
-  width: 20px; /* 검색 아이콘 너비 */
-  height: 20px; /* 검색 아이콘 높이 */
-  margin-left: 5px; /* 텍스트와 아이콘 간격 */
-}
-
-
-.list {
-  padding: 60px 170px 60px 170px;
+  background: #ffffff;
   display: flex;
-  flex-direction: column;
-  gap: 60px;
+  flex-direction: row;
+  gap: 40px;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
 }
-.container {
+.tab {
+  color: #000000;
+  text-align: left;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  position: relative;
+}
+.ranking-container {
+  padding: 60px 170px; /* 위, 오른쪽, 아래, 왼쪽 패딩 설정 */
+  display: flex; /* Flexbox 사용 */
+  flex-direction: column; /* 세로 방향으로 배치 */
+  gap: 60px; /* 요소 간의 간격 */
+  align-items: center; /* 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  flex-shrink: 0; /* 줄어들지 않도록 설정 */
+  width: 1420px; /* 고정 너비 */
+  position: relative; /* 상대 위치 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+.ranking-bar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 24px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
+  align-items: flex-start;
+  justify-content: center;
   flex-shrink: 0;
+  width: 1080px;
   position: relative;
 }
 .title2 {
@@ -88,7 +101,6 @@
   line-height: 48px;
   font-weight: 400;
   position: relative;
-  align-self: stretch;
 }
 .title-2-span {
   color: #000000;
@@ -104,7 +116,7 @@
   line-height: 48px;
   font-weight: 400;
 }
-.list2 {
+.ranking-list {
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -219,7 +231,7 @@
   bottom: 0px;
   overflow: visible;
 }
-.list3 {
+.ranking-list-2 {
   padding: 60px 170px 60px 170px;
   display: flex;
   flex-direction: row;
@@ -231,7 +243,7 @@
   position: relative;
   overflow: hidden;
 }
-.container2 {
+.container {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -250,7 +262,7 @@
   position: relative;
   align-self: stretch;
 }
-.list4 {
+.list {
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -426,7 +438,7 @@
   position: relative;
   overflow: hidden;
 }
-.container3 {
+.container2 {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -456,7 +468,7 @@
   position: relative;
   overflow: hidden;
 }
-.textfield2 {
+.textfield {
   background: #ffffff;
   border-radius: 6px;
   border-style: solid;
@@ -472,7 +484,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.text2 {
+.text {
   color: rgba(0, 0, 0, 0.5);
   text-align: left;
   font-family: "Roboto-Regular", sans-serif;
@@ -517,7 +529,7 @@
   bottom: 0px;
   overflow: visible;
 }
-.list5 {
+.todo-list {
   padding: 60px 170px 60px 170px;
   display: flex;
   flex-direction: row;
@@ -529,7 +541,7 @@
   position: relative;
   overflow: hidden;
 }
-.list6 {
+.list2 {
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -608,7 +620,7 @@
   position: relative;
   overflow: hidden;
 }
-.container4 {
+.container3 {
   display: flex;
   flex-direction: row;
   gap: 60px;
