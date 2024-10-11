@@ -9,8 +9,4 @@ public class MainController {
     public String root() {
         return "login_after";
     }
-    @GetMapping("/t")
-    public String remembrance(){
-        return "login_before";
-    }
 }
