@@ -13,4 +13,8 @@ public class MainController {
     public String t(){
         return "login_before";
     }
+    @GetMapping("/todo")
+    public String toto(){
+        return "todo_list_detail";
+    }
 }
