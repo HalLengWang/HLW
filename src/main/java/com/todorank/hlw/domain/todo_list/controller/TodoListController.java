@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
+import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.user.entity.SiteUser;
@@ -7,7 +8,6 @@ import com.todorank.hlw.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -47,9 +46,13 @@ public class TodoListController {
         return "todo_list";
     }
 
-   /* @GetMapping("/create")
-    @PreAuthorize("isAuthenticated()")
-    public String create() {
-
-    }*/
+    @GetMapping("/detail/{id}")
+    public String create(@PathVariable(value = "id") Long list_id, Model model) {
+        TodoListDTO todoList = this.todoListService.getTodoList(list_id);
+        if (todoList == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
+        }
+        model.addAttribute("todoList", todoList);
+        return "todo_list_detail";
+    }
 }

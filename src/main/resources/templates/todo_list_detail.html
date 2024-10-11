@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="search-box">
-            <input type="text" placeholder="Title Name">
+            <input type="text" placeholder="Title Name" th:value="${todoList.title}">
         </div>
         <div class="div13">제목</div>
         <div class="to-do-list-bar">
@@ -93,9 +93,8 @@
         </div>
         <div class="search-box2">
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
-            <img class="ic-search" src="search.png" alt="Search">
+            <img class="ic-search" src="/search.png" alt="Search">
         </div>
-
     </div>
     <div class="_3">
         <button class="button">
