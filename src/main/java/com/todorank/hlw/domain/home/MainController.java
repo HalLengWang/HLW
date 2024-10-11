@@ -11,6 +11,6 @@ public class MainController {
     }
     @GetMapping("/t")
     public String remembrance(){
-        return "remembrance";
+        return "login_before";
     }
 }
