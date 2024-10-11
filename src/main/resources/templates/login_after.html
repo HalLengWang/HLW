@@ -4,21 +4,23 @@
         <div class="rectangle-4137"></div>
         <div class="title11">할랭왕</div>
         <div class="navigation">
-            <div class="tab">로그아웃</div>
+            <div class="tab" sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></div>
+            <div class="tab" sec:authorize="isAuthenticated()"><a th:href="@{/user/logout}">로그아웃</a></div>
+            <div class="tab"><a th:href="@{/user/signup}">회원가입</a></div>
         </div>
     </div>
 
-    <div class="profile-bar">
+    <div class="profile-bar" sec:authorize="isAuthenticated()">
         <div class="avatar">
             <div class="frame-427318985">
-                <img class="person" src="/profile_basic.png" />
+                <img class="person" src="/profile_basic.png"/>
             </div>
         </div>
         <div class="frame-427318994">
             <div class="title10">name</div>
         </div>
         <div class="person2">
-            <img class="medal" src="/medal.png" />
+            <img class="medal" src="/medal.png"/>
         </div>
         <div class="container5">
             <div class="selection">
@@ -31,7 +33,7 @@
             </div>
         </div>
         <div class="seconday">
-            <div class="title6">바로 작성하러 가기</div>
+            <a class="title6" th:href="@{/todo_list/list}">바로 작성하러 가기</a>
         </div>
         <div class="container6">
             <div class="description">
@@ -52,7 +54,7 @@
         </div>
         <div class="list3">
             <div class="row">
-                <div class="item2">
+                <a class="item2" th:href="@{/todo_list/list?id=1}">
                     <div class="frame">
                         <div class="icon">🥇</div>
                     </div>
@@ -61,7 +63,7 @@
                     </div>
                     <div class="subtitle2">이상수</div>
                     <div class="subtitle3">일간 랭킹 순위 보러가기</div>
-                </div>
+                </a>
                 <div class="item2">
                     <div class="frame">
                         <div class="icon">🥇</div>
@@ -84,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <img class="vector-2007" src="vector-2006.svg" />
+        <img class="vector-2007" src="vector-2006.svg"/>
         <div class="list4">
             <div class="container4">
                 <div class="title9">일간 랭킹</div>
@@ -100,7 +102,7 @@
                             <div class="subtitle">9:00 AM</div>
                         </div>
                         <div class="subtitle5">1등</div>
-                        <img class="vector-2008" src="vector-2007.svg" />
+                        <img class="vector-2008" src="vector-2007.svg"/>
                     </div>
                 </div>
                 <div class="row">
@@ -113,7 +115,7 @@
                             <div class="subtitle">11:30 AM</div>
                         </div>
                         <div class="subtitle5">2등</div>
-                        <img class="vector-2009" src="vector-2008.svg" />
+                        <img class="vector-2009" src="vector-2008.svg"/>
                     </div>
                 </div>
                 <div class="row">
@@ -126,7 +128,7 @@
                             <div class="subtitle">3:00 PM</div>
                         </div>
                         <div class="subtitle5">3등</div>
-                        <img class="vector-20010" src="vector-2009.svg" />
+                        <img class="vector-20010" src="vector-2009.svg"/>
                     </div>
                 </div>
                 <div class="button2">
@@ -135,7 +137,7 @@
                     </div>
                 </div>
             </div>
-            <img class="vector-20011" src="vector-20010.svg" />
+            <img class="vector-20011" src="vector-20010.svg"/>
         </div>
     </div>
 
@@ -153,7 +155,7 @@
                 </div>
             </div>
         </div>
-        <img class="vector-2006" src="vector-2005.svg" />
+        <img class="vector-2006" src="vector-2005.svg"/>
     </div>
 
     <div class="todo-list">
@@ -168,7 +170,7 @@
                         <div class="subtitle">제목 : 오늘의 보성녹차왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-200" src="vector-2000.svg" />
+                    <img class="vector-200" src="vector-2000.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -181,7 +183,7 @@
                         <div class="subtitle">제목 : 오늘의 발표왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-2002" src="vector-2001.svg" />
+                    <img class="vector-2002" src="vector-2001.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -194,7 +196,7 @@
                         <div class="subtitle">제목 : 오늘의 배드민턴왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-2003" src="vector-2002.svg" />
+                    <img class="vector-2003" src="vector-2002.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -206,17 +208,14 @@
                         <div class="title4">Prepare for client pitch</div>
                         <div class="subtitle">Deadline: Tomorrow</div>
                     </div>
-                    <img class="vector-2004" src="vector-2003.svg" />
+                    <img class="vector-2004" src="vector-2003.svg"/>
                 </div>
             </div>
         </div>
-        <img class="vector-2005" src="vector-2004.svg" />
+        <img class="vector-2005" src="vector-2004.svg"/>
     </div>
 
     <div class="_11-12-13-14-15-16-17-18-19-20">
         &lt; 이전 | 11 12 13 14 15 16 17 18 19 20 | 다음 &gt;
     </div>
-
-    <div class="section">
-        <div class="container">
-            <div class="title
+</div>
