@@ -9,4 +9,8 @@ public class MainController {
     public String root() {
         return "login_after";
     }
+    @GetMapping("/t")
+    public String remembrance(){
+        return "remembrance";
+    }
 }
