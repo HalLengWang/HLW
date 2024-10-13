@@ -1,58 +1,99 @@
 <link rel="stylesheet" href="/styles.todo_list.css">
+<link rel="stylesheet" href="/bootstrap.min.css">
 <div class="to-do-list">
-  <div class="textfield">
-    <div class="text">ToDo List Search</div>
-    <img class="ic-search" src="/search.png" alt="검색 아이콘"/>
+    <div class="top-bar">
+        <div class="rectangle-4137"></div>
+        <div class="title3">할랭왕</div>
+        <div class="navigation">
+            <div class="tab">로그아웃</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="title2">ToDo List</div>
+        </div>
+        <img class="vector-200" src="vector-2000.svg"/>
+    </div>
+
+    <div class="textfield">
+        <div class="text">ToDo List Search</div>
+        <img class="ic-search" src="/search.png"/>
+    </div>
+
+    <div class="frame-427318974">
+        <div class="frame-427318969" th:each="todoList : ${paging}">
+            <img class="group" src="/group.png"/>
+            <div class="list-1" th:text="${todoList.title}"></div>
+            <div class="_1-min" th:text="${#temporals.format(todoList.createdDate, 'yyyy-MM-dd')}"></div>
+        </div>
+    </div>
   </div>
-  <div class="frame-427318974">
+
+  <div class="frame-427318979">
     <div class="frame-427318969">
-      <img class="group" src="/group.png" />
-      <div class="list-1">List 1</div>
-      <div class="_1-min">1min</div>
-    </div>
-    <div class="frame-427318970">
-      <img class="group2" src="/group.png" />
-      <div class="list-2">List 2</div>
-      <div class="_1-min">1min</div>
-    </div>
-    <div class="frame-427318971">
       <img class="group3" src="/group.png" />
       <div class="list-3">List 3</div>
       <div class="_1-min">1min</div>
     </div>
-    <div class="frame-427318972">
+  </div>
+
+  <div class="frame-427318980">
+    <div class="frame-427318969">
       <img class="group4" src="/group.png" />
       <div class="list-4">List 4</div>
       <div class="_1-min">1min</div>
     </div>
-    <div class="frame-427318973">
+  </div>
+
+  <div class="frame-427318981">
+    <div class="frame-427318969">
       <img class="group5" src="/group.png" />
       <div class="list-5">List 5</div>
       <div class="_1-min">1min</div>
     </div>
   </div>
-  <div class="primary">
-    <div class="title">ToDoList 등록</div>
-  </div>
-  <div class="primary2">
-    <div class="title">ToDoList 수정</div>
-  </div>
-  <div class="section">
-    <div class="container">
-      <div class="title2">ToDo List</div>
+
+
+    <div class="primary" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
+        <div class="title">ToDoList 등록</div>
     </div>
-    <img class="vector-200" src="/vector-2000.svg" />
-  </div>
-  <div class="frame-427318977">
-    <div class="_11-12-13-14-15-16-17-18-19-20">
-      &lt; 이전 | 11 12 13 14 15 16 17 18 19 20 | 다음 &gt;
+
+    <div class="primary2" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
+        <div class="title">ToDoList 수정</div>
     </div>
-  </div>
-  <div class="top-bar">
-    <div class="rectangle-4137"></div>
-    <div class="title3">할랭왕</div>
-    <div class="navigation">
-      <div class="tab">로그아웃</div>
+
+    <div class="frame-427318977">
+        <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    class="page-item">
+                    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
     </div>
-  </div>
+    <div class="top-bar">
+        <div class="rectangle-4137"></div>
+        <div class="title3">할랭왕</div>
+        <div class="navigation">
+            <div class="tab">로그아웃</div>
+        </div>
+    </div>
 </div>
+

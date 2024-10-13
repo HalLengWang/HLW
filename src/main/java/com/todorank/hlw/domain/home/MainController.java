@@ -9,19 +9,4 @@ public class MainController {
     public String root() {
         return "login_after";
     }
-
-    @GetMapping("/test/1")
-    public String login() {
-        return "Login-before";
-    }
-
-    @GetMapping("/test/2")
-    public String login2() {
-        return "Login-after";
-    }
-
-    @GetMapping("/test/3")
-    public String list() {
-        return "ToDo-List";
-    }
 }
