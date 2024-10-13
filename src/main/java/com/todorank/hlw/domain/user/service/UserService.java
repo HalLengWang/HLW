@@ -24,4 +24,11 @@ public class UserService {
                 .build();
         this.userRepository.save(user);
     }
+
+    public SiteUser getUser(String username) {
+        return this.userRepository.findByusername(username).orElse(null);
+    }
+    public SiteUser getUser(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
 }
