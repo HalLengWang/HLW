@@ -270,17 +270,31 @@
   position: relative;
   width: 520px;
 }
-.input {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  align-items: flex-start;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 360px;
-  position: relative;
-  overflow: hidden;
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center; /* 중앙 정렬 */
+    justify-content: center;
+    flex-shrink: 0;
+    width: 360px; /* 기존 너비 유지 */
+    height: auto; /* 높이를 자동으로 조정 */
+    padding: 16px; /* 내부 여백 추가 */
+    margin: 0 auto; /* 좌우 중앙 정렬 */
+    position: relative;
+    overflow: hidden;
 }
+
+input[type="text"] {
+    width: 100%; /* 너비를 박스에 맞추기 */
+    padding: 10px; /* 안쪽 여백 */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 스타일 */
+    border-radius: 4px; /* 둥근 모서리 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+
 .textfield {
   background: #ffffff;
   border-radius: 6px;
@@ -311,15 +325,27 @@
   overflow: hidden;
 }
 .button {
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #F7A6A6; /* 배경 색상 */
+    width: 240px; /* 가로 크기 */
+    height: 48px; /* 세로 크기 */
+    border-radius: 6px; /* 둥근 모서리 */
+    border: none; /* 스트로크 색상 제거 */
+    cursor: pointer; /* 커서 모양 */
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
+.button:hover {
+    background-color: #F07A7A; /* 호버 시 진한 색상 */
+}
+
+
 .primary {
   background: #f7a6a6;
   border-radius: 8px;
@@ -605,14 +631,24 @@
   overflow: visible;
 }
 .button2 {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #F7A6A6; /* 배경 색상 */
+    width: 240px; /* 가로 크기 */
+    height: 48px; /* 세로 크기 */
+    border-radius: 6px; /* 둥근 모서리 */
+    border: none; /* 스트로크 색상 제거 */
+    cursor: pointer; /* 커서 모양 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+.button2:hover {
+    background-color: #F07A7A; /* 호버 시 진한 색상 */
 }
 .primary2 {
   background: #f7a6a6;
@@ -878,4 +914,8 @@
   line-height: 24px;
   font-weight: 400;
   position: relative;
+}
+
+a {
+  text-decoration: none !important;
 }
