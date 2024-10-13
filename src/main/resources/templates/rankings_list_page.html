@@ -1,144 +1,135 @@
-<link rel="stylesheet" href="/rankings_list_page.css">
-<div class="div">
-    <div class="frame-427318932">
-        <div class="tab">🏆 일간 랭킹 🏆</div>
-    </div>
-    <div class="frame-427318931">
-        <div class="button">
-            <div class="primary">
-                <div class="title">주간 랭킹</div>
-            </div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할랭왕</title>
+    <link rel="stylesheet" href="/rankings_list_page.css">
+</head>
+<body>
+<!-- 상단 네비게이션 -->
+<div class="top-bar">
+    <div class="title6">할랭왕</div>
+    <div class="navigation">
+        <div class="tab2">로그인</div>
+        <div class="tab2">회원가입</div>
+        <!-- 검색 박스 -->
+        <div class="search-box">
+            <input type="text" placeholder="Search in site">
+            <img src="/lens.png" alt="검색 아이콘" class="ic-search">
         </div>
-        <div class="button">
-            <div class="primary">
-                <div class="title">월간 랭킹</div>
-            </div>
+
+    </div>
+</div>
+
+<!-- 타이틀 섹션 -->
+<div class="frame-427318932">
+    <div class="tab">🏆 일간 랭킹 🏆</div>
+</div>
+
+<!-- 버튼 섹션 -->
+<div class="frame-427318931">
+    <div class="button"><div class="primary">주간 랭킹</div></div>
+    <div class="button"><div class="primary">월간 랭킹</div></div>
+</div>
+
+<!-- 랭킹 리스트 -->
+<div class="list">
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">🥇</div>
+            <div class="title2">JohnDoe</div>
         </div>
-    </div>
-    <div class="list">
-        <div class="list2">
-            <div class="row">
-                <div class="item">
-                    <div class="frame">
-                        <div class="icon">🥇</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">JohnDoe</div>
-                    </div>
-                    <img class="vector-200" src="/vector-2000.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">🥈</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">JaneSmith</div>
-                    </div>
-                    <img class="vector-2002" src="vector-2001.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">🥉</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">SamWilliams</div>
-                    </div>
-                    <img class="vector-2003" src="vector-2002.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">4️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">AlexBrown</div>
-                    </div>
-                    <img class="vector-2004" src="vector-2003.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">5️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">EmilyClark</div>
-                    </div>
-                    <img class="vector-2005" src="vector-2004.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">6️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">ChrisTaylor</div>
-                    </div>
-                    <img class="vector-2006" src="vector-2005.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">7️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">OliviaGreen</div>
-                    </div>
-                    <img class="vector-2007" src="vector-2006.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">8️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">MichaelLee</div>
-                    </div>
-                    <img class="vector-2008" src="vector-2007.svg" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="item2">
-                    <div class="frame">
-                        <div class="icon">9️⃣</div>
-                    </div>
-                    <div class="frame-427318906">
-                        <div class="title2">SarahDavis</div>
-                    </div>
-                    <img class="vector-2009" src="vector-2008.svg" />
-                </div>
-            </div>
-        </div>
-        <img class="vector-20010" src="vector-2009.svg" />
-    </div>
-    <div class="_11-12-13-14-15-16-17-18-19-20">
-        &lt; 이전 | 11 12 13 14 15 16 17 18 19 20 | 다음 &gt;
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="title3">Contact Us</div>
-            <div class="title4">About Us</div>
-            <div class="title5">Privacy Policy</div>
+        <div class="score-container">
+            <div class="score">500</div>
+            <div class="score-change">+77</div>
         </div>
     </div>
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title6">할랭왕</div>
-        <div class="navigation">
-            <div class="tab2">로그인</div>
-            <div class="tab2">회원가입</div>
-            <div class="textfield">
-                <div class="text">Search in site</div>
-                <img class="ic-search" src="ic-search0.svg" />
-            </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">🥈</div>
+            <div class="title2">JaneSmith</div>
+        </div>
+        <div class="score-container">
+            <div class="score">495</div>
+            <div class="score-change">+70</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">🥉</div>
+            <div class="title2">SamWilliams</div>
+        </div>
+        <div class="score-container">
+            <div class="score">493</div>
+            <div class="score-change">+80</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">4️⃣</div>
+            <div class="title2">AlexBrown</div>
+        </div>
+        <div class="score-container">
+            <div class="score">470</div>
+            <div class="score-change">+85</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">5️⃣</div>
+            <div class="title2">EmilyClark</div>
+        </div>
+        <div class="score-container">
+            <div class="score">375</div>
+            <div class="score-change">+65</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">6️⃣</div>
+            <div class="title2">ChrisTaylor</div>
+        </div>
+        <div class="score-container">
+            <div class="score">370</div>
+            <div class="score-change">+32</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">7️⃣</div>
+            <div class="title2">OliviaGreen</div>
+        </div>
+        <div class="score-container">
+            <div class="score">355</div>
+            <div class="score-change">+33</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">8️⃣</div>
+            <div class="title2">MichaelLee</div>
+        </div>
+        <div class="score-container">
+            <div class="score">321</div>
+            <div class="score-change">+22</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="rank-item">
+            <div class="icon">9️⃣</div>
+            <div class="title2">SarahDavis</div>
+        </div>
+        <div class="score-container">
+            <div class="score">300</div>
+            <div class="score-change">+21</div>
         </div>
     </div>
 </div>
+
+<!-- 페이지네이션 -->
+<div class="pagination">
+    <a href="#">&lt; 이전</a> | 11 12 13 14 15 16 17 18 19 20 | <a href="#">다음 &gt;</a>
+</div>
+</body>
+</html>
