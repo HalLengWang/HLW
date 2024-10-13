@@ -40,6 +40,9 @@ public class TodoListService {
                 .userId(todoList.getUser().getId())
                 .username(todoList.getUser().getUsername())
                 .build();
+
+    }
+
     public List<TodoList> getLists(SiteUser user) {
         return this.todoListRepository.findByUser(user);
     }
