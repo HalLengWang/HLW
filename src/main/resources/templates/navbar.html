@@ -19,11 +19,12 @@
                         <a class="nav-link" href="/">홈</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/todo_card_read_create">업무</a>
+                        <a class="nav-link" th:href="@{/todo_list/list}" sec:authorize="isAuthenticated()">업무</a>
                     </li>
                     <!-- "로그인" 링크는 모든 화면 크기에서 표시되도록 설정 -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">로그인</a>
+                        <a class="nav-link" th:href="@{/user/login}" sec:authorize="isAnonymous()">로그인</a>
+                        <a class="nav-link" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
                     </li>
                     <!-- 검색 박스에 더 넓은 왼쪽 마진 추가 -->
                     <li class="nav-item ms-4"> <!-- 왼쪽 마진을 더 크게 조정 -->
