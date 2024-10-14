@@ -40,7 +40,7 @@ body {
 }
 
 .search-box input[type="text"] {
-    padding: 5px 35px 5px 15px;
+    padding: 5px 30px 5px 10px;
     border-radius: 20px;
     border: 1px solid #ddd;
 }
@@ -55,20 +55,18 @@ body {
     opacity: 0.6;
 }
 
-/* 전체 컨텐츠를 감싸는 컨테이너 */
 .content-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 30px 0;
 }
 
-/* review-container의 너비만큼 꽉 차는 핑크색 하이라이트 섹션 */
 .highlight-section {
     background-color: #f7a6a6;
     color: #fff;
     text-align: center;
     padding: 15px 0;
-    border-radius: 8px 8px 0 0; /* 상단 모서리만 둥글게 */
+    border-radius: 8px;
 }
 
 .highlight-section h1 {
@@ -79,12 +77,9 @@ body {
 
 .review-container {
     background-color: #fff;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.review-content {
-    padding: 20px;
 }
 
 .review-content h2 {
@@ -106,11 +101,8 @@ body {
     color: #666;
 }
 
-/* 댓글 영역 */
 .comments-section {
     margin-top: 30px;
-    padding: 20px; /* 전체 영역에 패딩 추가 */
-    box-sizing: border-box; /* padding과 border를 포함하여 너비를 맞추도록 설정 */
 }
 
 .comments-section h3 {
@@ -134,12 +126,6 @@ body {
     margin-bottom: 5px;
 }
 
-.comment p {
-    margin: 10px 0;
-    color: #555;
-    font-size: 16px;
-}
-
 .comment-info {
     display: flex;
     justify-content: flex-end;
@@ -148,8 +134,7 @@ body {
 }
 
 textarea {
-    width: 100%; /* 부모 너비에 맞게 확장 */
-    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+    width: 100%;
     height: 60px;
     padding: 10px;
     margin-top: 10px;
@@ -160,14 +145,13 @@ textarea {
 
 .submit-comment {
     display: block;
-    width: 150px; /* 버튼의 너비를 축소 */
-    box-sizing: border-box; /* 패딩 포함 */
+    width: 100%;
     padding: 10px;
     background-color: #333;
     color: #fff;
     border: none;
     border-radius: 5px;
-    margin: 10px auto 0; /* 상단 여백과 가운데 정렬 */
+    margin-top: 10px;
     cursor: pointer;
 }
 
@@ -179,7 +163,7 @@ textarea {
 
 .pagination a, .pagination span {
     color: #333;
-    margin: 0 5px;
+    margin: 0 50px; /* 숫자 간 간격을 조절 */
     text-decoration: none;
 }
 
