@@ -12,7 +12,7 @@ public class MainController {
 
     @GetMapping("/test/1")
     public String test1() {
-        return "login";
+        return "login_page";
     }
 
     @GetMapping("/test/2")
@@ -27,17 +27,17 @@ public class MainController {
 
     @GetMapping("/test/4")
     public String test4() {
-        return "profile_modify";
+        return "profile_modify_page";
     }
 
     @GetMapping("/test/5")
     public String test5() {
-        return "profile_read";
+        return "profile_read_page";
     }
 
     @GetMapping("/test/6")
     public String test6() {
-        return "signup";
+        return "signup_page";
     }
 
     @GetMapping("/test/7")
@@ -52,7 +52,7 @@ public class MainController {
 
     @GetMapping("/test/9")
     public String test9() {
-        return "todo_card_read_create";
+        return "todo_card_read_create_page";
     }
 
     @GetMapping("/test/10")
@@ -62,6 +62,6 @@ public class MainController {
 
     @GetMapping("/test/11")
     public String test11() {
-        return "remembrance";
+        return "remembrance_page";
     }
 }

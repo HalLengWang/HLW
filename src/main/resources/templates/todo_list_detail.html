@@ -32,8 +32,9 @@
                 <div class="x-axis">Tasks</div>
             </div>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Title Name">
+        <div class="textfield2">
+            <input type="text" class="text" th:value="${todoList.title}" />
+            <img class="ic-search2" src="/search.png"/>
         </div>
         <div class="div13">제목</div>
         <div class="to-do-list-bar">
@@ -51,13 +52,17 @@
         </div>
     </div>
     <div class="_2">
-        <button class="button2">
+        <button class="button2" sec:authorize="isAuthenticated()"
+                th:if="${todoList.username == #authentication.getPrincipal().getUsername()}">
             <div class="title6">ToDO-Card 수정</div>
         </button>
-        <button class="button3">
+        <a class="button3" sec:authorize="isAuthenticated()"
+           th:if="${todoList.username == #authentication.getPrincipal().getUsername()}"
+           th:href="@{|/todo_card/create?id=${todoList.id}|}">
             <div class="title6">ToDO-Card 등록</div>
-        </button>
-        <button class="button4">
+        </a>
+        <button class="button4" sec:authorize="isAuthenticated()"
+                th:if="${todoList.username == #authentication.getPrincipal().getUsername()}" >
             <div class="title6">회고 등록</div>
         </button>
         <div class="frame-427318978">
@@ -93,7 +98,7 @@
         </div>
         <div class="search-box2">
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
-            <img class="ic-search" src="search.png" alt="Search">
+            <img class="ic-search" src="/search.png" alt="Search">
         </div>
     </div>
     <div class="_3">
