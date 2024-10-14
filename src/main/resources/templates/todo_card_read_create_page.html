@@ -43,19 +43,16 @@
             </div>
             <div class="progress">
                 <label for="progress-slider">진행도</label>
-                <input type="range" id="progress-slider" min="0" max="100" value="60" oninput="updateProgressValue(this.value)">
-                <p id="progress-value">60%</p>
+                <input type="range" id="progress-slider" min="0" max="100" value="0" oninput="updateProgressValue(this.value)">
+                <p id="progress-value">0%</p>
             </div>
         </div>
 
 
         <div class="category">
             <p>할일 종류 리스트</p>
-            <div>
-                <input type="radio" name="category" value="study"> 공부<br>
-                <input type="radio" name="category" value="exercise"> 운동<br>
-                <input type="radio" name="category" value="reading"> 독서<br>
-                <input type="radio" name="category" value="other"> 기타<br>
+            <div th:each="todoType : ${todoTypeList}">
+                <input type="radio" name="category" th:text="${todoType.typeName}"><br>
             </div>
         </div>
     </div>
