@@ -9,4 +9,16 @@ public class MainController {
     public String root() {
         return "login_after";
     }
+    @GetMapping("/b")
+    public String before() {
+        return "login_after";
+    }
+    @GetMapping("/d")
+    public String detail() {
+        return "todo_list_detail";
+    }
+    @GetMapping("/c")
+    public String todolist() {
+        return "remembrance";
+    }
 }
