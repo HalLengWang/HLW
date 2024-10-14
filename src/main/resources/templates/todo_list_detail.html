@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="search-box">
-            <input type="text" placeholder="Title Name" th:value="${todoList.title}">
+            <input type="text" placeholder="Title Name" th:value="${todoList.title}" name="todo_list_title">
         </div>
         <div class="div13">제목</div>
         <div class="to-do-list-bar">
@@ -51,13 +51,17 @@
         </div>
     </div>
     <div class="_2">
-        <button class="button2">
+        <button class="button2" sec:authorize="isAuthenticated()"
+                th:if="${todoList.username == #authentication.getPrincipal().getUsername()}">
             <div class="title6">ToDO-Card 수정</div>
         </button>
-        <button class="button3">
+        <a class="button3" sec:authorize="isAuthenticated()"
+           th:if="${todoList.username == #authentication.getPrincipal().getUsername()}"
+           th:href="@{/todo_card/create}">
             <div class="title6">ToDO-Card 등록</div>
-        </button>
-        <button class="button4">
+        </a>
+        <button class="button4" sec:authorize="isAuthenticated()"
+                th:if="${todoList.username == #authentication.getPrincipal().getUsername()}" >
             <div class="title6">회고 등록</div>
         </button>
         <div class="frame-427318978">
