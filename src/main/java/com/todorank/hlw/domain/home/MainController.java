@@ -11,14 +11,10 @@ public class MainController {
     }
     @GetMapping("/b")
     public String before() {
-        return "login_after";
-    }
-    @GetMapping("/d")
-    public String detail() {
-        return "todo_list_detail";
+        return "todo_list";
     }
     @GetMapping("/c")
-    public String todolist() {
-        return "remembrance";
+    public String rankings(){
+        return "rankings_list_page";
     }
 }
