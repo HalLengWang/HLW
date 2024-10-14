@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 public class TodoCardForm {
     @NotEmpty(message = "할일의 종류를 선택해주세요.")
-    private TodoTypeList todoTypeList;
+    private TodoTypeList todoType;
 
     @NotEmpty(message = "제목을 입력해 주세요.")
     private String title;
