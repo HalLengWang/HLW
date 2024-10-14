@@ -34,29 +34,35 @@ public class TodoCardController {
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String todoCardCreate(TodoCardForm todoCardForm, Model model,
-                                 @RequestParam(value = "id") Long id , Principal principal) {
-        TodoListDTO todoList = this.todoListService.getTodoList(id);
-        if (!todoList.getUsername().equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
+                                 @RequestParam(value = "id") Long list_id , Principal principal) {
+        TodoList todoList = this.todoListService.getTodoList(list_id);
+        if (!todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         List<TodoTypeList> typeList = this.todoTypeListService.getList();
+        todoCardForm.setExecution(0);
         model.addAttribute("todoTypeList", typeList);
-        model.addAttribute("todoListId", id);
+        model.addAttribute("todoListId", list_id);
         return "todo_card_read_create_page";
     }
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String todoCardCreate(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
-                                 @RequestParam(value = "id") Long id, Model model, Principal principal) {
+                                 @RequestParam(value = "id") Long list_id, Principal principal) {
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
             return "todo_card_read_create_page";
         }
-        TodoListDTO todoList = this.todoListService.getTodoList(id);
-        if (!todoList.getUsername().equals(principal.getName())) {
+        TodoList todoList = this.todoListService.getTodoList(list_id);
+        if (!todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
         }
-        //TODO : 데이터 받아오고 저장하는 코드 추가
-        return "redirect:/todo_list/detail/" + id;
+        //TODO : execution 저장 안되는 버그
+        TodoTypeList todoType = todoTypeListService.getOne(todoCardForm.getCategory());
+        this.todoCardService.create(todoCardForm.getTitle(), todoCardForm.getMemo(), todoCardForm.getStartDateTime(),
+                todoCardForm.getEndDateTime(), todoCardForm.getCompletion(), todoCardForm.getExecution(),
+                todoType, todoList);
+        return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 }

@@ -26,21 +26,8 @@ public class TodoListService {
         return this.todoListRepository.findByUser(user, pageable);
     }
 
-    public TodoListDTO getTodoList(Long id) {
-        TodoList todoList = this.todoListRepository.findById(id).orElse(null);
-        if (todoList == null) {
-            return null;
-        }
-        return TodoListDTO.builder()
-                .id(todoList.getId())
-                .createdDate(todoList.getCreatedDate())
-                .modifiedDate(todoList.getModifiedDate())
-                .title(todoList.getTitle())
-                .remembrance(todoList.getRemembrance())
-                .userId(todoList.getUser().getId())
-                .username(todoList.getUser().getUsername())
-                .build();
-
+    public TodoList getTodoList(Long id) {
+        return this.todoListRepository.findById(id).orElse(null);
     }
 
     public List<TodoList> getLists(SiteUser user) {

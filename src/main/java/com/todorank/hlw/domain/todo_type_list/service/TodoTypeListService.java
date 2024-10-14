@@ -15,4 +15,8 @@ public class TodoTypeListService {
     public List<TodoTypeList> getList() {
         return this.todoTypeListRepository.findAll();
     }
+
+    public TodoTypeList getOne(Long id) {
+        return this.todoTypeListRepository.findById(id).orElse(null);
+    }
 }

@@ -21,28 +21,29 @@
     </div>
 </div>
 <form class="card" th:object="${todoCardForm}" th:action="@{/todo_card/create}" method="post">
+    <input type="hidden" th:value="${todoListId}" name="id"/>
     <div class="header">ToDo Card</div>
 
     <div class="content">
         <div class="time-section">
             <div class="time">
                 <p>시간</p>
-                <label for="start-time">시작 시간</label>
-                <input type="datetime-local" id="start-time" th:name="*{startDateTime}">
-
-                <br/>
-
-                <label for="end-time">종료 시간</label>
-                <input type="datetime-local" id="end-time" th:name="*{endDateTime}">
+                <label for="startDateTime">시작 시간</label>
+                <input type="datetime-local" th:field="*{startDateTime}">
+            </div>
+            <br/>
+            <div class="time">
+                <label for="endDateTime">종료 시간</label>
+                <input type="datetime-local" th:field="*{endDateTime}">
             </div>
             <div class="complete">
                 </br>
-                <div class="checkbox"><input type="checkbox" th:name="*{completion}">완료 여부</div>
+                <div class="checkbox"><input type="checkbox" th:field="*{completion}">완료 여부</div>
             </div>
             <div class="progress">
-                <label for="progress-slider">진행도</label>
-                <input type="range" id="progress-slider" min="0" max="100" value="0"
-                       oninput="updateProgressValue(this.value)" th:name="*{execution}">
+                <label for="execution">진행도</label>
+                <input type="range" min="0" max="100" th:value="${execution}"
+                       oninput="updateProgressValue(this.value)" th:name="${execution}">
                 <p id="progress-value">0%</p>
             </div>
         </div>
@@ -51,7 +52,8 @@
         <div class="category">
             <p>할일 종류 리스트</p>
             <div th:each="todoType : ${todoTypeList}">
-                <input type="radio" name="category" th:text="${todoType.typeName}" th:name="*{todoType}"><br>
+                <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}">
+                <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
             </div>
         </div>
     </div>
@@ -64,7 +66,7 @@
         <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"></textarea>
     </div>
 
-    <button class="save-btn">저장</button>
+    <button class="save-btn" type="submit">저장</button>
 </form>
 
 </body>

@@ -25,14 +25,14 @@ public class TodoListController {
     private final TodoListService todoListService;
     private final UserService userService;
 
-    @GetMapping("/list")
+    @GetMapping("/list/{id}")
     public String list(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "id", required = false) Long user_id) {
+                       @PathVariable(value = "id", required = false) Long user_id) {
         SiteUser user = null;
-        if (user_id != null) {
-            user = this.userService.getUser(user_id);
-        } else {
+        if (user_id == 0) {
             user = this.userService.getUser(principal.getName());
+        } else {
+            user = this.userService.getUser(user_id);
         }
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 유저입니다.");
@@ -48,10 +48,13 @@ public class TodoListController {
 
     @GetMapping("/detail/{id}")
     public String create(@PathVariable(value = "id") Long list_id, Model model) {
-        TodoListDTO todoList = this.todoListService.getTodoList(list_id);
+        TodoList todoList = this.todoListService.getTodoList(list_id);
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
         }
+        SiteUser user = todoList.getUser();
+        model.addAttribute("username", todoList.getUser().getUsername());
+        todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
         return "todo_list_detail";
     }
