@@ -4,9 +4,82 @@
 }
 .to-do-list {
   background: #ffffff;
-  height: 1315px;
-  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200px; /* top-bar와 section 높이만큼 여백 추가 */
   overflow: hidden;
+}
+.top-bar {
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
+  z-index: 15;
+}
+.rectangle-4137 {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+}
+.title3 {
+  color: #000000;
+  font-family: "Roboto-Medium", sans-serif;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 500;
+  flex: 1;
+}
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.tab {
+  color: #000000;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 30px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.section {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 132px;
+  position: fixed;
+  top: 80px; /* top-bar 아래 위치 */
+  left: 0;
+  z-index: 10;
+  margin-bottom: 100px; /* 하단 간격을 더 추가 */
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+.title2 {
+  color: #ffffff;
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  text-align: center;
 }
 .textfield {
   border-radius: 6px;
@@ -20,310 +93,109 @@
   align-items: center;
   justify-content: flex-end;
   width: 295px;
-  position: absolute;
-  left: 856px;
-  top: 239px;
+  margin-top: 50px;
 }
 .text {
   color: rgba(0, 0, 0, 0.5);
-  text-align: left;
   font-family: "Roboto-Regular", sans-serif;
   font-size: 30px;
   line-height: 20px;
   font-weight: 400;
-  position: relative;
   width: 243px;
 }
 .ic-search {
-  flex-shrink: 0;
   width: 30px;
   height: 30px;
-  position: relative;
-  overflow: visible;
 }
 .frame-427318974 {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  align-items: flex-end;
+  gap: 40px;
+  align-items: center; /* 가운데 정렬 */
   justify-content: flex-start;
-  width: 80%; /* 화면 크기에 따라 유동적으로 늘어나게 함 (80%로 설정) */
-  position: relative; /* relative로 변경하여 화면 흐름에 맞게 위치 */
-  margin: 0 auto; /* 가운데 정렬 */
-  top: 330px; /* 화면 상단에서 떨어진 위치 */
+  width: 80%;
+  max-width: 1140px;
+  margin: 50px auto 0 auto;
+  position: relative;
+  padding-top: 40px;
 }
-
-.frame-427318969 {
+.frame-427318969,
+.frame-427318970,
+.frame-427318971,
+.frame-427318972,
+.frame-427318973 {
   background: #d9d9d9;
   border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+  padding: 28px 40px;
   display: flex;
   flex-direction: row;
-  gap: 300px;
+  gap: 30px;
   align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   flex-shrink: 0;
   height: 126px;
-  position: relative;
 }
-.group {
+.group, .group2, .group3, .group4, .group5 {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  position: relative;
-  overflow: visible;
+  align-self: center;
 }
-.list-1 {
+.list-1, .list-2, .list-3, .list-4, .list-5 {
   color: #000000;
   text-align: center;
   font-family: "Roboto-Medium", sans-serif;
   font-size: 30px;
   line-height: 22px;
   font-weight: 500;
-  position: relative;
-  width: 81px;
-  height: 32px;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 ._1-min {
   color: #817f7f;
-  text-align: left;
   font-family: "Roboto-Medium", sans-serif;
   font-size: 20px;
   line-height: 22px;
   font-weight: 500;
-  position: relative;
-  width: 53px;
-  height: 27px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
+  flex-shrink: 0;
 }
-.frame-427318970 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
+.primary-container {
   display: flex;
   flex-direction: row;
-  gap: 300px;
+  gap: 30px; /* 기존 gap에서 간격을 더 넓힘 */
   align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
+  justify-content: center;
+  margin-top: 30px; /* 위쪽 여백 추가 */
+  margin-bottom: 30px; /* 아래쪽 여백 추가 */
 }
-.group2 {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  overflow: visible;
-}
-.list-2 {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 82px;
-  height: 32px;
+.primary, .primary2 {
+  border-radius: 20px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.frame-427318971 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
-  display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
-}
-.group3 {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  overflow: visible;
-}
-.list-3 {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 81px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.frame-427318972 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
-  display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
-}
-.group4 {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  overflow: visible;
-}
-.list-4 {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 82px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.frame-427318973 {
-  background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
-  display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 126px;
-  position: relative;
-}
-.group5 {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  overflow: visible;
-}
-.list-5 {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 85px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 188px;
+  height: 77px;
 }
 .primary {
   background: #000000;
-  border-radius: 20px;
-  padding: 10px 12px 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: center;
-  justify-content: center;
-  width: 188px;
-  height: 77px;
-  position: absolute;
-  left: 955px;
-  top: 1104px;
-}
-.title {
-  color: #ffffff;
-  text-align: left;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 124px;
 }
 .primary2 {
   background: rgba(95, 93, 93, 0.76);
-  border-radius: 20px;
-  padding: 10px 12px 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: center;
-  justify-content: center;
-  width: 188px;
-  height: 77px;
-  position: absolute;
-  left: 752px;
-  top: 1104px;
 }
-.section {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 60px 0px 60px 0px;
-  display: flex;
-  flex-direction: row;
-  gap: 60px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 132px;
-  position: absolute;
-  left: 0px;
-  top: 67px;
-  overflow: hidden;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
-  position: relative;
-}
-.title2 {
+.title {
   color: #ffffff;
-  text-align: center;
-  font-family: "Roboto-Bold", sans-serif;
-  font-size: 40px;
-  line-height: 48px;
-  font-weight: 700;
-  position: relative;
-  width: 520px;
-}
-.vector-200 {
-  flex-shrink: 0;
-  height: 0px;
-  position: absolute;
-  right: 0px;
-  left: 0px;
-  bottom: -40px;
-  overflow: visible;
+  font-family: "Roboto-Medium", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
 }
 .frame-427318977 {
   background: #ffffff;
@@ -332,74 +204,26 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
-  width: 1149px;
+  width: 100%;
   height: 69px;
-  position: absolute;
-  left: 156px;
-  top: 1200px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding-top: 20px; /* 상단 여백 추가 */
+  padding-bottom: 20px; /* 하단 여백 추가 */
 }
 ._11-12-13-14-15-16-17-18-19-20 {
-  color: #000000;
   text-align: left;
   font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
+  font-size: 36px; /* 글씨 크기를 36px로 키움 */
   font-weight: 500;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  text-decoration: none; /* 텍스트 밑줄 제거 */
+  border: none; /* 테두리 제거 */
+  outline: none; /* 아웃라인 제거 */
 }
-.top-bar {
-  background: #ffffff;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
-  position: absolute;
-  right: 0px;
-  left: 0px;
-  top: 0px;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
-}
-.rectangle-4137 {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 100px;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  position: relative;
-}
-.title3 {
-  color: #000000;
-  text-align: left;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 500;
-  position: relative;
-  flex: 1;
-}
-.navigation {
-  background: #ffffff;
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.tab {
-  color: #000000;
-  text-align: left;
-  font-family: "Roboto-Regular", sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  position: relative;
-}
+
