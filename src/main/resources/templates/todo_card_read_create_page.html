@@ -42,8 +42,8 @@
             </div>
             <div class="progress">
                 <label for="execution">진행도</label>
-                <input type="range" min="0" max="100" th:value="${execution}"
-                       oninput="updateProgressValue(this.value)" th:name="${execution}">
+                <input type="range" min="0" max="100"
+                       oninput="updateProgressValue(this.value)" th:field="*{execution}">
                 <p id="progress-value">0%</p>
             </div>
         </div>
