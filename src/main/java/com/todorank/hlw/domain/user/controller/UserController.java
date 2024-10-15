@@ -36,7 +36,7 @@ public class UserController {
                     userCreateForm.getEmail(), userCreateForm.getNickname());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            bindingResult.reject("signup error", "이미 가입된 아이디 혹은 이메일입니다.");
+            bindingResult.reject("signup_page error", "이미 가입된 아이디 혹은 이메일입니다.");
             return "signup_page";
         }
         return "login_after";
