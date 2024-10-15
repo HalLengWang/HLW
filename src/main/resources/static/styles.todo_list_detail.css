@@ -905,11 +905,15 @@ input[type="text"] {
 }
 
 .title-search {
+  color: rgba(0, 0, 0, 0.97);
   font-size: 20px;
-
+  margin-bottom: 10px;
+  text-align: right; /* 텍스트를 오른쪽 정렬 */
+  width: 400px; /* textfield2와 같은 폭 */
 }
 
 .container-title-search {
+  font-size: 40px;
   display: flex;
   align-items: center; /* 세로 중앙 정렬 */
   justify-content: flex-end; /* 오른쪽 정렬 */
@@ -930,13 +934,16 @@ input[type="text"] {
   align-items: center;
   border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  width: 180px; /* 검색창 너비 조정 */
+  padding: 2px 2px; /* 상하 폭을 줄이기 위해 padding 값을 조정 */
+  width: 400px; /* 좌우 폭을 늘리기 위해 width 값을 조정 */
 }
+
 /* 입력 필드 스타일 */
 .textfield2 .text {
+  font-size: 15px;
   border: none;
   outline: none;
+  width: 100%; /* 검색창 안에서 너비를 전체로 설정 */
 }
 
 /* 검색 아이콘 스타일 */
@@ -946,6 +953,7 @@ input[type="text"] {
   margin-left: 10px;
   cursor: pointer;
 }
+
 .to-do-list-bar {
   background: rgba(247, 166, 166, 0.6);
   padding: 60px 0px 60px 0px;
