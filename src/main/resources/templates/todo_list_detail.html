@@ -1,4 +1,12 @@
-<link href="/styles.todo_list_detail.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할랭왕</title>
+    <link href="/styles.todo_list_detail.css" rel="stylesheet">
+</head>
+<body>
 <div class="to-do-list">
     <!-- 상단 바 -->
     <div class="top-bar">
@@ -60,7 +68,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- ToDo List 상세 바 -->
@@ -104,6 +111,22 @@
             <div class="_1-min">1min</div>
         </div>
 
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=-1">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page=0">1</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=1">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+
         <!-- 버튼들 -->
         <button class="button2" sec:authorize="isAuthenticated()"
                 th:if="${username == #authentication.getPrincipal().getUsername()}">
@@ -115,7 +138,7 @@
             <div class="title6">ToDO-Card 등록</div>
         </a>
         <button class="button4" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}" >
+                th:if="${username == #authentication.getPrincipal().getUsername()}">
             <div class="title6">회고 등록</div>
         </button>
     </div>
@@ -154,28 +177,42 @@
 
         <!-- 댓글과 이모티콘 -->
         <div class="div6">댓글</div>
-        <div class="div3">
-            <div class="div4">엄준식 짱짱맨</div>
-        </div>
-        <div class="img-1">
-            <img class="lol" src="/lol.png"/>
-            <div class="_5">5</div>
-            <img class="surprised" src="/surprised.png"/>
-            <div class="_4">4</div>
-            <img class="vector2" src="/vector.png"/>
-            <div class="_6">6</div>
+
+        <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
+        <div class="reactions" style="position: absolute; right: 120px; top: 1015px;">
+            <span onclick="increaseCount(this)">👍 <span class="count">3</span></span>
+            <span onclick="increaseCount(this)">👎 <span class="count">4</span></span>
+            <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
         </div>
         <div class="div5">
             <div class="div4">엄준식 짱짱맨</div>
         </div>
-        <div class="img-2">
-            <img class="lol" src="/lol.png"/>
-            <div class="_5">5</div>
-            <img class="surprised" src="/surprised.png"/>
-            <div class="_4">4</div>
-            <img class="vector" src="/vector.png"/>
-            <div class="_6">6</div>
+
+        <!-- reactions를 div3 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
+        <div class="reactions" style="position: absolute; right: 120px; top: 1280px;">
+            <span onclick="increaseCount(this)">👍 <span class="count">6</span></span>
+            <span onclick="increaseCount(this)">👎 <span class="count">7</span></span>
+            <span onclick="increaseCount(this)">❤️ <span class="count">8</span></span>
         </div>
+        <div class="div3">
+            <div class="div4">엄준식 짱짱맨</div>
+        </div>
+
+        <ul class="pagination1 justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=-1">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page=0">1</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=1">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
 
         <!-- 댓글 입력 필드 -->
         <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
@@ -187,3 +224,13 @@
         </button>
     </div>
 </div>
+</body>
+</html>
+
+<script>
+    function increaseCount(element) {
+        const countElement = element.querySelector(".count");
+        let count = parseInt(countElement.textContent);
+        countElement.textContent = count + 1;
+    }
+</script>

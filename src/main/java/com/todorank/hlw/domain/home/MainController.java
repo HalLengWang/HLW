@@ -61,7 +61,7 @@ public class MainController {
         return "todo_card_read_create_page";
     }
 
-    //500 에러
+    // URL 경로로 직접 접근시 500 에러(루트경로에서 접근할 것)
     @GetMapping("/todo_list")
     public String root11() {
         return "todo_list";
