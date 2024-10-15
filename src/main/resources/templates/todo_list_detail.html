@@ -69,9 +69,11 @@
 
 
         <div class="frame-427318978" th:each="todoCard : ${paging}">
-            <img class="group" src="/group.png"/>
-            <div class="to-do-card-5" th:text="${todoCard.title}"></div>
-            <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+            <a th:href="@{|/todo_card/detail/${todoCard.id}|}">
+                <img class="group" src="/group.png"/>
+                <div class="to-do-card-5" th:text="${todoCard.title}"></div>
+                <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+            </a>
         </div>
 
         <div class="to-do-list-detail-bar">

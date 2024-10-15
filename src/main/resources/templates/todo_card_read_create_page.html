@@ -44,7 +44,7 @@
                 <label for="execution">진행도</label>
                 <input type="range" min="0" max="100"
                        oninput="updateProgressValue(this.value)" th:field="*{execution}">
-                <p id="progress-value">0%</p>
+                <p id="progress-value" th:text="${todoCardForm.execution} + '%'"></p>
             </div>
         </div>
 
@@ -73,7 +73,13 @@
 </html>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 페이지가 로드될 때 실행
+        var executionValue = /*[[${todoCardForm.execution}]]*/;
+        document.getElementById('progress-value').innerText = executionValue + '%';
+    });
+
     function updateProgressValue(value) {
-        document.getElementById("progress-value").textContent = value + "%";
+        document.getElementById("progress-value").innerText = value + "%";
     }
 </script>
