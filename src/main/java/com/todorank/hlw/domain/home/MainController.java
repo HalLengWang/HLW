@@ -9,12 +9,4 @@ public class MainController {
     public String root() {
         return "login_after";
     }
-    @GetMapping("/b")
-    public String before() {
-        return "todo_list";
-    }
-    @GetMapping("/c")
-    public String rankings(){
-        return "rankings_list_page";
-    }
 }
