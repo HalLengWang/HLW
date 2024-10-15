@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class TodoCard extends BaseEntity {
@@ -29,6 +29,7 @@ public class TodoCard extends BaseEntity {
     @NotNull
     private TodoTypeList todoTypeList;
 
+    @NotNull
     private String title;
 
     @Column(columnDefinition = "text")

@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="seconday">
-            <a class="title6" th:href="@{/todo_list/list}">바로 작성하러 가기</a>
+            <a class="title6" th:href="@{/todo_list/list/0}">바로 작성하러 가기</a>
         </div>
         <div class="container6">
             <div class="description">
@@ -54,16 +54,20 @@
         </div>
         <div class="list3">
             <div class="row">
-                <a class="item2" th:href="@{/todo_list/list?id=1}">
-                    <div class="frame">
-                        <div class="icon">🥇</div>
+                <div class="item2">
+                    <a th:href="@{/todo_list/list/1}">
+                        <div class="frame">
+                            <div class="icon">🥇</div>
+                        </div>
+                        <div class="frame-4273189062">
+                            <div class="title8">일간 랭킹 1위</div>
+                        </div>
+                        <div class="subtitle2">이상수</div>
+                    </a>
+                    <div class="subtitle3">
+                        <a th:href="@{/test/10}">일간 랭킹 순위 보러가기</a>
                     </div>
-                    <div class="frame-4273189062">
-                        <div class="title8">일간 랭킹 1위</div>
-                    </div>
-                    <div class="subtitle2">이상수</div>
-                    <div class="subtitle3">일간 랭킹 순위 보러가기</div>
-                </a>
+                </div>
                 <div class="item2">
                     <div class="frame">
                         <div class="icon">🥇</div>
@@ -146,7 +150,7 @@
                 <input type="text" placeholder="user name">
             </div>
             <button class="button">
-                    <div class="title6">검색하기</div>
+                <div class="title6">검색하기</div>
             </button>
         </div>
         <img class="vector-2006" src="vector-2005.svg"/>

@@ -32,8 +32,9 @@
                 <div class="x-axis">Tasks</div>
             </div>
         </div>
-        <div class="search-box">
-            <input type="text" placeholder="Title Name">
+        <div class="textfield2">
+            <input type="text" class="text" th:value="${todoList.title}" />
+            <img class="ic-search2" src="/search.png"/>
         </div>
         <div class="div13">제목</div>
         <div class="to-do-list-bar">
@@ -51,13 +52,17 @@
         </div>
     </div>
     <div class="_2">
-        <button class="button2">
+        <button class="button2" sec:authorize="isAuthenticated()"
+                th:if="${username == #authentication.getPrincipal().getUsername()}">
             <div class="title6">ToDO-Card 수정</div>
         </button>
-        <button class="button3">
+        <a class="button3" sec:authorize="isAuthenticated()"
+           th:if="${username == #authentication.getPrincipal().getUsername()}"
+           th:href="@{|/todo_card/create?id=${todoList.id}|}">
             <div class="title6">ToDO-Card 등록</div>
-        </button>
-        <button class="button4">
+        </a>
+        <button class="button4" sec:authorize="isAuthenticated()"
+                th:if="${username == #authentication.getPrincipal().getUsername()}" >
             <div class="title6">회고 등록</div>
         </button>
         <div class="frame-427318978">
@@ -93,22 +98,22 @@
         </div>
         <div class="search-box2">
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
-            <img class="ic-search" src="search.png" alt="Search">
+            <img class="ic-search" src="/search.png" alt="Search">
         </div>
-
     </div>
     <div class="_3">
         <button class="button">
             <div class="title6">등록</div>
         </button>
-        <div class="div"></div>
+        <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
+
         <div class="div2">댓글등록</div>
         <div class="img-2">
-            <img class="lol" src="lol.png"/>
+            <img class="lol" src="/lol.png"/>
             <div class="_5">5</div>
-            <img class="surprised" src="surprised.png"/>
+            <img class="surprised" src="/surprised.png"/>
             <div class="_4">4</div>
-            <img class="vector" src="vector.png"/>
+            <img class="vector" src="/vector.png"/>
             <div class="_6">6</div>
         </div>
         <div class="div3">
@@ -118,11 +123,11 @@
             <div class="div4">엄준식 짱짱맨</div>
         </div>
         <div class="img-1">
-            <img class="lol" src="lol.png"/>
+            <img class="lol" src="/lol.png"/>
             <div class="_5">5</div>
-            <img class="surprised" src="surprised.png"/>
+            <img class="surprised" src="/surprised.png"/>
             <div class="_4">4</div>
-            <img class="vector2" src="vector.png"/>
+            <img class="vector2" src="/vector.png"/>
             <div class="_6">6</div>
         </div>
         <div class="div6">댓글</div>
@@ -144,7 +149,7 @@
             </div>
         </div>
         <div class="div8">공개</div>
-        <div class="div9"></div>
+        <div9 class="div9">오늘의 회고</div9>
         <div class="div10">제목</div>
         <div class="bar">
             <div class="container">
