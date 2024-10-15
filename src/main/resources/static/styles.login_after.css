@@ -486,26 +486,23 @@ input[type="text"] {
   position: relative;
   align-self: stretch;
 }
-.subtitle3 {
-  color: rgba(255, 0, 4, 0.5);
-  text-align: center;
-  font-family: "Roboto-Regular", sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  position: relative;
-  align-self: stretch;
-}
+
 .subtitle4 {
-  color: rgba(0, 0, 0, 0.5);
-  text-align: center;
-  font-family: "Roboto-Regular", sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  position: relative;
-  align-self: stretch;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    position: relative;
+    align-self: stretch;
+    transition: color 0.3s; /* 부드러운 전환 효과 */
 }
+
+.subtitle4:hover {
+    color: red; /* 호버 시 변경할 텍스트 색상을 빨간색으로 설정 */
+}
+
 .vector-2007 {
   height: 0px;
   position: absolute;
@@ -630,26 +627,7 @@ input[type="text"] {
   bottom: 0px;
   overflow: visible;
 }
-.button2 {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center; /* 가운데 정렬 */
-    justify-content: center; /* 가운데 정렬 */
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-    background-color: #F7A6A6; /* 배경 색상 */
-    width: 240px; /* 가로 크기 */
-    height: 48px; /* 세로 크기 */
-    border-radius: 6px; /* 둥근 모서리 */
-    border: none; /* 스트로크 색상 제거 */
-    cursor: pointer; /* 커서 모양 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-}
-.button2:hover {
-    background-color: #F07A7A; /* 호버 시 진한 색상 */
-}
+
 .primary2 {
   background: #f7a6a6;
   border-radius: 8px;
@@ -822,22 +800,28 @@ input[type="text"] {
   overflow: hidden;
 }
 .seconday {
-  background: #000000;
-  border-radius: 8px;
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: center;
-  justify-content: center;
-  width: 240px;
-  position: absolute;
-  left: 461px;
-  top: 122px;
+    background: #000000;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: #000000;
+    border-width: 1px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    position: absolute;
+    left: 461px;
+    top: 122px;
+    transition: background-color 0.3s; /* 부드러운 전환 효과 */
 }
+
+.seconday:hover {
+    background: #333333; /* 호버 시 변경할 배경 색상 */
+}
+
 .container6 {
   display: flex;
   flex-direction: column;
