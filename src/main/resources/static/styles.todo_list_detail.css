@@ -942,13 +942,8 @@
 input[type="text"] {
     width: 100%; /* 너비를 박스에 맞추기 */
     padding: 10px; /* 안쪽 여백 */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 스타일 */
-    border-radius: 4px; /* 둥근 모서리 */
     text-align: center; /* 텍스트 중앙 정렬 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
-
-
 .div13 {
   color: #000000;
   text-align: left;
@@ -956,11 +951,56 @@ input[type="text"] {
   font-size: 30px;
   line-height: 20px;
   font-weight: 400;
-  position: absolute;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px; /* 우측 여백 설정 */
   left: 870px;
   top: 162px;
-  width: 403px;
+  width: 200px; /* 너비 조정 */
   height: 47px;
+}
+
+.title-search {
+  font-size: 20px;
+
+}
+
+.container-title-search {
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  position: absolute;
+  right: 150px;
+  top: 162px;
+}
+
+.title-search {
+  font-size: 20px;
+  margin-bottom: 10px; /* 검색 필드와의 간격 조정 */
+  text-align: right; /* 오른쪽 정렬 */
+}
+/* 검색 필드 스타일 */
+.textfield2 {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  width: 180px; /* 검색창 너비 조정 */
+}
+/* 입력 필드 스타일 */
+.textfield2 .text {
+  border: none;
+  outline: none;
+}
+
+/* 검색 아이콘 스타일 */
+.textfield2 .ic-search2 {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 .to-do-list-bar {
   background: rgba(247, 166, 166, 0.6);
