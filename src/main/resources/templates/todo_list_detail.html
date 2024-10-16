@@ -53,10 +53,6 @@
         </div>
     </div>
     <div class="_2">
-        <button class="button2" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">ToDO-Card 수정</div>
-        </button>
         <a class="button3" sec:authorize="isAuthenticated()"
            th:if="${username == #authentication.getPrincipal().getUsername()}"
            th:href="@{|/todo_card/create?id=${todoList.id}|}">

@@ -8,6 +8,8 @@ import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import com.todorank.hlw.domain.todo_type_list.service.TodoTypeListService;
+import com.todorank.hlw.domain.user.entity.SiteUser;
+import com.todorank.hlw.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ public class TodoCardController {
     private final TodoCardService todoCardService;
     private final TodoTypeListService todoTypeListService;
     private final TodoListService todoListService;
+    private final UserService userService;
 
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
@@ -42,6 +45,7 @@ public class TodoCardController {
         todoCardForm.setExecution(0);
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
+        model.addAttribute("username", todoList.getUser().getUsername());
         return "todo_card_read_create_page";
     }
 
@@ -66,13 +70,14 @@ public class TodoCardController {
 
     @GetMapping("/detail/{id}")
     public String todoCardDetail(TodoCardForm todoCardForm, @PathVariable(value = "id") Long cardId,
-                                 Model model) {
+                                 Model model, Principal principal) {
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         List<TodoTypeList> typeList = this.todoTypeListService.getList();
         if (todoCard == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 데이터입니다.");
         }
         model.addAttribute("todoTypeList", typeList);
+        model.addAttribute("username", todoCard.getTodoList().getUser().getUsername());
         todoCardForm.setExecution(todoCard.getExecution());
         todoCardForm.setMemo(todoCard.getMemo());
         todoCardForm.setCategory(todoCard.getTodoTypeList().getId());
