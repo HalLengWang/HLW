@@ -42,8 +42,9 @@
             </div>
             <div class="progress">
                 <label for="execution">진행도</label>
-                <input type="range" min="0" max="100"
-                       oninput="updateProgressValue(this.value)" th:field="*{execution}">
+                <input type="range" min="0" max="100" th:field="*{execution}"
+                       oninput="updateProgressValue(this.value)" id="execution-range">
+                <!-- 서버에서 받은 execution 값을 표시 -->
                 <p id="progress-value" th:text="${todoCardForm.execution} + '%'"></p>
             </div>
         </div>
@@ -74,12 +75,14 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 페이지가 로드될 때 실행
-        var executionValue = /*[[${todoCardForm.execution}]]*/;
-        document.getElementById('progress-value').innerText = executionValue + '%';
+        // 슬라이더 값을 서버에서 받은 값으로 초기화
+        var executionValue = /*[[${todoCardForm.execution}]]*/ 0;
+        var progressValueElement = document.getElementById('progress-value');
+        var sliderElement = document.getElementById('execution-range');
     });
 
     function updateProgressValue(value) {
+        // 슬라이더 값을 실시간으로 업데이트
         document.getElementById("progress-value").innerText = value + "%";
     }
 </script>
