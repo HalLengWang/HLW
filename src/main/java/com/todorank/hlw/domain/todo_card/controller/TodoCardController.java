@@ -56,7 +56,6 @@ public class TodoCardController {
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
         }
-        //TODO : execution 저장 안되는 버그
         TodoTypeList todoType = todoTypeListService.getOne(todoCardForm.getCategory());
         this.todoCardService.create(todoCardForm.getTitle(), todoCardForm.getMemo(), todoCardForm.getStartDateTime(),
                 todoCardForm.getEndDateTime(), todoCardForm.getCompletion(), todoCardForm.getExecution(),
