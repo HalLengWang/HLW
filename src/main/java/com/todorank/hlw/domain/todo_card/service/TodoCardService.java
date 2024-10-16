@@ -5,9 +5,15 @@ import com.todorank.hlw.domain.todo_card.repository.TodoCardRepository;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +33,12 @@ public class TodoCardService {
                 .todoTypeList(todoType)
                 .build();
         this.todoCardRepository.save(todoCard);
+    }
+
+    public Page<TodoCard> getPage(TodoList todoList, int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc("startDateTime"));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        return this.todoCardRepository.findByTodoList(todoList, pageable);
     }
 }
