@@ -41,4 +41,8 @@ public class TodoCardService {
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.todoCardRepository.findByTodoList(todoList, pageable);
     }
+
+    public TodoCard getCard(Long id) {
+        return this.todoCardRepository.findById(id).orElse(null);
+    }
 }
