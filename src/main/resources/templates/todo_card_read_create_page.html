@@ -29,7 +29,9 @@
             <div class="time">
                 <p>시간</p>
                 <label for="startDateTime">시작 시간</label>
-                <input type="datetime-local" th:field="*{startDateTime}">
+                <input type="datetime-local"
+                       th:field="*{startDateTime}"
+                       th:value="${formattedStartDateTime}" />
             </div>
             <br/>
             <div class="time">
