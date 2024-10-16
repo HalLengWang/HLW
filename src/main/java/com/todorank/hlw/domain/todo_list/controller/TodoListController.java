@@ -1,5 +1,7 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
+import com.todorank.hlw.domain.todo_card.entity.TodoCard;
+import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
@@ -24,6 +26,7 @@ import java.security.Principal;
 public class TodoListController {
     private final TodoListService todoListService;
     private final UserService userService;
+    private final TodoCardService todoCardService;
 
     @GetMapping("/list/{id}")
     public String list(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
@@ -47,12 +50,14 @@ public class TodoListController {
     }
 
     @GetMapping("/detail/{id}")
-    public String create(@PathVariable(value = "id") Long list_id, Model model) {
+    public String create(@PathVariable(value = "id") Long list_id, Model model,
+                         @RequestParam(value = "page", defaultValue = "0") int page) {
         TodoList todoList = this.todoListService.getTodoList(list_id);
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
         }
-        SiteUser user = todoList.getUser();
+        Page<TodoCard> paging = this.todoCardService.getPage(todoList, page);
+        model.addAttribute("paging", paging);
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
