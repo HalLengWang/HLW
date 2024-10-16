@@ -30,7 +30,7 @@
         <div class="container-title-search">
             <div class="title-search">제목</div>
             <div class="textfield2">
-                <input type="text" class="text" placeholder="title search">
+                <input type="text" class="text" placeholder="title search" th:value="${todoList.title}">
                 <img class="ic-search2" src="/search.png" alt="Search">
             </div>
         </div>
@@ -68,8 +68,8 @@
                 </div>
             </div>
         </div>
-    </div>
-
+      </div>
+          
     <!-- ToDo List 상세 바 -->
     <div class="_2">
         <div class="to-do-list-detail-bar">
@@ -84,54 +84,40 @@
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
             <img class="ic-search" src="/search.png" alt="Search">
         </div>
-
-        <div class="frame-427318974">
+          
+        <div class="frame-427318974" th:each="todoCard : ${paging}">
+          <a th:href="@{|/todo_card/detail/${todoCard.id}|}">
             <img class="group5" src="/group.png"/>
-            <div class="_5-km">런닝 5km</div>
-            <div class="_1-min">1min</div>
+            <div class="_5-km" th:text="${todoCard.title}"></div>
+            <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+           </a>
         </div>
-        <div class="frame-427318970">
-            <img class="group4" src="/group.png"/>
-            <div class="div12">밥 세끼 먹기</div>
-            <div class="_1-min">1min</div>
+      
+       <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    class="page-item">
+                    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="frame-427318971">
-            <img class="group3" src="/group.png"/>
-            <div class="div11">깃허브 공부하기</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318975">
-            <img class="group2" src="/group.png"/>
-            <div class="to-do-card-4">ToDo Card 4</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318978">
-            <img class="group" src="/group.png"/>
-            <div class="to-do-card-5">ToDo Card 5</div>
-            <div class="_1-min">1min</div>
-        </div>
-
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=-1">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="?page=0">1</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=1">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
+        <!-- 페이징처리 끝 -->
 
         <!-- 버튼들 -->
-        <button class="button2" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">ToDO-Card 수정</div>
-        </button>
         <a class="button3" sec:authorize="isAuthenticated()"
            th:if="${username == #authentication.getPrincipal().getUsername()}"
            th:href="@{|/todo_card/create?id=${todoList.id}|}">
@@ -175,7 +161,7 @@
             </div>
         </div>
 
-        <!-- 댓글과 이모티콘 -->
+           <!-- 댓글과 이모티콘 -->
         <div class="div6">댓글</div>
 
         <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
@@ -197,8 +183,8 @@
         <div class="div3">
             <div class="div4">엄준식 짱짱맨</div>
         </div>
-
-        <ul class="pagination1 justify-content-center">
+     
+          <ul class="pagination1 justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="?page=-1">
                     <span>이전</span>
@@ -213,7 +199,7 @@
                 </a>
             </li>
         </ul>
-
+         
         <!-- 댓글 입력 필드 -->
         <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
         <div class="div2">댓글등록</div>
