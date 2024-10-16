@@ -19,31 +19,31 @@ public class UserController {
 
     @GetMapping("/signup")
     public String userSignup(UserCreateForm userCreateForm) {
-        return "signup";
+        return "signup_page";
     }
 
     @PostMapping("/signup")
     public String userSignup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "signup_page";
         }
         if (!userCreateForm.getPassword().equals(userCreateForm.getPasswordCheck())) {
             bindingResult.rejectValue("passwordCheck", "password incorrect", "비밀번호가 다릅니다.");
-            return "signup";
+            return "signup_page";
         }
         try {
             this.userService.create(userCreateForm.getUsername(), userCreateForm.getPassword(),
                     userCreateForm.getEmail(), userCreateForm.getNickname());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            bindingResult.reject("signup error", "이미 가입된 아이디 혹은 이메일입니다.");
-            return "signup_form";
+            bindingResult.reject("signup_page error", "이미 가입된 아이디 혹은 이메일입니다.");
+            return "signup_page";
         }
-        return "Login-after";
+        return "login_after";
     }
 
     @GetMapping("/login")
     public String userLogin() {
-        return "login";
+        return "login_page";
     }
 }

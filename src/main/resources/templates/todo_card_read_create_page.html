@@ -16,65 +16,122 @@
         <a href="#">로그인 / 로그아웃</a>
         <div class="textfield">
             <input type="text" class="search-box" placeholder="Search in site">
-            <img class="ic-search" src="/lens.png" alt="검색 아이콘" />
+            <img class="ic-search" src="/lens.png" alt="검색 아이콘"/>
         </div>
     </div>
 </div>
-
-<div class="card">
+<form class="card" th:object="${todoCardForm}" th:action="@{/todo_card/create}" method="post">
+    <input type="hidden" th:value="${todoListId}" name="id"/>
     <div class="header">ToDo Card</div>
 
     <div class="content">
         <div class="time-section">
             <div class="time">
                 <p>시간</p>
-                <label for="start-time">시작 시간</label>
-                <input type="datetime-local" id="start-time" name="start-time">
-
-                <br/>
-
-                <label for="end-time">종료 시간</label>
-                <input type="datetime-local" id="end-time" name="end-time">
+                <label for="startDateTime">시작 시간</label>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="datetime-local" th:field="*{startDateTime}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="datetime-local" th:field="*{startDateTime}" disabled="disabled"/>
+                </th:block>
+            </div>
+            <br/>
+            <div class="time">
+                <label for="endDateTime">종료 시간</label>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="datetime-local" th:field="*{endDateTime}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="datetime-local" th:field="*{endDateTime}" disabled="disabled"/>
+                </th:block>
             </div>
             <div class="complete">
                 </br>
-                <p>완료 여부</p>
-                <div class="checkbox"><input type="checkbox" checked> 할 일</div>
+                <div class="checkbox">
+                    <th:block sec:authorize="isAuthenticated()">
+                        <input type="checkbox" th:field="*{completion}"
+                               th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>완료 여부
+                    </th:block>
+                    <th:block sec:authorize="isAnonymous()">
+                        <input type="checkbox" th:field="*{completion}" disabled="disabled"/>완료 여부
+                    </th:block>
+                </div>
             </div>
             <div class="progress">
-                <label for="progress-slider">진행도</label>
-                <input type="range" id="progress-slider" min="0" max="100" value="60" oninput="updateProgressValue(this.value)">
-                <p id="progress-value">60%</p>
+                <label for="execution">진행도</label>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="range" min="0" max="100" th:field="*{execution}"
+                           oninput="updateProgressValue(this.value)" id="execution-range"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="range" min="0" max="100" th:field="*{execution}"
+                           oninput="updateProgressValue(this.value)" id="execution-range"
+                           disabled="disabled"/>
+                </th:block>
+                <!-- 서버에서 받은 execution 값을 표시 -->
+                <p id="progress-value" th:text="${todoCardForm.execution} + '%'"></p>
             </div>
         </div>
 
 
         <div class="category">
             <p>할일 종류 리스트</p>
-            <div>
-                <input type="radio" name="category" value="study"> 공부<br>
-                <input type="radio" name="category" value="exercise"> 운동<br>
-                <input type="radio" name="category" value="reading"> 독서<br>
-                <input type="radio" name="category" value="other"> 기타<br>
-            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:each="todoType : ${todoTypeList}">
+                    <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}">
+                    <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
+                </div>
+            </th:block>
+            <th:block sec:authorize="isAnonymous()">
+                <div th:each="todoType : ${todoTypeList}">
+                    <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}"
+                           disabled="disabled">
+                    <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
+                </div>
+            </th:block>
         </div>
     </div>
 
     <div class="memo-content">
         <label for="title">제목</label>
-        <input type="text" id="title" placeholder="title">
+        <th:block sec:authorize="isAuthenticated()">
+            <input type="text" id="title" placeholder="title" th:field="*{title}"
+                   th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <input type="text" id="title" placeholder="title" th:field="*{title}"
+                   disabled="disabled"/>
+        </th:block>
+
 
         <label for="memo">메모</label>
-        <textarea id="memo" placeholder="메모 내용을 입력하세요."></textarea>
+        <th:block sec:authorize="isAuthenticated()">
+            <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"
+                      th:disabled="${username != #authentication.getPrincipal().getUsername()}"></textarea>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"
+                      disabled="disabled"></textarea>
+        </th:block>
     </div>
 
-    <button class="save-btn">저장</button>
-</div>
+    <button class="save-btn" type="submit"
+            sec:authorize="isAuthenticated()"
+            th:if="${username == #authentication.getPrincipal().getUsername()}">저장
+    </button>
+</form>
+
 </body>
 </html>
 
 <script>
     function updateProgressValue(value) {
-        document.getElementById("progress-value").textContent = value + "%";
+        // 슬라이더 값을 실시간으로 업데이트
+        document.getElementById("progress-value").innerText = value + "%";
     }
 </script>

@@ -1,6 +1,54 @@
-<link href="/styles.todo_list_detail.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할랭왕</title>
+    <link href="/styles.todo_list_detail.css" rel="stylesheet">
+</head>
+<body>
 <div class="to-do-list">
+    <!-- 상단 바 -->
+    <div class="top-bar">
+        <div class="rectangle-4137"></div>
+        <div class="title5">할랭왕</div>
+        <div class="navigation">
+            <div class="tab">로그아웃</div>
+        </div>
+    </div>
+
+    <!-- ToDo List 제목 바 -->
     <div class="_1">
+        <div class="to-do-list-bar">
+            <div class="container">
+                <div class="title2">ToDo List</div>
+            </div>
+            <img class="vector-2003" src="vector-2002.svg"/>
+        </div>
+
+        <!-- 검색 필드 -->
+        <div class="container-title-search">
+            <div class="title-search">제목</div>
+            <div class="textfield2">
+                <input type="text" class="text" placeholder="title search" th:value="${todoList.title}">
+                <img class="ic-search2" src="/search.png" alt="Search">
+            </div>
+        </div>
+
+        <div class="container2">
+            <div class="container3">
+                <div class="title4">시간표(TimeTable)</div>
+                <div class="y-axis">Percentage</div>
+                <div class="graph">
+                    <div class="ellipse-95"></div>
+                    <div class="ellipse-96"></div>
+                    <div class="ellipse-97"></div>
+                </div>
+                <div class="x-axis">Tasks</div>
+            </div>
+        </div>
+
+        <!-- 메트릭 및 시간표 -->
         <div class="list">
             <div class="row">
                 <div class="metric">
@@ -20,112 +68,81 @@
                 </div>
             </div>
         </div>
-        <div class="container2">
-            <div class="container3">
-                <div class="title4">시간표(TimeTable)</div>
-                <div class="y-axis">Percentage</div>
-                <div class="graph">
-                    <div class="ellipse-95"></div>
-                    <div class="ellipse-96"></div>
-                    <div class="ellipse-97"></div>
-                </div>
-                <div class="x-axis">Tasks</div>
-            </div>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Title Name">
-        </div>
-        <div class="div13">제목</div>
-        <div class="to-do-list-bar">
-            <div class="container">
-                <div class="title2">ToDo List</div>
-            </div>
-            <img class="vector-2003" src="vector-2002.svg"/>
-        </div>
-    </div>
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title5">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>
+      </div>
+          
+    <!-- ToDo List 상세 바 -->
     <div class="_2">
-        <button class="button2">
-            <div class="title6">ToDO-Card 수정</div>
-        </button>
-        <button class="button3">
-            <div class="title6">ToDO-Card 등록</div>
-        </button>
-        <button class="button4">
-            <div class="title6">회고 등록</div>
-        </button>
-        <div class="frame-427318978">
-            <img class="group" src="/group.png"/>
-            <div class="to-do-card-5">ToDo Card 5</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318975">
-            <img class="group2" src="/group.png"/>
-            <div class="to-do-card-4">ToDo Card 4</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318971">
-            <img class="group3" src="/group.png"/>
-            <div class="div11">깃허브 공부하기</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318970">
-            <img class="group4" src="/group.png"/>
-            <div class="div12">밥 세끼 먹기</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318974">
-            <img class="group5" src="/group.png"/>
-            <div class="_5-km">런닝 5km</div>
-            <div class="_1-min">1min</div>
-        </div>
         <div class="to-do-list-detail-bar">
             <div class="container">
-                <div class="title2">ToDo List 상세</div>
+                <div class="title2">ToDo Card</div>
             </div>
             <img class="vector-2002" src="vector-2001.svg"/>
         </div>
+
+        <!-- 검색 박스 및 ToDo 카드 -->
         <div class="search-box2">
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
-            <img class="ic-search" src="search.png" alt="Search">
+            <img class="ic-search" src="/search.png" alt="Search">
+        </div>
+          
+        <div class="frame-427318974" th:each="todoCard : ${paging}">
+          <a th:href="@{|/todo_card/detail/${todoCard.id}|}">
+            <img class="group5" src="/group.png"/>
+            <div class="_5-km" th:text="${todoCard.title}"></div>
+            <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+           </a>
+        </div>
+      
+       <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    class="page-item">
+                    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
+
+        <!-- 버튼들 -->
+        <a class="button3" sec:authorize="isAuthenticated()"
+           th:if="${username == #authentication.getPrincipal().getUsername()}"
+           th:href="@{|/todo_card/create?id=${todoList.id}|}">
+            <div class="title6">ToDO-Card 등록</div>
+        </a>
+        <button class="button4" sec:authorize="isAuthenticated()"
+                th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <div class="title6">회고 등록</div>
+        </button>
+    </div>
+
+    <!-- 회고 바 -->
+    <div class="_3">
+        <div class="bar">
+            <div class="container">
+                <div class="title2">회고</div>
+            </div>
+            <img class="vector-200" src="vector-2000.svg"/>
         </div>
 
-    </div>
-    <div class="_3">
-        <button class="button">
-            <div class="title6">등록</div>
-        </button>
-        <div class="div"></div>
-        <div class="div2">댓글등록</div>
-        <div class="img-2">
-            <img class="lol" src="lol.png"/>
-            <div class="_5">5</div>
-            <img class="surprised" src="surprised.png"/>
-            <div class="_4">4</div>
-            <img class="vector" src="vector.png"/>
-            <div class="_6">6</div>
-        </div>
-        <div class="div3">
-            <div class="div4">엄준식 짱짱맨</div>
-        </div>
-        <div class="div5">
-            <div class="div4">엄준식 짱짱맨</div>
-        </div>
-        <div class="img-1">
-            <img class="lol" src="lol.png"/>
-            <div class="_5">5</div>
-            <img class="surprised" src="surprised.png"/>
-            <div class="_4">4</div>
-            <img class="vector2" src="vector.png"/>
-            <div class="_6">6</div>
-        </div>
-        <div class="div6">댓글</div>
+        <!-- 회고 제목 및 내용 -->
+        <div class="div10">제목</div>
+        <div class="div9">오늘의 회고</div>
+        <div class="div8">공개</div>
+
         <div class="div7">
             <div class="to-do-list-a">
                 이번 주 ToDo List를 돌아보니, 많은 일을 완료할 수 있었지만 몇 가지
@@ -143,14 +160,63 @@
                 이번 회고를 통해 다음 주에 더 나은 계획을 세우고 싶습니다.
             </div>
         </div>
-        <div class="div8">공개</div>
-        <div class="div9"></div>
-        <div class="div10">제목</div>
-        <div class="bar">
-            <div class="container">
-                <div class="title2">회고</div>
-            </div>
-            <img class="vector-200" src="vector-2000.svg"/>
+
+           <!-- 댓글과 이모티콘 -->
+        <div class="div6">댓글</div>
+
+        <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
+        <div class="reactions" style="position: absolute; right: 120px; top: 1015px;">
+            <span onclick="increaseCount(this)">👍 <span class="count">3</span></span>
+            <span onclick="increaseCount(this)">👎 <span class="count">4</span></span>
+            <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
         </div>
+        <div class="div5">
+            <div class="div4">엄준식 짱짱맨</div>
+        </div>
+
+        <!-- reactions를 div3 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
+        <div class="reactions" style="position: absolute; right: 120px; top: 1280px;">
+            <span onclick="increaseCount(this)">👍 <span class="count">6</span></span>
+            <span onclick="increaseCount(this)">👎 <span class="count">7</span></span>
+            <span onclick="increaseCount(this)">❤️ <span class="count">8</span></span>
+        </div>
+        <div class="div3">
+            <div class="div4">엄준식 짱짱맨</div>
+        </div>
+     
+          <ul class="pagination1 justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=-1">
+                    <span>이전</span>
+                </a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="?page=0">1</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="?page=1">
+                    <span>다음</span>
+                </a>
+            </li>
+        </ul>
+         
+        <!-- 댓글 입력 필드 -->
+        <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
+        <div class="div2">댓글등록</div>
+
+        <!-- 등록 버튼 -->
+        <button class="button">
+            <div class="title6">등록</div>
+        </button>
     </div>
 </div>
+</body>
+</html>
+
+<script>
+    function increaseCount(element) {
+        const countElement = element.querySelector(".count");
+        let count = parseInt(countElement.textContent);
+        countElement.textContent = count + 1;
+    }
+</script>

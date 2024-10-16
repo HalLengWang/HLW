@@ -34,7 +34,7 @@
     border: none; /* 테두리 제거 */
     cursor: pointer; /* 커서 모양 */
     text-align: center; /* 텍스트 중앙 정렬 */
-    left: 1106px; /* 절대 위치 조정 */
+    left: 1070px; /* 절대 위치 조정 */
     top: 1969px; /* 절대 위치 조정 */
     color: white; /* 글씨 색상 흰색으로 설정 */
     font-size: 18px; /* 글씨 크기 설정 */
@@ -65,17 +65,29 @@
   font-weight: 500;
   position: relative;
 }
-.div {
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  width: 1279px;
-  height: 176px;
-  position: absolute;
-  left: 67px;
-  top: 1717px;
-  overflow: hidden;
+.input-field3 {
+  border: none;  /* 테두리 없애기 */
+  width: 1250px !important;  /* 너비 설정 */
+  height: 176px;  /* 고정된 높이 설정 */
+  padding: 5px;  /* 내부 여백 설정 */
+  font-size: 18px;  /* 글씨 크기 설정 */
+  line-height: 1.2;  /* 줄 간격 조절 */
+  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+  outline: none;  /* 클릭 시 테두리 제거 */
+  position: absolute; /* 위치 조정 */
+  left: 67px;  /* 위치 설정 */
+  top: 1717px; /* 위치 설정 */
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
+
+  /* 크기 조정 비활성화 */
+  resize: none;  /* 크기 조정 불가 */
 }
+
 .div2 {
   color: rgba(0, 0, 0, 0.42);
   text-align: center;
@@ -92,22 +104,7 @@
   align-items: center;
   justify-content: center;
 }
-.img-2 {
-  width: 406px;
-  height: 85px;
-  position: absolute;
-  left: 934px;
-  top: 1255px;
-  overflow: hidden;
-}
-.lol {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  left: 274px;
-  top: 20px;
-  object-fit: cover;
-}
+
 ._5 {
   color: #000000;
   text-align: left;
@@ -123,14 +120,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
-.surprised {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  left: 155px;
-  top: 20px;
-  object-fit: cover;
 }
 ._4 {
   color: #000000;
@@ -148,16 +137,7 @@
   align-items: center;
   justify-content: flex-start;
 }
-.vector {
-  width: 13.66%;
-  height: 67.33%;
-  position: absolute;
-  right: 80.27%;
-  left: 6.07%;
-  bottom: 25.62%;
-  top: 7.06%;
-  overflow: visible;
-}
+
 ._6 {
   color: #000000;
   text-align: left;
@@ -175,16 +155,26 @@
   justify-content: flex-start;
 }
 .div3 {
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  width: 1279px;
-  height: 176px;
-  position: absolute;
-  left: 67px;
-  top: 1340px;
-  overflow: hidden;
+  border: none;  /* 테두리 없애기 */
+  width: 1250px !important;  /* 너비 설정 */
+  height: 176px;  /* 고정된 높이 설정 */
+  padding: 5px;  /* 내부 여백 설정 */
+  font-size: 18px;  /* 글씨 크기 설정 */
+  line-height: 1.2;  /* 줄 간격 조절 */
+  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+  position: absolute; /* 위치 조정 */
+  left: 67px;  /* 위치 설정 */
+  top: 1340px; /* 위치 설정 */
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
+
+  overflow: hidden;  /* 내용 넘침 숨김 */
 }
+
 .div4 {
   color: rgba(0, 0, 0, 0.4);
   text-align: left;
@@ -202,34 +192,26 @@
   justify-content: flex-start;
 }
 .div5 {
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  width: 1279px;
-  height: 176px;
-  position: absolute;
-  left: 63px;
-  top: 1071px;
-  overflow: hidden;
+  border: none;  /* 테두리 없애기 */
+  width: 1250px;  /* 너비 설정 */
+  height: 176px;  /* 고정된 높이 설정 */
+  padding: 5px;  /* 내부 여백 설정 */
+  font-size: 18px;  /* 글씨 크기 설정 */
+  line-height: 1.2;  /* 줄 간격 조절 */
+  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+  position: absolute; /* 위치 조정 */
+  left: 63px;  /* 위치 설정 */
+  top: 1071px; /* 위치 설정 */
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
+
+  overflow: hidden;  /* 내용 넘침 숨김 */
 }
-.img-1 {
-  width: 406px;
-  height: 85px;
-  position: absolute;
-  left: 934px;
-  top: 974px;
-  overflow: hidden;
-}
-.vector2 {
-  width: 13.66%;
-  height: 67.33%;
-  position: absolute;
-  right: 80.27%;
-  left: 6.07%;
-  bottom: 25.62%;
-  top: 7.06%;
-  overflow: visible;
-}
+
 .div6 {
   color: rgba(0, 0, 0, 0.42);
   text-align: center;
@@ -247,16 +229,24 @@
   justify-content: center;
 }
 .div7 {
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  width: 1272px;
-  height: 436px;
-  position: absolute;
-  left: 63px;
-  top: 414px;
-  overflow: hidden;
+  border: none;  /* 테두리 없애기 */
+  width: 1250px;  /* 너비 설정 */
+  height: 436px;  /* 고정된 높이 설정 */
+  padding: 5px;  /* 내부 여백 설정 */
+  font-size: 18px;  /* 글씨 크기 설정 */
+  line-height: 1.2;  /* 줄 간격 조절 */
+  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+  position: absolute; /* 위치 조정 */
+  left: 63px;  /* 위치 설정 */
+  top: 414px;  /* 위치 설정 */
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
 }
+
 .to-do-list-a {
   color: rgba(0, 0, 0, 0.31);
   text-align: left;
@@ -266,7 +256,7 @@
   font-weight: 500;
   position: absolute;
   left: 19px;
-  top: 22px;
+  top: 40px;
   width: 1106px;
   height: 254px;
   display: flex;
@@ -290,16 +280,32 @@
   justify-content: center;
 }
 .div9 {
-  border-style: solid;
-  border-color: #000000;
-  border-width: 1px;
-  width: 1279px;
-  height: 82px;
-  position: absolute;
-  left: 67px;
-  top: 208px;
-  overflow: hidden;
+  border: none;  /* 테두리 없애기 */
+  width: 1250px !important;  /* 너비 설정 */
+  height: 82px;  /* 높이 설정 */
+  padding: 0;  /* 내부 여백 설정 (패딩을 제거하여 중앙 정렬에 도움) */
+  font-size: 22px;  /* 글씨 크기 설정 (더 크게) */
+  line-height: 1.2;  /* 줄 간격 조절 */
+  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+  outline: none;  /* 클릭 시 테두리 제거 */
+  position: absolute;  /* 위치 조정 */
+  left: 67px;  /* 위치 설정 */
+  top: 208px;  /* 위치 설정 */
+  overflow: hidden;  /* 내용 넘침 방지 */
+
+  /* Flexbox를 사용하여 텍스트 중앙 정렬 */
+  display: flex;  /* Flexbox 사용 */
+  align-items: center;  /* 세로 중앙 정렬 */
+  justify-content: center;  /* 가로 중앙 정렬 */
+
+  /* 그림자 추가 */
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
 }
+
 .div10 {
   color: rgba(0, 0, 0, 0.42);
   text-align: center;
@@ -880,13 +886,8 @@
 input[type="text"] {
     width: 100%; /* 너비를 박스에 맞추기 */
     padding: 10px; /* 안쪽 여백 */
-    border: 1px solid rgba(0, 0, 0, 0.1); /* 테두리 스타일 */
-    border-radius: 4px; /* 둥근 모서리 */
     text-align: center; /* 텍스트 중앙 정렬 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
 }
-
-
 .div13 {
   color: #000000;
   text-align: left;
@@ -894,12 +895,65 @@ input[type="text"] {
   font-size: 30px;
   line-height: 20px;
   font-weight: 400;
-  position: absolute;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px; /* 우측 여백 설정 */
   left: 870px;
   top: 162px;
-  width: 403px;
+  width: 200px; /* 너비 조정 */
   height: 47px;
 }
+
+.title-search {
+  color: rgba(0, 0, 0, 0.97);
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: right; /* 텍스트를 오른쪽 정렬 */
+  width: 400px; /* textfield2와 같은 폭 */
+}
+
+.container-title-search {
+  font-size: 40px;
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  position: absolute;
+  right: 150px;
+  top: 162px;
+}
+
+.title-search {
+  font-size: 20px;
+  margin-bottom: 10px; /* 검색 필드와의 간격 조정 */
+  text-align: right; /* 오른쪽 정렬 */
+}
+/* 검색 필드 스타일 */
+.textfield2 {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2px 2px; /* 상하 폭을 줄이기 위해 padding 값을 조정 */
+  width: 400px; /* 좌우 폭을 늘리기 위해 width 값을 조정 */
+}
+
+/* 입력 필드 스타일 */
+.textfield2 .text {
+  font-size: 15px;
+  border: none;
+  outline: none;
+  width: 100%; /* 검색창 안에서 너비를 전체로 설정 */
+}
+
+/* 검색 아이콘 스타일 */
+.textfield2 .ic-search2 {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .to-do-list-bar {
   background: rgba(247, 166, 166, 0.6);
   padding: 60px 0px 60px 0px;
@@ -986,3 +1040,138 @@ input[type="text"] {
     padding: 20px;
     background-color: #f4f4f4;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    margin-top: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1000px;
+    list-style: none; /* 리스트 점 제거 */
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px; /* 페이지 아이템 간 간격 */
+}
+
+.page-item a.page-link {
+    display: inline-block;
+    padding: 8px 16px;
+    color: #F7A6A6;
+    text-decoration: none;
+    border: 1px solid #F7A6A6;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.page-item a.page-link:hover {
+    background-color: #F7A6A6; /* 호버 시 배경색 변경 */
+    color: #ffffff; /* 호버 시 글자색 변경 */
+}
+
+.page-item.disabled .page-link {
+    color: #c0c0c0; /* 비활성화된 링크 색상 */
+    pointer-events: none; /* 클릭 불가 */
+    border-color: #c0c0c0;
+}
+
+.page-item.active .page-link {
+    background-color: #F7A6A6; /* 활성화된 페이지의 배경색 */
+    color: #ffffff;
+    border-color: #F7A6A6;
+}
+
+.reactions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 30px;
+    margin-bottom: 5px;
+    position: relative; /* 반응 아이콘이 div 내부에 위치하도록 설정 */
+    right: 0; /* 오른쪽 정렬 */
+    top: -20px; /* 위로 올려 위치 조정 */
+    z-index: 10; /* 다른 요소 위에 표시되도록 설정 */
+}
+
+.div3, .div5 {
+    border: none;
+    width: 1250px !important;
+    height: 176px;
+    padding: 5px;
+    font-size: 18px;
+    line-height: 1.2;
+    box-sizing: border-box;
+    position: absolute;
+    left: 67px;
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.05),
+        0 -2px 10px rgba(0, 0, 0, 0.05),
+        2px 0 10px rgba(0, 0, 0, 0.05),
+        -2px 0 10px rgba(0, 0, 0, 0.05);
+    overflow: visible; /* 이모지가 잘리지 않도록 설정 */
+}
+
+.pagination1 {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    list-style: none;
+    padding: 0;
+    margin-top: 1590px; /* div3 하단과의 간격 */
+    position: relative;
+}
+
+.input-field3 {
+    border: none;  /* 테두리 없애기 */
+    width: 1250px !important;  /* 너비 설정 */
+    height: 176px;  /* 고정된 높이 설정 */
+    padding: 5px;  /* 내부 여백 설정 */
+    font-size: 18px;  /* 글씨 크기 설정 */
+    line-height: 1.2;  /* 줄 간격 조절 */
+    box-sizing: border-box;  /* 패딩 포함 크기 계산 */
+    outline: none;  /* 클릭 시 테두리 제거 */
+    position: absolute; /* 위치 조정 */
+    left: 67px;  /* 위치 설정 */
+    top: 1700px; /* 더 위로 위치 조정 */
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
+        0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
+        2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
+        -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
+
+    resize: none;  /* 크기 조정 불가 */
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: absolute;
+    left: 1070px; /* 버튼 위치 */
+    top: 1900px; /* 더 위로 위치 조정 */
+    background-color: #F7A6A6;
+    width: 240px;
+    height: 48px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+.button:hover {
+    background-color: #F07A7A; /* 호버 시 진한 색상 */
+}
+
+
+
+
+
+
+
