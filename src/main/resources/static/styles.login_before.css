@@ -474,7 +474,7 @@
     align-items: center; /* 중앙 정렬 */
     justify-content: center;
     flex-shrink: 0;
-    width: 360px; /* 기존 너비 유지 */
+    width: 270px; /* 기존 너비 유지 */
     height: auto; /* 높이를 자동으로 조정 */
     padding: 16px; /* 내부 여백 추가 */
     margin: 0 auto; /* 좌우 중앙 정렬 */
