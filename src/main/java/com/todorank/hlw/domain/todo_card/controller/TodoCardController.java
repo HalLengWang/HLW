@@ -80,12 +80,6 @@ public class TodoCardController {
         todoCardForm.setCompletion(todoCard.getCompletion());
         todoCardForm.setEndDateTime(todoCard.getEndDateTime());
         todoCardForm.setStartDateTime(todoCard.getStartDateTime());
-        if (todoCardForm.getStartDateTime() != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            String formattedDateTime = todoCardForm.getStartDateTime().format(formatter);
-            model.addAttribute("formattedStartDateTime", formattedDateTime);
-        }
-        model.addAttribute("todoCardForm", todoCardForm);
         return "todo_card_read_create_page";
     }
 }

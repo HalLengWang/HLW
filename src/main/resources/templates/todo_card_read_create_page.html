@@ -29,9 +29,7 @@
             <div class="time">
                 <p>시간</p>
                 <label for="startDateTime">시작 시간</label>
-                <input type="datetime-local"
-                       th:field="*{startDateTime}"
-                       th:value="${formattedStartDateTime}" />
+                <input type="datetime-local" th:field="*{startDateTime}" />
             </div>
             <br/>
             <div class="time">
@@ -76,13 +74,6 @@
 </html>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 슬라이더 값을 서버에서 받은 값으로 초기화
-        var executionValue = /*[[${todoCardForm.execution}]]*/ 0;
-        var progressValueElement = document.getElementById('progress-value');
-        var sliderElement = document.getElementById('execution-range');
-    });
-
     function updateProgressValue(value) {
         // 슬라이더 값을 실시간으로 업데이트
         document.getElementById("progress-value").innerText = value + "%";
