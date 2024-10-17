@@ -105,4 +105,20 @@ public class TodoCardController {
         model.addAttribute("success", true);
         return "redirect:/todo_card/detail/" + cardId;
     }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String todoCardDelete(@PathVariable(value = "id") Long cardId, TodoCardForm todoCardForm,
+                                 Principal principal) {
+        TodoCard todoCard = this.todoCardService.getCard(cardId);
+        if (todoCard == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 데이터입니다.");
+        }
+        if (!todoCard.getTodoList().getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
+        }
+        Long listId = todoCard.getTodoList().getId();
+        this.todoCardService.delete(todoCard);
+        return "redirect:/todo_list/detail/" + listId;
+    }
 }

@@ -57,4 +57,8 @@ public class TodoCardService {
                 .build();
         this.todoCardRepository.save(modCard);
     }
+
+    public void delete(TodoCard todoCard) {
+        this.todoCardRepository.delete(todoCard);
+    }
 }
