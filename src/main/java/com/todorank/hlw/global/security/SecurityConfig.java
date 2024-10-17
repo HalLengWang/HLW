@@ -1,5 +1,7 @@
 package com.todorank.hlw.global.security;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,15 +9,20 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.io.IOException;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -27,8 +34,23 @@ public class SecurityConfig {
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true))
-        ;
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .addLogoutHandler((request, response, authentication) -> {
+                            // 카카오 로그아웃 URL 생성
+                            String kakaoLogoutUrl = "https://kauth.kakao.com/oauth/logout" +
+                                    "?client_id=adeda249321077b1ea78f8f04428cf4f" +  // 실제 REST API 키로 변경
+                                    "&logout_redirect_uri=http://localhost:8010"; // 리다이렉트 URL
+
+                            // 리다이렉트로 카카오 로그아웃 호출
+                            try {
+                                response.sendRedirect(kakaoLogoutUrl);
+                            } catch (IOException e) {
+                                e.printStackTrace(); // 예외 처리
+                            }
+                        }))
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .loginPage("/user/login"));
         return http.build();
     }
 
