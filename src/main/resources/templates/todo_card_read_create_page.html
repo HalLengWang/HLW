@@ -119,11 +119,18 @@
                       disabled="disabled"></textarea>
         </th:block>
     </div>
+    <div class="save-btn-container"
+         sec:authorize="isAuthenticated()"
+         th:if="${username == #authentication.getPrincipal().getUsername()}">
+        <th:block th:if="${mode == 'create'}">
+            <button class="save-btn" type="submit">저장</button>
+        </th:block>
+        <th:block th:if="${mode == 'detail'}">
+            <button class="save-btn" type="submit">저장</button>
+            <button class="save-btn" type="submit">삭제</button>
+        </th:block>
+    </div>
 
-    <button class="save-btn" type="submit"
-            sec:authorize="isAuthenticated()"
-            th:if="${username == #authentication.getPrincipal().getUsername()}">저장
-    </button>
 </form>
 
 </body>

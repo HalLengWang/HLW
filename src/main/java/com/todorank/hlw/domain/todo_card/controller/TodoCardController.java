@@ -3,12 +3,10 @@ package com.todorank.hlw.domain.todo_card.controller;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
-import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import com.todorank.hlw.domain.todo_type_list.service.TodoTypeListService;
-import com.todorank.hlw.domain.user.entity.SiteUser;
 import com.todorank.hlw.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -36,7 +33,7 @@ public class TodoCardController {
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String todoCardCreate(TodoCardForm todoCardForm, Model model,
-                                 @RequestParam(value = "id") Long list_id , Principal principal) {
+                                 @RequestParam(value = "id") Long list_id, Principal principal) {
         TodoList todoList = this.todoListService.getTodoList(list_id);
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
@@ -46,6 +43,7 @@ public class TodoCardController {
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
         model.addAttribute("username", todoList.getUser().getUsername());
+        model.addAttribute("mode", "create");
         return "todo_card_read_create_page";
     }
 
@@ -61,10 +59,8 @@ public class TodoCardController {
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
         }
-        TodoTypeList todoType = todoTypeListService.getOne(todoCardForm.getCategory());
-        this.todoCardService.create(todoCardForm.getTitle(), todoCardForm.getMemo(), todoCardForm.getStartDateTime(),
-                todoCardForm.getEndDateTime(), todoCardForm.getCompletion(), todoCardForm.getExecution(),
-                todoType, todoList);
+        TodoTypeList type = todoTypeListService.getOne(todoCardForm.getCategory());
+        this.todoCardService.create(todoCardForm, type, todoList);
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 
@@ -78,6 +74,8 @@ public class TodoCardController {
         }
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("username", todoCard.getTodoList().getUser().getUsername());
+        model.addAttribute("mode", "detail");
+        model.addAttribute("cardId", cardId);
         todoCardForm.setExecution(todoCard.getExecution());
         todoCardForm.setMemo(todoCard.getMemo());
         todoCardForm.setCategory(todoCard.getTodoTypeList().getId());
@@ -86,5 +84,25 @@ public class TodoCardController {
         todoCardForm.setEndDateTime(todoCard.getEndDateTime());
         todoCardForm.setStartDateTime(todoCard.getStartDateTime());
         return "todo_card_read_create_page";
+    }
+
+    @PostMapping("/detail/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String todoCardModify(@RequestBody TodoCardForm todoCardForm, BindingResult bindingResult,
+                                 @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "todo_card_read_create_page";
+        }
+        TodoCard todoCard = this.todoCardService.getCard(cardId);
+        if (todoCard == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 데이터입니다.");
+        }
+        if (!todoCard.getTodoList().getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
+        }
+        TodoTypeList type = this.todoTypeListService.getOne(todoCardForm.getCategory());
+        this.todoCardService.modify(todoCardForm, todoCard, type);
+        model.addAttribute("success", true);
+        return "redirect:/todo_card/detail/" + cardId;
     }
 }
