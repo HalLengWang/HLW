@@ -123,12 +123,12 @@
          th:if="${username == #authentication.getPrincipal().getUsername()}">
         <th:block th:if="${mode == 'create'}">
             <input type="hidden" th:value="${todoListId}" name="id"/>
-            <button class="save-btn" type="submit">저장</button>
+            <button class="save-btn" type="submit" onclick="return confirmSave();">저장</button>
         </th:block>
         <th:block th:if="${mode == 'detail'}">
             <input type="hidden" th:value="${cardId}" name="id"/>
-            <button class="save-btn" type="submit">저장</button>
-            <button class="save-btn" type="submit">삭제</button>
+            <button class="save-btn" type="submit" onclick="return confirmSave();">수정</button>
+            <button class="save-btn" type="submit" onclick="return confirmDelete();">삭제</button>
         </th:block>
     </div>
 
@@ -141,5 +141,13 @@
     function updateProgressValue(value) {
         // 슬라이더 값을 실시간으로 업데이트
         document.getElementById("progress-value").innerText = value + "%";
+    }
+    function confirmSave() {
+        // 사용자에게 저장 확인을 위한 alert 창을 띄움
+        return confirm("저장하시겠습니까?");
+    }
+    function confirmDelete() {
+        // 사용자에게 삭제 확인을 위한 alert 창을 띄움
+        return confirm("삭제하시겠습니까?");
     }
 </script>
