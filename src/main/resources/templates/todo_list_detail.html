@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>할랭왕</title>
     <link href="/styles.todo_list_detail.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
 <div class="to-do-list">
@@ -31,7 +32,6 @@
             <div class="title-search">제목</div>
             <div class="textfield2">
                 <input type="text" class="text" placeholder="title search" th:value="${todoList.title}">
-                <img class="ic-search2" src="/search.png" alt="Search">
             </div>
         </div>
 
@@ -68,8 +68,8 @@
                 </div>
             </div>
         </div>
-      </div>
-          
+    </div>
+
     <!-- ToDo List 상세 바 -->
     <div class="_2">
         <div class="to-do-list-detail-bar">
@@ -84,16 +84,18 @@
             <input class="textfield" type="text" placeholder="ToDo Card List Search">
             <img class="ic-search" src="/search.png" alt="Search">
         </div>
-          
-        <div class="frame-427318974" th:each="todoCard : ${paging}">
-          <a th:href="@{|/todo_card/detail/${todoCard.id}|}">
-            <img class="group5" src="/group.png"/>
-            <div class="_5-km" th:text="${todoCard.title}"></div>
-            <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
-           </a>
+
+        <div class="frame-427318997">
+            <div class="frame-427318974" th:each="todoCard : ${paging}">
+                <a th:href="@{|/todo_card/detail/${todoCard.id}|}" style="display: flex; align-items: center; width: 100%;">
+                    <img class="group5" src="/group.png" alt="Group Icon"/>
+                    <div class="_5-km" th:text="${todoCard.title}"></div>
+                    <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+                </a>
+            </div>
         </div>
-      
-       <!-- 페이징처리 시작 -->
+
+        <!-- 페이징처리 시작 -->
         <div th:if="${!paging.isEmpty()}">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
@@ -161,7 +163,7 @@
             </div>
         </div>
 
-           <!-- 댓글과 이모티콘 -->
+        <!-- 댓글과 이모티콘 -->
         <div class="div6">댓글</div>
 
         <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
@@ -183,8 +185,8 @@
         <div class="div3">
             <div class="div4">엄준식 짱짱맨</div>
         </div>
-     
-          <ul class="pagination1 justify-content-center">
+
+        <ul class="pagination1 justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link" href="?page=-1">
                     <span>이전</span>
@@ -199,7 +201,7 @@
                 </a>
             </li>
         </ul>
-         
+
         <!-- 댓글 입력 필드 -->
         <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
         <div class="div2">댓글등록</div>

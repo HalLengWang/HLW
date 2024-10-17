@@ -18,6 +18,18 @@
   overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 }
 
+.frame-427318997 {
+  display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center; /* 중앙 정렬 */
+    justify-content: flex-start;
+    width: 863px;
+    position: absolute;
+    left: 50%; /* 부모 요소의 중앙 위치 */
+    top: 250px; /* 필요한 경우 이 값 조정 */
+    transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
+}
 .button {
     display: flex;
     flex-direction: column; /* 세로 방향 정렬 */
@@ -405,7 +417,7 @@
     justify-content: center; /* 수평 중앙 정렬 */
     position: absolute; /* 절대 위치 설정 */
     left: 758px; /* X 좌표 */
-    top: 977px; /* Y 좌표 */
+    top: 1050px; /* Y 좌표 */
     overflow: hidden; /* 넘치는 내용 숨김 */
     background-color: #F7A6A6; /* 배경 색상 */
     width: 240px; /* 가로 크기 */
@@ -428,7 +440,7 @@
     justify-content: center; /* 수평 중앙 정렬 */
     position: absolute; /* 절대 위치 설정 */
     left: 1017px; /* X 좌표 */
-    top: 977px; /* Y 좌표 */
+    top: 1050px; /* Y 좌표 */
     overflow: hidden; /* 넘치는 내용 숨김 */
     background-color: #F7A6A6; /* 배경 색상 */
     width: 240px; /* 가로 크기 */
@@ -480,18 +492,10 @@
   justify-content: center;
 }
 ._1-min {
-  color: #817f7f;
-  text-align: left;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 53px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+ font-size: 20px;
+   font-weight: 500;
+   color: #817f7f;
+   text-align: right;
 }
 .frame-427318975 {
   background: #d9d9d9;
@@ -603,18 +607,17 @@
 }
 .frame-427318974 {
   background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
-  display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
-  justify-content: flex-start;
-  width: 1093px;
-  height: 98px;
-  position: absolute;
-  left: 164px;
-  top: 262px;
+    border-radius: 100px;
+    padding: 28px 60px 28px 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    width: 894px;
+    height: 126px;
+    position: relative;
 }
 .group5 {
   flex-shrink: 0;
@@ -624,18 +627,11 @@
   overflow: visible;
 }
 ._5-km {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 291px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-grow: 1;
+    font-size: 30px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
 }
 .to-do-list-detail-bar {
   background: rgba(247, 166, 166, 0.6);
@@ -668,7 +664,7 @@
   width: 400px;
   position: absolute;
   left: 857px; /* 검색창의 위치 조정 */
-  top: 174px; /* 검색창의 위치 조정 */
+  top: 150px; /* 검색창의 위치 조정 */
   position: relative; /* 아이콘을 내부에 위치시키기 위해 relative 설정 */
 }
 
@@ -1048,7 +1044,7 @@ input[type="text"] {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 1000px;
+    top: 1100px;
     list-style: none; /* 리스트 점 제거 */
     padding: 0;
 }
