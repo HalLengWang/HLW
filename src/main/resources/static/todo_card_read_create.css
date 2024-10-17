@@ -132,10 +132,14 @@ body {
     color: #333;
 }
 
+.save-btn-container {
+  text-align: center; /* 버튼들을 가운데 정렬 */
+}
+
 .save-btn {
     width: 100px;
-    margin: 20px auto;
-    display: block;
+    margin: 20px 10px; /* 버튼 사이의 여백 조절 */
+    display: inline-block;
     padding: 10px;
     border: none;
     background-color: #000;
