@@ -137,7 +137,7 @@
 </body>
 </html>
 
-<script>
+<script th:inline="javascript">
     function updateProgressValue(value) {
         // 슬라이더 값을 실시간으로 업데이트
         document.getElementById("progress-value").innerText = value + "%";
@@ -150,8 +150,9 @@
         if (confirm("삭제하시겠습니까?")) {
             // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
             var form = document.querySelector('form.card');
-            // TODO 경로 형식만 바꾸면 됨
-            form.action = `/todo_card/delete/${cardId.toString()}`;  // 삭제 요청을 보낼 경로
+            var cardId = /*[[${cardId}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+
+            form.action = `/todo_card/delete/` + cardId;  // 삭제 요청을 보낼 경로
             form.submit();
         }
     }
