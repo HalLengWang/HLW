@@ -9,5 +9,4 @@ class HlwApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

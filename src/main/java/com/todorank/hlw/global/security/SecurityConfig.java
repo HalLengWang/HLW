@@ -2,6 +2,7 @@ package com.todorank.hlw.global.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,8 +21,11 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
 
+
+public class SecurityConfig {
+    @Value("${kakao.client.id}")
+    private String kakaoClientId;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,7 +43,7 @@ public class SecurityConfig {
                         .addLogoutHandler((request, response, authentication) -> {
                             // 카카오 로그아웃 URL 생성
                             String kakaoLogoutUrl = "https://kauth.kakao.com/oauth/logout" +
-                                    "?client_id=adeda249321077b1ea78f8f04428cf4f" +  // 실제 REST API 키로 변경
+                                    "?client_id=" + kakaoClientId +
                                     "&logout_redirect_uri=http://localhost:8010"; // 리다이렉트 URL
 
                             // 리다이렉트로 카카오 로그아웃 호출
