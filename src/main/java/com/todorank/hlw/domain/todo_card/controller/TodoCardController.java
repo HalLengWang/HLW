@@ -88,7 +88,7 @@ public class TodoCardController {
 
     @PostMapping("/detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String todoCardModify(@RequestBody TodoCardForm todoCardForm, BindingResult bindingResult,
+    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
                                  @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
             return "todo_card_read_create_page";
