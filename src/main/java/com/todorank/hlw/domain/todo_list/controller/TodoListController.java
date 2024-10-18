@@ -77,6 +77,6 @@ public class TodoListController {
         if (todoList.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
         }
-        return "redirect:/todo_list/list/" + userId;
+        return "redirect:/todo_list/detail/" + todoList.getId();
     }
 }
