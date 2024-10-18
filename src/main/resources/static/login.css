@@ -131,8 +131,12 @@ body {
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+    text-align: center; /* 글씨 중앙 정렬 */
+    display: inline-block; /* 블록 요소로 변환하여 width에 따라 크기 조정 */
 }
-
+.kakao-login:hover {
+    background-color: #ffd700; /* 호버 시 색상 변경 */
+}
 .login-btn {
     background-color: #000;
     color: #fff;
@@ -141,4 +145,10 @@ body {
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
+}
+.login-btn:hover {
+    background-color: #444; /* 호버 시 색상 변경 */
+}
+a {
+    text-decoration: none; /* 모든 a 태그의 밑줄 제거 */
 }
