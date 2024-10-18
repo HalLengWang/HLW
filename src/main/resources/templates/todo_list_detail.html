@@ -31,7 +31,15 @@
         <div class="container-title-search">
             <div class="title-search">제목</div>
             <div class="textfield2">
-                <input type="text" class="text" placeholder="title search" th:value="${todoList.title}">
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled />
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text" id="title-input"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly />
+                    <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly />
+                </th:block>
             </div>
         </div>
 
@@ -221,4 +229,23 @@
         let count = parseInt(countElement.textContent);
         countElement.textContent = count + 1;
     }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 입력 필드 선택
+        const titleInput = document.getElementById("title-input");
+
+        // 클릭하면 readonly 해제
+        titleInput.addEventListener("click", function() {
+            titleInput.removeAttribute('readonly');  // readonly 속성 제거
+            titleInput.focus();  // 클릭한 후 자동으로 포커스 맞춤
+        });
+
+        // 포커스를 잃으면 다시 readonly로 설정 (원하는 경우 추가)
+        titleInput.addEventListener("blur", function() {
+            if (titleInput.value.trim() === "") {
+                titleInput.setAttribute('readonly', true);  // 빈 값이면 다시 readonly
+            }
+        });
+    });
 </script>
