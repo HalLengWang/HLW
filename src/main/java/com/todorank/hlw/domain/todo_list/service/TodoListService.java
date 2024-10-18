@@ -1,6 +1,5 @@
 package com.todorank.hlw.domain.todo_list.service;
 
-import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.repository.TodoListRepository;
 import com.todorank.hlw.domain.user.entity.SiteUser;
@@ -32,5 +31,14 @@ public class TodoListService {
 
     public List<TodoList> getLists(SiteUser user) {
         return this.todoListRepository.findByUser(user);
+    }
+
+    public TodoList create(SiteUser user) {
+        TodoList todoList = TodoList.builder()
+                .title("제목 없음")
+                .user(user)
+                .build();
+        this.todoListRepository.save(todoList);
+        return todoList;
     }
 }
