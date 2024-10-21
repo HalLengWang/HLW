@@ -39,13 +39,12 @@
         </div>
     </div>
 
-    <div class="primary" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 등록</div>
-    </div>
+    <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
+        <a class="primary" th:href="@{|/todo_list/create/${userId}|}">
+            <div class="title">ToDoList 등록</div>
+        </a>
+    </th:block>
 
-    <div class="primary2" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 수정</div>
-    </div>
 
     <div class="frame-427318977">
         <!-- 페이징처리 시작 -->
