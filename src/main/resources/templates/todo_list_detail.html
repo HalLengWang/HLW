@@ -142,7 +142,7 @@
     </div>
 
     <!-- 회고 바 -->
-    <div class="_3" th:if="${todoList.remembrance != null}">
+    <div class="_3"> <!--th:if="${todoList.remembrance != null}"-->
         <div class="bar">
             <div class="container">
                 <div class="title2">회고</div>
@@ -172,6 +172,10 @@
                 이번 회고를 통해 다음 주에 더 나은 계획을 세우고 싶습니다.
             </div>
         </div>
+
+        <button class="button-save">
+            <div class="title6">저장</div>
+        </button>
 
         <!-- 댓글과 이모티콘 -->
         <div class="div6">댓글</div>
