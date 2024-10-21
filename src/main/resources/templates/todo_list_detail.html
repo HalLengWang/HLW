@@ -237,14 +237,14 @@
     document.addEventListener("DOMContentLoaded", function() {
         const titleInput = document.getElementById("title-input");
         let originalValue = titleInput.value;
+        let isEnterKeyPressed = false;  // 엔터키를 눌렀는지 확인하는 플래그
 
         titleInput.addEventListener("click", function() {
             titleInput.removeAttribute('readonly');
             titleInput.focus();
         });
 
-        titleInput.addEventListener("blur", function() {
-            // blur 이벤트는 기존 로직 유지
+       function handleInput() {
             if (titleInput.value.trim() === "") {
                 alert("제목이 비어있습니다.");
                 titleInput.value = originalValue;
@@ -255,6 +255,22 @@
                     sendUpdatedValue(titleInput.value);
                 }
                 titleInput.setAttribute('readonly', true);
+            }
+        }
+
+        titleInput.addEventListener("blur", function() {
+            if (!isEnterKeyPressed) {  // 엔터가 눌리지 않은 경우에만 blur 처리
+                handleInput();
+            }
+            isEnterKeyPressed = false;  // 다음 이벤트에서 엔터 플래그 초기화
+        });
+
+        // 엔터 키를 눌렀을 때 handleInput 호출
+        titleInput.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                isEnterKeyPressed = true;
+                handleInput();
+                titleInput.blur(); // 엔터를 누른 후 input을 비활성화
             }
         });
 
