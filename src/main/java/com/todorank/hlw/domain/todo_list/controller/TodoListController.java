@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -77,6 +74,18 @@ public class TodoListController {
         if (todoList.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
         }
+        return "redirect:/todo_list/detail/" + todoList.getId();
+    }
+
+    @PostMapping("/modify/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String modify(@PathVariable(value = "id") Long listId, Principal principal,
+                         @RequestParam(value = "title") String title) {
+        TodoList todoList = this.todoListService.getTodoList(listId);
+        if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
+        }
+        this.todoListService.modify(todoList, title);
         return "redirect:/todo_list/detail/" + todoList.getId();
     }
 }

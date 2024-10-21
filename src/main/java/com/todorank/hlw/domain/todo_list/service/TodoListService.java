@@ -41,4 +41,11 @@ public class TodoListService {
         this.todoListRepository.save(todoList);
         return todoList;
     }
+
+    public void modify(TodoList todoList, String title) {
+        TodoList modified = todoList.toBuilder()
+                .title(title)
+                .build();
+        this.todoListRepository.save(modified);
+    }
 }

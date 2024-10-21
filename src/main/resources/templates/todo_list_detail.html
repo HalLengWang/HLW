@@ -230,7 +230,7 @@
         countElement.textContent = count + 1;
     }
 </script>
-<script>
+<script th:inline="javascript">
     // 페이지가 로드된 후 스크립트가 실행되도록 함
     document.addEventListener("DOMContentLoaded", function() {
         // 입력 필드 선택
@@ -260,10 +260,30 @@
                 // 값이 변경되었는지 확인
                 if (titleInput.value !== originalValue) {
                     alert("제목이 변경되었습니다.");
+
+                    // Ajax로 변경된 값을 서버에 전송
+                    sendUpdatedValue(titleInput.value);
                 }
                 // readonly 속성만 설정
                 titleInput.setAttribute('readonly', true);
             }
         });
+
+        // Ajax 요청 함수
+        function sendUpdatedValue(updatedValue) {
+            const xhr = new XMLHttpRequest();
+            const url = /*[[@{/modify/}]]*/ + /*[[${todoList.id}]]*/ + "?title=" + updatedValue;
+            xhr.open("POST", url, true);
+
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 서버에서 리다이렉트 응답을 받았으므로 페이지를 새로고침
+                    window.location.href = xhr.getResponseHeader("Location");
+                }
+            };
+
+            xhr.send();  // 서버로 요청 전송
+        }
     });
 </script>
