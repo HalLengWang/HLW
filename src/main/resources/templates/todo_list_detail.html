@@ -236,7 +236,7 @@
 <script th:inline="javascript">
     document.addEventListener("DOMContentLoaded", function() {
         const titleInput = document.getElementById("title-input");
-        const originalValue = titleInput.value;
+        let originalValue = titleInput.value;
 
         titleInput.addEventListener("click", function() {
             titleInput.removeAttribute('readonly');
@@ -276,6 +276,7 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     console.log(response);
+                    originalValue = response.updatedTitle || updatedValue;  // 서버 응답에 title 값이 있는 경우 사용
                 } else if (xhr.readyState === 4 && xhr.status !== 200) {
                     alert("권한이 없거나 오류가 발생했습니다.");
                 }

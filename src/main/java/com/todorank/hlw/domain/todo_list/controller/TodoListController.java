@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -80,13 +82,16 @@ public class TodoListController {
     @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     @ResponseBody
-    public ResponseEntity<String> modify(@PathVariable(value = "id") Long listId, Principal principal,
+    public ResponseEntity<Map<String, String>> modify(@PathVariable(value = "id") Long listId, Principal principal,
                                          @RequestParam(value = "title") String title) {
         TodoList todoList = this.todoListService.getTodoList(listId);
         if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         this.todoListService.modify(todoList, title);
-        return ResponseEntity.ok("수정 성공");
+
+        Map<String, String> response = new HashMap<>();
+        response.put("updatedTitle", title);
+        return ResponseEntity.ok(response);
     }
 }
