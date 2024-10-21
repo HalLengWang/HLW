@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
-<div class="to-do-list">
+<!--div class="to-do-list"-->
     <!-- 상단 바 -->
     <div class="top-bar">
         <div class="rectangle-4137"></div>
@@ -142,7 +142,7 @@
     </div>
 
     <!-- 회고 바 -->
-    <div class="_3">
+    <div class="_3" th:if="${todoList.remembrance != null}">
         <div class="bar">
             <div class="container">
                 <div class="title2">회고</div>
@@ -221,7 +221,7 @@
             <div class="title6">등록</div>
         </button>
     </div>
-</div>
+<!--/div-->
 </body>
 </html>
 
