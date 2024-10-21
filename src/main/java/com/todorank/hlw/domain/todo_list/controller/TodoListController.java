@@ -2,7 +2,6 @@ package com.todorank.hlw.domain.todo_list.controller;
 
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
-import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.user.entity.SiteUser;
@@ -10,12 +9,10 @@ import com.todorank.hlw.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -62,5 +59,17 @@ public class TodoListController {
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
         return "todo_list_detail";
+    }
+
+    @PostMapping("/modify/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String modify(@PathVariable(value = "id") Long listId, Principal principal,
+                         @RequestParam(value = "title") String title) {
+        TodoList todoList = this.todoListService.getTodoList(listId);
+        if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
+        }
+        this.todoListService.modify(todoList, title);
+        return "redirect:/todo_list/detail/" + todoList.getId();
     }
 }
