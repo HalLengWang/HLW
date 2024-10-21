@@ -10,6 +10,7 @@ import com.todorank.hlw.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,13 +80,14 @@ public class TodoListController {
 
     @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String modify(@PathVariable(value = "id") Long listId, Principal principal,
-                         @RequestParam(value = "title") String title) {
+    @ResponseBody
+    public ResponseEntity<String> modify(@PathVariable(value = "id") Long listId, Principal principal,
+                                         @RequestParam(value = "title") String title) {
         TodoList todoList = this.todoListService.getTodoList(listId);
         if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         this.todoListService.modify(todoList, title);
-        return "redirect:/todo_list/detail/" + todoList.getId();
+        return ResponseEntity.ok("수정 성공");
     }
 }

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>할랭왕</title>
     <link href="/styles.todo_list_detail.css" rel="stylesheet">
     <link rel="stylesheet" href="/bootstrap.min.css">
@@ -38,7 +40,7 @@
                     <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text" id="title-input"
                            class="text" placeholder="title search" th:value="${todoList.title}" readonly />
                     <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
-                           class="text" placeholder="title search" th:value="${todoList.title}" readonly />
+                           class="text" placeholder="title search" th:value="${todoList.title}" disabled />
                 </th:block>
             </div>
         </div>
@@ -230,60 +232,58 @@
         countElement.textContent = count + 1;
     }
 </script>
-<script th:inline="javascript">
-    // 페이지가 로드된 후 스크립트가 실행되도록 함
-    document.addEventListener("DOMContentLoaded", function() {
-        // 입력 필드 선택
-        const titleInput = document.getElementById("title-input");
 
-        // th:value 값 (서버에서 전달된 원래 값) 저장
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        const titleInput = document.getElementById("title-input");
         const originalValue = titleInput.value;
 
-        // 클릭하면 readonly 해제
         titleInput.addEventListener("click", function() {
-            titleInput.removeAttribute('readonly');  // readonly 속성 제거
-            titleInput.focus();  // 클릭한 후 자동으로 포커스 맞춤
+            titleInput.removeAttribute('readonly');
+            titleInput.focus();
         });
 
-        // 포커스를 잃으면 내용 확인 후 다시 readonly로 설정
         titleInput.addEventListener("blur", function() {
+            // blur 이벤트는 기존 로직 유지
             if (titleInput.value.trim() === "") {
-                // 빈 값이면 alert를 띄움
                 alert("제목이 비어있습니다.");
-
-                // 원래 값으로 복원
                 titleInput.value = originalValue;
-
-                // 다시 readonly 속성 설정
                 titleInput.setAttribute('readonly', true);
             } else {
-                // 값이 변경되었는지 확인
                 if (titleInput.value !== originalValue) {
                     alert("제목이 변경되었습니다.");
-
-                    // Ajax로 변경된 값을 서버에 전송
                     sendUpdatedValue(titleInput.value);
                 }
-                // readonly 속성만 설정
                 titleInput.setAttribute('readonly', true);
             }
         });
 
-        // Ajax 요청 함수
         function sendUpdatedValue(updatedValue) {
+            /*<![CDATA[*/
             const xhr = new XMLHttpRequest();
-            const url = /*[[@{/modify/}]]*/ + /*[[${todoList.id}]]*/ + "?title=" + updatedValue;
-            xhr.open("POST", url, true);
+            const url = "/todo_list/modify/" + /*[[${todoList.id}]]*/;
 
+            // CSRF 토큰 가져오기
+            const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+            const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // CSRF 토큰 헤더 추가
+            xhr.setRequestHeader(header, token);
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    // 서버에서 리다이렉트 응답을 받았으므로 페이지를 새로고침
-                    window.location.href = xhr.getResponseHeader("Location");
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    alert("권한이 없거나 오류가 발생했습니다.");
                 }
             };
 
-            xhr.send();  // 서버로 요청 전송
+            const requestData = "title=" + encodeURIComponent(updatedValue);
+            xhr.send(requestData);
+            /*]]>*/
         }
     });
 </script>
