@@ -62,6 +62,7 @@ public class TodoListController {
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
+        model.addAttribute("remembrance", todoList.getRemembrance());
         return "todo_list_detail";
     }
 

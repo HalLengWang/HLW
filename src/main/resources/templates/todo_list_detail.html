@@ -154,11 +154,12 @@
 
         <!-- 회고 제목 및 내용 -->
         <div class="div10">제목</div>
-        <input type="text" class="div9" value="오늘의 회고"/>
+        <input type="text" class="div9" th:value="${remembrance != null ? remembrance.title : '오늘의 회고'}"/>
         <div class="div8"><input type="checkbox" style='zoom:2.8;'/>공개</div>
 
 
-        <textarea class="div7" style="resize:none;"></textarea>
+        <textarea class="div7" style="resize:none;"
+                  th:text="${remembrance != null ? remembrance.content : '회고를 입력해주세요'}"></textarea>
 
         <button class="button-save">
             <div class="title6">저장</div>
