@@ -136,13 +136,15 @@
             <div class="title6">ToDO-Card 등록</div>
         </a>
         <button class="button4" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
+                th:if="${username == #authentication.getPrincipal().getUsername()}"
+                onclick='btnClick()'>
             <div class="title6">회고 등록</div>
         </button>
     </div>
 
     <!-- 회고 바 -->
-    <div class="_3"> <!--th:if="${todoList.remembrance != null}"-->
+    <div class="_3" id="remembrance_div"
+         th:style="${todoList.remembrance == null ? 'display: none;' : ''}">
         <div class="bar">
             <div class="container">
                 <div class="title2">회고</div>
@@ -214,6 +216,7 @@
 </body>
 </html>
 
+<!--추천, 싫어요 숫자 증가-->
 <script>
     function increaseCount(element) {
         const countElement = element.querySelector(".count");
@@ -222,6 +225,19 @@
     }
 </script>
 
+<!--회고 영역 숨기기-->
+<script>
+    function btnClick() {
+        const mydiv = document.getElementById('remembrance_div');
+        if(mydiv.style.display === 'none') {
+            mydiv.style.display = 'block';
+        }else {
+            mydiv.style.display = 'none';
+        }
+    }
+</script>
+
+<!--리스트 제목 비동기 수정-->
 <script th:inline="javascript">
     document.addEventListener("DOMContentLoaded", function() {
         const titleInput = document.getElementById("title-input");
