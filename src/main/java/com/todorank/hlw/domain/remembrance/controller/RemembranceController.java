@@ -10,12 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,8 +30,12 @@ public class RemembranceController {
     @PostMapping("/create/{id}")
     @PreAuthorize("isAuthenticated()")
     public String createRemembrance(@Valid RemembranceForm remembranceForm, BindingResult bindingResult,
-                                    @PathVariable("id") Long listId, Principal principal) {
+                                    @PathVariable("id") Long listId, Principal principal, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList()));
             return "redirect:/todo_list/detail/" + listId;
         }
         TodoList todoList = this.todoListService.getTodoList(listId);

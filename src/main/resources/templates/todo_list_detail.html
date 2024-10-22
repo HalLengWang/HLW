@@ -349,6 +349,13 @@
 </script>
 
 <script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 리스너의 작업
+        const errorMessages = /*[[${errorMessages}]]*/ [];
+        if (errorMessages.length > 0) {
+            alert(errorMessages.join("\n"));
+        }
+    });
     function submitSaveForm() {
         if (confirm("저장하시겠습니까?")) {
             // 확인을 받은 후 action URL을 변경하고 폼을 제출
