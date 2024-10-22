@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.remembrance.controller;
 
+import com.todorank.hlw.domain.remembrance.entity.Remembrance;
 import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
 import com.todorank.hlw.domain.remembrance.service.RemembranceService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -43,6 +44,29 @@ public class RemembranceController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근입니다.");
         }
         this.remembranceService.create(remembranceForm, todoList);
+        return "redirect:/todo_list/detail/" + listId;
+    }
+
+    @PostMapping("/modify/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String modifyRemembrance(@Valid RemembranceForm remembranceForm, BindingResult bindingResult,
+                                    @PathVariable("id") Long listId, Principal principal, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList()));
+            return "redirect:/todo_list/detail/" + listId;
+        }
+        TodoList todoList = this.todoListService.getTodoList(listId);
+        if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근입니다.");
+        }
+        Remembrance remembrance = todoList.getRemembrance();
+        if (remembrance == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근입니다.");
+        }
+        this.remembranceService.modify(remembranceForm, remembrance);
         return "redirect:/todo_list/detail/" + listId;
     }
 }

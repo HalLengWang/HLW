@@ -21,4 +21,13 @@ public class RemembranceService {
                 .build();
         this.remembranceRepository.save(remembrance);
     }
+
+    public void modify (RemembranceForm remembranceForm, Remembrance remembrance) {
+        Remembrance modified = remembrance.toBuilder()
+                .title(remembranceForm.getTitle())
+                .content(remembranceForm.getContent())
+                .isPublic(remembranceForm.getIsPublic())
+                .build();
+        this.remembranceRepository.save(modified);
+    }
 }
