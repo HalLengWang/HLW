@@ -132,18 +132,29 @@
     <!-- 버튼들 -->
     <th:block sec:authorize="isAuthenticated()"
               th:if="${username == #authentication.getPrincipal().getUsername()}">
-        <a class="button3" th:href="@{|/todo_card/create?id=${todoList.id}|}">
+        <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
             <div class="title6">ToDO-Card 등록</div>
         </a>
-        <button class="button4" onclick='btnClick()'>
+        <button class="button3" onclick='btnClick()' th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
             <div class="title6">회고 등록</div>
         </button>
     </th:block>
 </div>
 
 <!-- 회고 바 -->
-<div class="_3" id="remembrance_div"
-     th:style="${todoList.remembrance == null ? 'display: none;' : ''}">
+<th:block th:if="${todoList.remembrance != null}">
+    <th:block sec:authorize="isAuthenticated()">
+        <div class="_3"
+             th:style="${username == #authentication.getPrincipal().getUsername() or todoList.remembrance.isPublic == true ? '' : 'display: none;'}">
+    </th:block>
+    <th:block sec:authorize="isAnonymous()">
+        <div class="_3"
+             th:style="${todoList.remembrance.isPublic == false ? 'display: none;' : ''}">
+    </th:block>
+</th:block>
+<th:block th:if="${todoList.remembrance == null}">
+    <div class="_3" id="remembrance_div" style="display: none;">
+</th:block>
     <form class="remembrance_form" th:object="${remembranceForm}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="bar">
@@ -155,11 +166,23 @@
 
         <!-- 회고 제목 및 내용 -->
         <div class="div10">제목</div>
-        <input type="text" class="div9" th:field="*{title}"/>
-        <div class="div8"><input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}"/>공개</div>
-
-
-        <textarea class="div7" style="resize:none;" th:field="*{title}"></textarea>
+        <th:block sec:authorize="isAuthenticated()">
+            <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요."
+                   th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+            <div class="div8">
+                <input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}"
+                       th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>공개
+            </div>
+            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요."
+                      th:disabled="${username != #authentication.getPrincipal().getUsername()}"></textarea>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요." disabled="disabled"/>
+            <div class="div8">
+                <input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}" disabled="disabled"/>공개
+            </div>
+            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요." disabled="disabled"></textarea>
+        </th:block>
 
         <th:block sec:authorize="isAuthenticated()" th:if="${username == #authentication.getPrincipal().getUsername()}">
             <th:block th:if="${todoList.remembrance == null}">
@@ -327,19 +350,16 @@
 
 <script th:inline="javascript">
     function submitSaveForm() {
-        /*<![CDATA[*/
         if (confirm("저장하시겠습니까?")) {
-            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
+            // 확인을 받은 후 action URL을 변경하고 폼을 제출
             var form = document.querySelector('form.remembrance_form');
-            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값 (타임리프에서 listId를 JavaScript 변수로 전달)
 
-            form.action = `/remembrance/create/` + listId;  // 삭제 요청을 보낼 경로
+            form.action = `/remembrance/create/` + listId;  // 요청을 보낼 경로
             form.submit();
         }
-        /*]]>*/
     }
     function submitModifyForm() {
-        /*<![CDATA[*/
         if (confirm("수정하시겠습니까?")) {
             // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
             var form = document.querySelector('form.remembrance_form');
@@ -348,10 +368,8 @@
             form.action = `/remembrance/modify/` + listId;  // 삭제 요청을 보낼 경로
             form.submit();
         }
-        /*]]>*/
     }
     function submitDeleteForm() {
-        /*<![CDATA[*/
         if (confirm("삭제하시겠습니까?")) {
             // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
             var form = document.querySelector('form.remembrance_form');
@@ -360,6 +378,5 @@
             form.action = `/remembrance/delete/` + listId;  // 삭제 요청을 보낼 경로
             form.submit();
         }
-        /*]]>*/
     }
 </script>
