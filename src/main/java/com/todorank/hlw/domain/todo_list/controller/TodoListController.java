@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
+import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -52,7 +53,8 @@ public class TodoListController {
 
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable(value = "id") Long listId, Model model,
-                         @RequestParam(value = "page", defaultValue = "0") int page) {
+                         @RequestParam(value = "page", defaultValue = "0") int page,
+                         RemembranceForm remembranceForm) {
         TodoList todoList = this.todoListService.getTodoList(listId);
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
@@ -62,7 +64,11 @@ public class TodoListController {
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
-        model.addAttribute("remembrance", todoList.getRemembrance());
+        if (todoList.getRemembrance() != null) {
+            remembranceForm.setContent(todoList.getRemembrance().getContent());
+            remembranceForm.setTitle(todoList.getRemembrance().getTitle());
+            remembranceForm.setIsPublic(todoList.getRemembrance().getIsPublic());
+        }
         return "todo_list_detail";
     }
 
@@ -84,7 +90,7 @@ public class TodoListController {
     @PreAuthorize("isAuthenticated()")
     @ResponseBody
     public ResponseEntity<Map<String, String>> modify(@PathVariable(value = "id") Long listId, Principal principal,
-                                         @RequestParam(value = "title") String title) {
+                                                      @RequestParam(value = "title") String title) {
         TodoList todoList = this.todoListService.getTodoList(listId);
         if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
