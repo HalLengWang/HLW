@@ -69,4 +69,19 @@ public class RemembranceController {
         this.remembranceService.modify(remembranceForm, remembrance);
         return "redirect:/todo_list/detail/" + listId;
     }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public String deleteRemembrance(@PathVariable("id") Long listId, Principal principal, RedirectAttributes redirectAttributes) {
+        TodoList todoList = this.todoListService.getTodoList(listId);
+        if (todoList == null || !todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근입니다.");
+        }
+        Remembrance remembrance = todoList.getRemembrance();
+        if (remembrance == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근입니다.");
+        }
+        this.remembranceService.delete(remembrance);
+        return "redirect:/todo_list/detail/" + listId;
+    }
 }

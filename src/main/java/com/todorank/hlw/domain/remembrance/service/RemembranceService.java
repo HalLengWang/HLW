@@ -30,4 +30,8 @@ public class RemembranceService {
                 .build();
         this.remembranceRepository.save(modified);
     }
+
+    public void delete (Remembrance remembrance) {
+        this.remembranceRepository.delete(remembrance);
+    }
 }
