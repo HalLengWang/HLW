@@ -210,21 +210,33 @@
     <div class="div6">댓글</div>
 
     <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
-    <div class="comments-container">
-        <div class="comments-list" th:each="comment : ${comments}">
-            <div class="comment-item">
-                <span th:text="${comment.author}">작성자</span>:
-                <span th:text="${comment.content}">댓글 내용</span>
+    <th:block th:if="${comments != null}">
+        <div class="comments-container">
+            <div class="comments-list" th:each="comment : ${comments}">
+                <div class="comment-item">
+                    <span th:text="${comment.author}">작성자</span>:
+                    <span th:text="${comment.content}">댓글 내용</span>
+                </div>
             </div>
         </div>
-    </div>
+    </th:block>
+    <th:block th:if="${comments == null}">
+        <div class="comments-container">
+            <div class="comments-list">
+                <div class="comment-item">
+                    <span>댓글이 비어있습니다.</span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+
 
     <!-- 댓글 입력 필드 -->
     <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
     <div class="div2">댓글등록</div>
 
     <!-- 등록 버튼 -->
-    <button class="button">
+    <button class="button" type="button" onclick="submitSaveComment();">
         <div class="title6">등록</div>
     </button>
 
@@ -362,6 +374,39 @@
             var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
 
             form.action = `/remembrance/delete/` + listId;  // 삭제 요청을 보낼 경로
+            form.submit();
+        }
+    }
+</script>
+
+<script th:inline="javascript">
+    function submitSaveComment() {
+        if (confirm("저장하시겠습니까?")) {
+            // 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값 (타임리프에서 listId를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance_comment/create/` + listId;  // 요청을 보낼 경로
+            form.submit();
+        }
+    }
+    function submitModifyComment() {
+        if (confirm("수정하시겠습니까?")) {
+            // 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 Id 값 (타임리프에서 Id를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance_comment/modify/` + listId;  // 삭제 요청을 보낼 경로
+            form.submit();
+        }
+    }
+    function submitDeleteComment() {
+        if (confirm("삭제하시겠습니까?")) {
+            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance_comment/delete/` + listId;  // 삭제 요청을 보낼 경로
             form.submit();
         }
     }

@@ -1,6 +1,7 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
 import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
+import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -28,6 +29,7 @@ public class TodoListController {
     private final TodoListService todoListService;
     private final UserService userService;
     private final TodoCardService todoCardService;
+    private final RemembranceCommentService remembranceCommentService;
 
     @GetMapping("/list/{id}")
     public String list(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
@@ -64,6 +66,12 @@ public class TodoListController {
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
+        if (todoList.getRemembrance().getComments().isEmpty()) {
+            model.addAttribute("comments", null);
+        } else {
+            model.addAttribute("comments", todoList.getRemembrance().getComments());
+        }
+
         if (todoList.getRemembrance() != null) {
             remembranceForm.setContent(todoList.getRemembrance().getContent());
             remembranceForm.setTitle(todoList.getRemembrance().getTitle());
