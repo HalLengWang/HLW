@@ -142,19 +142,20 @@
 </div>
 
 <!-- 회고 바 -->
-<th:block th:if="${todoList.remembrance != null}">
-    <th:block sec:authorize="isAuthenticated()">
-        <div class="_3"
-             th:style="${username == #authentication.getPrincipal().getUsername() or todoList.remembrance.isPublic == true ? '' : 'display: none;'}">
+<div><!--줄맞춤용 나중에 지우기-->
+    <th:block th:if="${todoList.remembrance != null}">
+        <th:block sec:authorize="isAuthenticated()">
+            <div class="_3"
+                 th:style="${username == #authentication.getPrincipal().getUsername() or todoList.remembrance.isPublic == true ? '' : 'display: none;'}">
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <div class="_3"
+                 th:style="${todoList.remembrance.isPublic == false ? 'display: none;' : ''}">
+        </th:block>
     </th:block>
-    <th:block sec:authorize="isAnonymous()">
-        <div class="_3"
-             th:style="${todoList.remembrance.isPublic == false ? 'display: none;' : ''}">
+    <th:block th:if="${todoList.remembrance == null}">
+        <div class="_3" id="remembrance_div" style="display: none;">
     </th:block>
-</th:block>
-<th:block th:if="${todoList.remembrance == null}">
-    <div class="_3" id="remembrance_div" style="display: none;">
-</th:block>
     <form class="remembrance_form" th:object="${remembranceForm}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="bar">
@@ -166,6 +167,9 @@
 
         <!-- 회고 제목 및 내용 -->
         <div class="div10">제목</div>
+        <div class="reactions" style="position: absolute; right: 120px; top: 150px;">
+            <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
+        </div>
         <th:block sec:authorize="isAuthenticated()">
             <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요."
                    th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
@@ -181,7 +185,8 @@
             <div class="div8">
                 <input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}" disabled="disabled"/>공개
             </div>
-            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요." disabled="disabled"></textarea>
+            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요."
+                      disabled="disabled"></textarea>
         </th:block>
 
         <th:block sec:authorize="isAuthenticated()" th:if="${username == #authentication.getPrincipal().getUsername()}">
@@ -205,40 +210,14 @@
     <div class="div6">댓글</div>
 
     <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
-    <div class="reactions" style="position: absolute; right: 120px; top: 1015px;">
-        <span onclick="increaseCount(this)">👍 <span class="count">3</span></span>
-        <span onclick="increaseCount(this)">👎 <span class="count">4</span></span>
-        <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
+    <div class="comments-container">
+        <div class="comments-list" th:each="comment : ${comments}">
+            <div class="comment-item">
+                <span th:text="${comment.author}">작성자</span>:
+                <span th:text="${comment.content}">댓글 내용</span>
+            </div>
+        </div>
     </div>
-    <div class="div5">
-        <div class="div4">엄준식 짱짱맨</div>
-    </div>
-
-    <!-- reactions를 div3 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
-    <div class="reactions" style="position: absolute; right: 120px; top: 1280px;">
-        <span onclick="increaseCount(this)">👍 <span class="count">6</span></span>
-        <span onclick="increaseCount(this)">👎 <span class="count">7</span></span>
-        <span onclick="increaseCount(this)">❤️ <span class="count">8</span></span>
-    </div>
-    <div class="div3">
-        <div class="div4">엄준식 짱짱맨</div>
-    </div>
-
-    <ul class="pagination1 justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="?page=-1">
-                <span>이전</span>
-            </a>
-        </li>
-        <li class="page-item active">
-            <a class="page-link" href="?page=0">1</a>
-        </li>
-        <li class="page-item disabled">
-            <a class="page-link" href="?page=1">
-                <span>다음</span>
-            </a>
-        </li>
-    </ul>
 
     <!-- 댓글 입력 필드 -->
     <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
