@@ -210,8 +210,8 @@
         <div class="comments-container">
             <div class="comments-list" th:each="comment : ${comments}">
                 <div class="comment-item">
-                    <span th:text="${comment.user.nickname}"></span>:
-                    <span th:text="${comment.content}" style="white-space: pre-wrap;"></span>
+                    <span th:text="${comment.user.nickname + ' :'}">작성자</span>
+                    <span th:text="${comment.content}" style="white-space: pre-wrap;">내용</span>
                     <button class="delete-button" th:onclick="'deleteComment(' + ${comment.id} + ')'">
                         <span>&times;</span> <!-- 동그라미 안에 X -->
                     </button>

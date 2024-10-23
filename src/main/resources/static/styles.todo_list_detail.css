@@ -1137,9 +1137,23 @@ input[type="text"] {
 }
 
 .comment-item {
-    display: flex; /* 플렉스 박스 사용 */
-    justify-content: space-between; /* 요소 간의 간격을 조정 */
-    align-items: center; /* 수직 정렬 */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    display: flex;  /*플렉스 박스 사용 */
+    justify-content: space-between;  /*요소 간의 간격을 조정 */
+    align-items: center; /*수직 정렬 */
+    padding: 5px 10px; /* 댓글 내용의 패딩 추가 */
+}
+
+.comment-item span:first-child {
+    margin-right: 5px; /* 작성자 이름과 내용 사이 간격 조절 */
+    font-weight: bold;
+}
+
+.comment-item span:last-child {
+    flex-grow: 1; /* 내용 영역이 남는 공간을 차지하도록 설정 */
 }
 
 .delete-button {
