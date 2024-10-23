@@ -212,6 +212,9 @@
                 <div class="comment-item">
                     <span th:text="${comment.user.nickname}"></span>:
                     <span th:text="${comment.content}" style="white-space: pre-wrap;"></span>
+                    <button class="delete-button" th:onclick="'deleteComment(' + ${comment.id} + ')'">
+                        <span>&times;</span> <!-- 동그라미 안에 X -->
+                    </button>
                 </div>
             </div>
         </div>
@@ -412,4 +415,31 @@
             }
         }
     }
+    async function submitDeleteComment(commentId) {
+    if (confirm("댓글을 삭제하시겠습니까?")) {
+        const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+        const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+
+        try {
+            // 댓글 ID를 비동기적으로 전송
+            const response = await fetch(`/remembrance_comment/delete/${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    [header]: token
+                }
+            });
+
+            if (response.ok) {
+                alert('댓글이 성공적으로 삭제되었습니다.');
+                location.reload();  // 성공 시 페이지 새로고침
+            } else {
+                alert('댓글 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            alert('댓글 삭제 중 오류가 발생했습니다.');
+            console.error('Error:', error);  // 오류 출력
+        }
+    }
+}
 </script>
