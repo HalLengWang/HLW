@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.remembrance_comment.controller;
 
+import com.todorank.hlw.domain.remembrance_comment.entity.RemembranceComment;
 import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
@@ -42,6 +43,26 @@ public class RemembranceCommentController {
             return ResponseEntity.ok("댓글이 성공적으로 저장되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 저장에 실패했습니다.");
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("isAuthenticated")
+    public ResponseEntity<String> deleteComment(@PathVariable("id") Long commentId, Principal principal) {
+        RemembranceComment comment = this.remembranceCommentService.getComment(commentId);
+        if (comment.getRemembrance() == null || comment.getRemembrance().getTodoList() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 접근입니다.");
+        }
+        TodoList todoList = comment.getRemembrance().getTodoList();
+        if (!comment.getUser().getUsername().equals(principal.getName())
+                || !todoList.getUser().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 접근입니다.");
+        }
+        try {
+            this.remembranceCommentService.delete(comment);
+            return ResponseEntity.ok("댓글이 성공적으로 삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 삭제에 실패했습니다.");
         }
     }
 }
