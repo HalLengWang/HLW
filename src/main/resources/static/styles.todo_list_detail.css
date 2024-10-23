@@ -1118,7 +1118,7 @@ input[type="text"] {
 
 .comments-container {
     position: absolute;
-    left: 100px;
+    left: 50px;
     top: 1070px; /* 더 위로 위치 조정 */
     width: 100%;
     max-width: 1280px; /* 댓글 영역의 너비를 고정 */
