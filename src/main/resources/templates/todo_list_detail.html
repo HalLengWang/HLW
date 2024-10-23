@@ -142,7 +142,6 @@
 </div>
 
 <!-- 회고 바 -->
-<div><!--줄맞춤용 나중에 지우기-->
     <th:block th:if="${todoList.remembrance != null}">
         <th:block sec:authorize="isAuthenticated()">
             <div class="_3"
@@ -167,9 +166,6 @@
 
         <!-- 회고 제목 및 내용 -->
         <div class="div10">제목</div>
-        <div class="reactions" style="position: absolute; right: 120px; top: 150px;">
-            <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
-        </div>
         <th:block sec:authorize="isAuthenticated()">
             <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요."
                    th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
