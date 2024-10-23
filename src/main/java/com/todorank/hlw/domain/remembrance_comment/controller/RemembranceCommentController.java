@@ -55,7 +55,7 @@ public class RemembranceCommentController {
         }
         TodoList todoList = comment.getRemembrance().getTodoList();
         if (!comment.getUser().getUsername().equals(principal.getName())
-                || !todoList.getUser().getUsername().equals(principal.getName())) {
+                && !todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 접근입니다.");
         }
         try {

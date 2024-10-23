@@ -1137,6 +1137,7 @@ input[type="text"] {
 }
 
 .comment-item {
+    min-height: 52.5px;
     padding: 10px;
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
@@ -1147,12 +1148,18 @@ input[type="text"] {
     padding: 5px 10px; /* 댓글 내용의 패딩 추가 */
 }
 
-.comment-item span:first-child {
+.comment-content {
+    display: flex;
+    flex-grow: 1; /* 내용 영역이 남는 공간을 차지하도록 설정 */
+    align-items: center; /* 수직 정렬 */
+}
+
+.comment-content span:first-child {
     margin-right: 5px; /* 작성자 이름과 내용 사이 간격 조절 */
     font-weight: bold;
 }
 
-.comment-item span:last-child {
+.comment-content span:last-child {
     flex-grow: 1; /* 내용 영역이 남는 공간을 차지하도록 설정 */
 }
 
