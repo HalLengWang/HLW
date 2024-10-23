@@ -138,6 +138,13 @@
 </html>
 
 <script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 리스너의 작업
+        const errorMessages = /*[[${errorMessages}]]*/ [];
+        if (errorMessages.length > 0) {
+            alert(errorMessages.join("\n"));
+        }
+    });
     function updateProgressValue(value) {
         // 슬라이더 값을 실시간으로 업데이트
         document.getElementById("progress-value").innerText = value + "%";

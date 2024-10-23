@@ -15,11 +15,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,10 +53,13 @@ public class TodoCardController {
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String todoCardCreate(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
-                                 @RequestParam(value = "id") Long list_id, Principal principal) {
+                                 @RequestParam(value = "id") Long list_id, Principal principal, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
-            return "todo_card_read_create_page";
+            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList()));
+            return "redirect:/todo_card/create?id=" + list_id;
         }
         TodoList todoList = this.todoListService.getTodoList(list_id);
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
@@ -88,10 +94,14 @@ public class TodoCardController {
 
     @PostMapping("/detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
+    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
                                  @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
-            return "todo_card_read_create_page";
+            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList()));
+            return "redirect:/todo_card/detail/" + cardId;
         }
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         if (todoCard == null) {
