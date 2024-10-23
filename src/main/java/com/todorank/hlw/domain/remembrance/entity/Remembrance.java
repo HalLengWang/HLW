@@ -25,7 +25,12 @@ public class Remembrance extends BaseEntity {
     @NotNull
     private TodoList todoList;
 
-    private String remembrance;
+    private String title;
+
+    @Column(columnDefinition = "text")
+    private String content;
+
+    private Boolean isPublic;
 
     @ManyToMany
     private Set<SiteUser> votes;
