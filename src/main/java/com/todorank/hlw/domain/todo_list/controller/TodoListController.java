@@ -66,12 +66,13 @@ public class TodoListController {
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
-        if (todoList.getRemembrance().getComments().isEmpty()) {
-            model.addAttribute("comments", null);
-        } else {
-            model.addAttribute("comments", todoList.getRemembrance().getComments());
+        if (todoList.getRemembrance() != null) {
+            if (todoList.getRemembrance().getComments().isEmpty()) {
+                model.addAttribute("comments", null);
+            } else {
+                model.addAttribute("comments", todoList.getRemembrance().getComments());
+            }
         }
-
         if (todoList.getRemembrance() != null) {
             remembranceForm.setContent(todoList.getRemembrance().getContent());
             remembranceForm.setTitle(todoList.getRemembrance().getTitle());

@@ -214,8 +214,8 @@
         <div class="comments-container">
             <div class="comments-list" th:each="comment : ${comments}">
                 <div class="comment-item">
-                    <span th:text="${comment.author}">작성자</span>:
-                    <span th:text="${comment.content}">댓글 내용</span>
+                    <span th:text="${comment.user.nickname}"></span>:
+                    <span th:text="${comment.content}" style="white-space: pre-wrap;"></span>
                 </div>
             </div>
         </div>
@@ -230,16 +230,16 @@
         </div>
     </th:block>
 
+    <th:block sec:authorize="isAuthenticated()">
+        <!-- 댓글 입력 필드 -->
+        <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
+        <div class="div2">댓글등록</div>
 
-    <!-- 댓글 입력 필드 -->
-    <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
-    <div class="div2">댓글등록</div>
-
-    <!-- 등록 버튼 -->
-    <button class="button" type="button" onclick="submitSaveComment();">
-        <div class="title6">등록</div>
-    </button>
-
+        <!-- 등록 버튼 -->
+        <button class="button" type="button" onclick="submitSaveComment();">
+            <div class="title6">등록</div>
+        </button>
+    </th:block>
 </div>
 <!--/div-->
 </body>
@@ -380,34 +380,40 @@
 </script>
 
 <script th:inline="javascript">
-    function submitSaveComment() {
+    async function submitSaveComment() {
         if (confirm("저장하시겠습니까?")) {
-            // 확인을 받은 후 action URL을 변경하고 폼을 제출
-            var form = document.querySelector('form.remembrance_form');
-            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값 (타임리프에서 listId를 JavaScript 변수로 전달)
+            const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+            const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+            // 댓글 내용과 listId 가져오기
+            const commentContent = document.querySelector('.input-field3').value;
+            const listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값
 
-            form.action = `/remembrance_comment/create/` + listId;  // 요청을 보낼 경로
-            form.submit();
-        }
-    }
-    function submitModifyComment() {
-        if (confirm("수정하시겠습니까?")) {
-            // 확인을 받은 후 action URL을 변경하고 폼을 제출
-            var form = document.querySelector('form.remembrance_form');
-            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 Id 값 (타임리프에서 Id를 JavaScript 변수로 전달)
+            // 댓글 내용이 비어있으면 경고
+            if (!commentContent.trim()) {
+                return alert("댓글 내용을 입력하세요.");
+            }
 
-            form.action = `/remembrance_comment/modify/` + listId;  // 삭제 요청을 보낼 경로
-            form.submit();
-        }
-    }
-    function submitDeleteComment() {
-        if (confirm("삭제하시겠습니까?")) {
-            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
-            var form = document.querySelector('form.remembrance_form');
-            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+            try {
+                // 댓글 내용과 listId를 비동기적으로 전송
+                const response = await fetch(`/remembrance_comment/create/` + listId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                         [header]: token
+                    },
+                    body: JSON.stringify({ id: listId, content: commentContent })  // id와 content만 전송
+                });
 
-            form.action = `/remembrance_comment/delete/` + listId;  // 삭제 요청을 보낼 경로
-            form.submit();
+                if (response.ok) {
+                    alert('댓글이 성공적으로 저장되었습니다.');
+                    location.reload();  // 성공 시 페이지 새로고침
+                } else {
+                    alert('댓글 저장에 실패했습니다.');
+                }
+            } catch (error) {
+                alert('댓글 저장 중 오류가 발생했습니다.');
+                console.error('Error:', error);  // 오류 출력
+            }
         }
     }
 </script>
