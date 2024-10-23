@@ -29,7 +29,6 @@ public class TodoListController {
     private final TodoListService todoListService;
     private final UserService userService;
     private final TodoCardService todoCardService;
-    private final RemembranceCommentService remembranceCommentService;
 
     @GetMapping("/list/{id}")
     public String list(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
