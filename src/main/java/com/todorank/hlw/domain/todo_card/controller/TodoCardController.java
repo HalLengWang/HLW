@@ -41,8 +41,11 @@ public class TodoCardController {
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
-        List<TodoTypeList> typeList = this.todoTypeListService.getList();
         todoCardForm.setExecution(0);
+        if (model.containsAttribute("todoCardForm")) {
+            todoCardForm = (TodoCardForm) model.getAttribute("todoCardForm");
+        }
+        List<TodoTypeList> typeList = this.todoTypeListService.getList();
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
         model.addAttribute("username", todoList.getUser().getUsername());
@@ -59,6 +62,7 @@ public class TodoCardController {
                     .stream()
                     .map(ObjectError::getDefaultMessage)
                     .collect(Collectors.toList()));
+            redirectAttributes.addFlashAttribute("todoCardForm", todoCardForm);
             return "redirect:/todo_card/create?id=" + list_id;
         }
         TodoList todoList = this.todoListService.getTodoList(list_id);
