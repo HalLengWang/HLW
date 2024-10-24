@@ -20,7 +20,6 @@ import java.util.Optional;
 public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private String thumbnailImg;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -33,9 +32,5 @@ public class UserSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities =  new ArrayList<>();
 
         return new UserContext(user, authorities);
-    }
-
-    public String getThumbnailImg(){
-        return thumbnailImg != null ? thumbnailImg : "/profile_basic.png";
     }
 }

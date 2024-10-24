@@ -1,17 +1,5 @@
 <link rel="stylesheet" href="/styles.login_after.css">
 <div class="div">
-    <!--<div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title11">할랭왕</div>
-        <div class="tab"><a th:href="@{/user/profile_modify}">프로필</a></div>
-        <div class="navigation">
-            &lt;!&ndash;[[${#authentication.principal.thumbnailImg}]]&ndash;&gt;
-            <div class="tab" sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></div>
-            <div class="tab" sec:authorize="isAuthenticated()"><a th:href="@{/user/logout}">로그아웃</a></div>
-            <div class="tab"><a th:href="@{/user/signup}">회원가입</a></div>
-        </div>
-    </div>-->
-
     <!-- 네비게이션바 -->
     <nav th:replace="~{navbar :: navbarFragment}"></nav>
 
@@ -19,32 +7,14 @@
         <div class="avatar">
             <div class="frame-427318985">
                 <a th:href="@{/user/profile_modify}">
-                    <!--thumbnailImg가 있는 경우-->
-                    <img class="person" th:if="${user != null and user.thumbnailImg != null}"
+                    <img class="person" th:if="${user.thumbnailImg != null}"
                          th:src="@{|/file/${user.thumbnailImg}|}"
                          alt="프로필 이미지"/>
 
                     <!-- thumbnailImg가 없는 경우 기본 이미지 사용 -->
-                    <img class="person" th:if="${user != null and user.thumbnailImg == null}"
-                         th:src="@{/profile_basic.png}"
+                    <img class="person" th:if="${user.thumbnailImg == null}"
+                         src="/profile_basic.png"
                          alt="기본 프로필 이미지"/>
-
-                    <!--<div sec:authorize="isAuthenticated()">
-                        <img th:src="${#authentication.principal?.userContext?.thumbnailImg}" alt="Profile Image">
-                    </div>
-
-                    <div sec:authorize="isAnonymous()">
-                        <img src="/profile_basic.png" alt="Default Profile Image">
-                    </div>-->
-
-
-                    <!-- 프로필 이미지가 있을 경우 -->
-                    <!--<img class="person" th:if="${#authentication.principal != null and #authentication.principal.thumbnailImg != null}"
-                         th:src="@{|/file/${#authentication.principal.thumbnailImg}|}" alt="프로필 이미지"/>
-
-                    &lt;!&ndash; 프로필 이미지가 없을 경우 기본 이미지 표시 &ndash;&gt;
-                    <img class="person" th:if="${#authentication.principal != null and #authentication.principal.thumbnailImg == null}"
-                         th:src="@{/profile_basic.png}" alt="기본 프로필 이미지"/>-->
                 </a>
             </div>
         </div>

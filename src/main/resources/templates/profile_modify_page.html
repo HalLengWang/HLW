@@ -30,7 +30,10 @@
             <section class="profile-photo">
                 <div class="profile-img-container">
                     <img src="/star_of_bethlehem.png" alt="별 아이콘" class="profile-star">
-                    <img id="profile-img-preview" th:src="@{/file/{image}(image=${user.thumbnailImg})}" alt="프로필 이미지" class="profile-img">
+                    <img id="profile-img-preview"
+                         th:src="${user.thumbnailImg != null ? '/file/' + user.thumbnailImg : '/profile_basic.png'}"
+                         alt="프로필 이미지" class="profile-img">
+
                 </div>
                 <div class="profile-text">
                     <!-- th:text로 변경된 닉네임을 반영 -->
@@ -76,6 +79,23 @@
         const file = event.target.files[0];
         const reader = new FileReader();
         const output = document.getElementById('profile-img-preview');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        reader.onload = function() {
+            output.src = reader.result;
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+            fileNameDisplay.textContent = file.name;
+        } else {
+            fileNameDisplay.textContent = "선택된 파일 없음";
+        }
+    }
+
+    function previewImage2(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        const output = document.getElementById('profile-img person');
         const fileNameDisplay = document.getElementById('file-name');
 
         reader.onload = function() {

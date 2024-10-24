@@ -31,13 +31,13 @@
                 <img src="/multiple_stars.png" alt="별 아이콘" class="profile-star">
                 <a th:href="@{/user/profile_modify}">
                     <!-- thumbnailImg가 있는 경우 -->
-                    <img class="profile-img person" th:if="${user != null and user.thumbnailImg != null}"
+                    <img class="profile-img" th:if="${user.thumbnailImg != null}"
                          th:src="@{|/file/${user.thumbnailImg}|}"
                          alt="프로필 이미지"/>
 
                     <!-- thumbnailImg가 없는 경우 기본 이미지 사용 -->
-                    <img class="profile-img person" th:if="${user != null and user.thumbnailImg == null}"
-                         th:src="@{/avatar.png}"
+                    <img class="profile-img" th:if="${user.thumbnailImg == null}"
+                         src="/profile_basic.png"
                          alt="기본 프로필 이미지"/>
                 </a>
                 <!--<img src="/avatar.png" alt="프로필 이미지" class="profile-img">-->

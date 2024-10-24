@@ -91,25 +91,13 @@ public class UserController {
         // 수정된 사용자 정보를 모델에 추가하여 다시 렌더링할 때 반영
         model.addAttribute("user", siteUser);
         /*return "redirect:/user/profile_modify";*/
-        return "redirect:/user/login_after";
+        return "login_after";
     }
 
     // 프로필 수정 -> 홈버튼 클릭시 login_after 페이지로 이동
-    @GetMapping("/")
-    public String LoginAfter(){
-        return "login_after";
-    }
 
-    // 프로필 수정 -> 홈 화면에 프로필도 수정
-    @GetMapping("/login_after")
-    public String userLoginAfter(Principal principal, Model model/*, @AuthenticationPrincipal UserContext userContext*/) {
-        SiteUser siteUser = userService.getUser(principal.getName());
-        if (siteUser /*userContext*/ == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "사용자를 찾을 수 없습니다.");
-        }
-        model.addAttribute("user", siteUser /*userContext*/);
-        /*model.addAttribute("user", siteUser);*/
-        return "login_after";
-    }
+
+
 
 }
+

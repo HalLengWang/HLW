@@ -1,6 +1,7 @@
 package com.todorank.hlw.domain.user.entity;
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -11,6 +12,9 @@ public class UserContext extends User {
     private final Long id;
     private final String nickname;
     private final String thumbnailImg;
+
+    @Value("${default.thumbnail}")  // 기본 프로필 이미지 경로
+    private String defaultThumbnail;
 
     public UserContext(SiteUser siteUser, List<GrantedAuthority> authorities) {
         super(siteUser.getUsername(), siteUser.getPassword(), authorities);
