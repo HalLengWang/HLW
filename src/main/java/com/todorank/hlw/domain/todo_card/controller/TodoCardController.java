@@ -73,9 +73,9 @@ public class TodoCardController {
         }
         TodoTypeList type = todoTypeListService.getOne(todoCardForm.getCategory());
         TodoCard todoCard = this.todoCardService.create(todoCardForm, type, todoList);
-        if (todoCardForm.getCompletion()) {
-            this.scoreService.create(todoCard, this.userService.getUser(principal.getName()));
-        }
+
+        this.scoreService.create(todoCard, this.userService.getUser(principal.getName()));
+
 
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
