@@ -1,6 +1,7 @@
 package com.todorank.hlw.domain.user.service;
 
 import com.todorank.hlw.domain.user.entity.SiteUser;
+import com.todorank.hlw.domain.user.entity.UserContext;
 import com.todorank.hlw.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +31,6 @@ public class UserSecurityService implements UserDetailsService {
         SiteUser user = _user.get();
         List<GrantedAuthority> authorities =  new ArrayList<>();
 
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new UserContext(user, authorities);
     }
 }
