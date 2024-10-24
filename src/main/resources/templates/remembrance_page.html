@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="/remembrance.css">
 </head>
 <body>
-<header class="navbar">
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<!--<header class="navbar">
     <div class="user-info">유정원 - 실버</div>
     <nav class="menu">
         <div class="menu-links">
@@ -21,7 +24,7 @@
             <img src="/lens.png" alt="검색 아이콘" class="ic-search">
         </div>
     </nav>
-</header>
+</header>-->
 
 <div class="content-container">
     <section class="review-container">
@@ -46,7 +49,7 @@
             <div class="comment">
                 <p>엄준식 짱짱맨</p>
                 <div class="comment-info">
-                    <span>작성자 도레이몽</span>
+                    <span>작성자 도라이몽</span>
                 </div>
             </div>
 
@@ -81,3 +84,7 @@
         countElement.textContent = count + 1;
     }
 </script>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

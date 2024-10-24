@@ -7,58 +7,96 @@
     <link rel="stylesheet" href="/profile_modify.css">
 </head>
 <body>
-<header class="navbar">
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<!--<header class="navbar">
     <div class="back-link">&lt; 프로필</div>
     <nav class="menu">
         <div class="nav-links">
-            <a href="#">홈</a>
+            <a href="/user/login_after">홈</a>
             <a href="#">업무</a>
-            <a href="#">로그아웃</a>
+            <a href="/login_before">로그아웃</a>
         </div>
         <div class="search-box">
             <input type="text" placeholder="Search in site">
             <img src="/lens.png" alt="검색 아이콘" class="ic-search">
         </div>
     </nav>
-</header>
+</header>-->
 
 <section class="profile-container">
-    <div class="profile-left">
-        <section class="profile-photo">
-            <div class="profile-img-container">
-                <img src="/star_of_bethlehem.png" alt="별 아이콘" class="profile-star">
-                <img src="/avatar.png" alt="프로필 이미지" class="profile-img">
-            </div>
-            <div class="profile-text">
-                <h2>길현수</h2>
-                <p class="user-role">User</p>
-            </div>
-        </section>
-        <section class="profile-actions">
-            <button class="edit-button">프로필 수정</button>
-            <br/>
-            <label for="upload-photo" class="file-label">파일 선택</label>
-            <input type="file" id="upload-photo" class="file-input">
-            <button class="save-button">변경사항 저장</button>
-        </section>
-    </div>
-    <div class="profile-details">
-        <div class="nickname">
-            <label for="nickname">닉네임</label>
-            <input type="text" id="nickname" placeholder="Enter your new nickname">
-            <button class="save-button">변경사항 저장</button>
+    <form th:action="@{/user/profile_modify}" method="post" enctype="multipart/form-data">
+        <div class="profile-left">
+            <section class="profile-photo">
+                <div class="profile-img-container">
+                    <img src="/star_of_bethlehem.png" alt="별 아이콘" class="profile-star">
+                    <img id="profile-img-preview" th:src="@{/file/{image}(image=${user.thumbnailImg})}" alt="프로필 이미지" class="profile-img">
+                </div>
+                <div class="profile-text">
+                    <!-- th:text로 변경된 닉네임을 반영 -->
+                    <h2 id="nickname-display" th:text="${user.nickname}">길현수</h2>
+                    <p class="user-role">User</p>
+                </div>
+            </section>
+            <section class="profile-actions">
+                <label for="upload-photo" class="file-label">파일 선택</label>
+                <input type="file" name="thumbnail" accept="image/png, image/gif, image/jpeg" id="upload-photo" class="file-input" onchange="previewImage(event)">
+                <div id="file-name" class="file-name-display">선택된 파일 없음</div>
+            </section>
         </div>
-        <div class="bio">
-            <label for="bio">자기소개</label>
-            <textarea id="bio" placeholder="Write a new bio"></textarea>
-            <button class="save-button">변경사항 저장</button>
+
+        <div class="profile-details">
+            <div class="nickname">
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" th:value="${user.nickname}" placeholder="Enter your new nickname" oninput="updateNickname(event)">
+            </div>
+            <div class="bio">
+                <label for="bio">자기소개</label>
+                <textarea id="bio" name="intro" th:text="${user.intro}" placeholder="Write a new bio"></textarea>
+            </div>
         </div>
-    </div>
+
+        <!-- 수정 버튼을 페이지 하단에 배치 -->
+        <div class="profile-submit">
+            <button type="submit" class="edit-button">프로필 수정</button>
+        </div>
+    </form>
 </section>
 
 <footer class="footer">
     <a href="#">개인정보처리방침</a>
     <a href="#">정책</a>
 </footer>
+
 </body>
 </html>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        const output = document.getElementById('profile-img-preview');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        reader.onload = function() {
+            output.src = reader.result;
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+            fileNameDisplay.textContent = file.name;
+        } else {
+            fileNameDisplay.textContent = "선택된 파일 없음";
+        }
+    }
+
+    function updateNickname(event) {
+        const nicknameDisplay = document.getElementById('nickname-display');
+        nicknameDisplay.textContent = event.target.value || '길현수';
+    }
+</script>
+
+<!-- Bootstrap JS -->
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

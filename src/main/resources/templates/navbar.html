@@ -1,43 +1,48 @@
-<title>네비게이션 바</title>
-<link rel="stylesheet" href="/navbar.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<nav th:fragment="navbarFragment">
+    <title>네비게이션 바</title>
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<header class="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom w-100">
-        <div class="container-fluid">
-            <!-- 좌측 "프로필" 링크 -->
-            <a class="navbar-brand" href="/profile_read">&lt; 프로필</a>
-            <!-- 토글 버튼 (작은 화면에서 메뉴를 접었다 펼 수 있도록 설정) -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- 우측 메뉴와 검색창 -->
-            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">홈</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/todo_list/list}" sec:authorize="isAuthenticated()">업무</a>
-                    </li>
-                    <!-- "로그인" 링크는 모든 화면 크기에서 표시되도록 설정 -->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/login}" sec:authorize="isAnonymous()">로그인</a>
-                        <a class="nav-link" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
-                    </li>
-                    <!-- 검색 박스에 더 넓은 왼쪽 마진 추가 -->
-                    <li class="nav-item ms-4"> <!-- 왼쪽 마진을 더 크게 조정 -->
-                        <div class="search-box">
-                            <input type="text" placeholder="Search in site">
-                            <img src="/lens.png" alt="검색 아이콘" class="ic-search">
-                        </div>
-                    </li>
-                </ul>
+    <header class="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light w-100" >
+            <div class="container-fluid">
+                <!-- 좌측 "프로필" 링크 -->
+                <a class="navbar-brand" href="/">&lt; 홈</a>
+                <!-- 토글 버튼 (작은 화면에서 메뉴를 접었다 펼 수 있도록 설정) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- 우측 메뉴와 검색창 -->
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile_read">프로필</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/user/signup}" sec:authorize="isAnonymous()">회원가입</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/user/profile_modify}" sec:authorize="isAuthenticated()">프로필 수정</a>
+                        </li>
+                        <!-- "로그인" 링크는 모든 화면 크기에서 표시되도록 설정 -->
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/user/login}" sec:authorize="isAnonymous()">로그인</a>
+                            <a class="nav-link" th:href="@{/user/logout}" sec:authorize="isAuthenticated()">로그아웃</a>
+                        </li>
+                        <!-- 검색 박스에 더 넓은 왼쪽 마진 추가 -->
+                        <li class="nav-item ms-4"> <!-- 왼쪽 마진을 더 크게 조정 -->
+                            <div class="search-box">
+                                <input type="text" placeholder="Search in site">
+                                <img src="/lens.png" alt="검색 아이콘" class="ic-search">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
+</nav>
 </html>
 
 <!-- Bootstrap JS -->

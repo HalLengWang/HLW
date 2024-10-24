@@ -1,6 +1,7 @@
 package com.todorank.hlw.domain.user.service;
 
 import com.todorank.hlw.domain.user.entity.SiteUser;
+import com.todorank.hlw.domain.user.entity.UserContext;
 import com.todorank.hlw.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private String thumbnailImg;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,6 +32,10 @@ public class UserSecurityService implements UserDetailsService {
         SiteUser user = _user.get();
         List<GrantedAuthority> authorities =  new ArrayList<>();
 
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new UserContext(user, authorities);
+    }
+
+    public String getThumbnailImg(){
+        return thumbnailImg != null ? thumbnailImg : "/profile_basic.png";
     }
 }

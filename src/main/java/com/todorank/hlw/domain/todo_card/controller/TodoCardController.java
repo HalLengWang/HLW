@@ -3,6 +3,7 @@ package com.todorank.hlw.domain.todo_card.controller;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
+import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
@@ -15,14 +16,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,6 +43,7 @@ public class TodoCardController {
         todoCardForm.setExecution(0);
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
+        // github 코드 2줄
         model.addAttribute("username", todoList.getUser().getUsername());
         model.addAttribute("mode", "create");
         return "todo_card_read_create_page";
@@ -53,13 +52,10 @@ public class TodoCardController {
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String todoCardCreate(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
-                                 @RequestParam(value = "id") Long list_id, Principal principal, RedirectAttributes redirectAttributes) {
+                                 @RequestParam(value = "id") Long list_id, Principal principal) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
-                    .stream()
-                    .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.toList()));
-            return "redirect:/todo_card/create?id=" + list_id;
+            System.out.println(bindingResult.getAllErrors());
+            return "todo_card_read_create_page";
         }
         TodoList todoList = this.todoListService.getTodoList(list_id);
         if (!todoList.getUser().getUsername().equals(principal.getName())) {
@@ -70,6 +66,7 @@ public class TodoCardController {
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 
+    // github 코드 getmapping 1개, postmapping 2개
     @GetMapping("/detail/{id}")
     public String todoCardDetail(TodoCardForm todoCardForm, @PathVariable(value = "id") Long cardId,
                                  Model model, Principal principal) {
@@ -94,14 +91,10 @@ public class TodoCardController {
 
     @PostMapping("/detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
                                  @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
-                    .stream()
-                    .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.toList()));
-            return "redirect:/todo_card/detail/" + cardId;
+            return "todo_card_read_create_page";
         }
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         if (todoCard == null) {
@@ -131,4 +124,5 @@ public class TodoCardController {
         this.todoCardService.delete(todoCard);
         return "redirect:/todo_list/detail/" + listId;
     }
+
 }

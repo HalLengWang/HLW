@@ -7,22 +7,25 @@
     <link rel="stylesheet" type="text/css" href="/signup.css">
 </head>
 <body>
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
 <div class="div">
-    <div class="div2">
-        <img src="/profile_basic.png" alt="프로필 기본 이미지"/>
+    <!--<div class="div2">
+        <img src="/profile_basic.png" alt="프로필 기본 이미지" />
         <div class="title">회원가입 페이지</div>
         <div class="navigation">
             <div class="tab">홈</div>
             <div class="tab">업무</div>
             <div class="textfield">
                 <div class="text">Search in site</div>
-                <img class="ic-search" src="/lens.png" alt="검색 아이콘"/>
+                <img class="ic-search" src="/lens.png" alt="검색 아이콘" />
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="content">
         <div class="image-container">
-            <img class="signup-image" src="/signup_register.png" alt="Background Image"/>
+            <img class="signup-image" src="/signup_register.png" alt="Background Image" />
             <div class="image-title">Register</div>
         </div>
         <div class="form-container">
@@ -47,36 +50,49 @@
                 </div>
             </div>
             <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+                <div class="alert alert-danger row" role="alert" th:if="${#fields.hasAnyErrors()}">
+                    <div th:each="err : ${#fields.allErrors()}">
+                        <p th:text="${err}"></p>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input">
                         <div class="title2">사용자명</div>
-                        <input class="textfield3" type="text" placeholder="Enter your username" th:field="*{username}">
+                        <div class="textfield3">
+                            <input class="text3" type="text" placeholder="Enter your username" th:field="*{username}">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input">
                         <div class="title2">비밀번호</div>
-                        <input class="textfield3" type="password" placeholder="Enter your password"
-                               th:field="*{password}">
+                        <div class="textfield3">
+                            <input class="text3" type="password" placeholder="Enter your password" th:field="*{password}">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input">
                         <div class="title2">비밀번호 확인</div>
-                        <input class="textfield3" type="password" placeholder="Confirm your password"
-                               th:field="*{passwordCheck}">
+                        <div class="textfield3">
+                            <input class="text3" type="password" placeholder="Confirm your password" th:field="*{passwordCheck}">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input">
                         <div class="title2">이메일</div>
-                        <input class="textfield3" type="email" placeholder="Enter your email" th:field="*{email}">
+                        <div class="textfield3">
+                            <input class="text3" type="email" placeholder="Enter your email" th:field="*{email}">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input">
                         <div class="title2">닉네임</div>
-                        <input class="textfield3" type="text" placeholder="Enter your nickname" th:field="*{nickname}">
+                        <div class="textfield3">
+                            <input class="text3" type="text" placeholder="Enter your nickname" th:field="*{nickname}">
+                        </div>
                     </div>
                 </div>
                 <div class="button">
@@ -94,12 +110,7 @@
 </div>
 </body>
 </html>
-<script th:inline="javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        // 첫 번째 리스너의 작업
-        const errorMessages = /*[[${errorMessages}]]*/ [];
-        if (errorMessages.length > 0) {
-            alert(errorMessages.join("\n"));
-        }
-    });
-</script>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
