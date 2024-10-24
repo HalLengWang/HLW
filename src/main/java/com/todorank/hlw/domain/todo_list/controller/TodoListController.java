@@ -1,5 +1,7 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
+import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
+import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -62,6 +64,18 @@ public class TodoListController {
         model.addAttribute("username", todoList.getUser().getUsername());
         todoList.toBuilder().user(null).build();
         model.addAttribute("todoList", todoList);
+        if (todoList.getRemembrance() != null) {
+            if (todoList.getRemembrance().getComments().isEmpty()) {
+                model.addAttribute("comments", null);
+            } else {
+                model.addAttribute("comments", todoList.getRemembrance().getComments());
+            }
+        }
+        if (todoList.getRemembrance() != null) {
+            remembranceForm.setContent(todoList.getRemembrance().getContent());
+            remembranceForm.setTitle(todoList.getRemembrance().getTitle());
+            remembranceForm.setIsPublic(todoList.getRemembrance().getIsPublic());
+        }
         return "todo_list_detail";
     }
 
