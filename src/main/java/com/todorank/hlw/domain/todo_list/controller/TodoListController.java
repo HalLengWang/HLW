@@ -1,26 +1,29 @@
-package com.todorank.hlw.domain.todo_list.controller;
+package com.todorank.hlw.domain.todo_card.controller;
 
-import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
-import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
+import com.todorank.hlw.domain.score.service.ScoreService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
+import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
-import com.todorank.hlw.domain.user.entity.SiteUser;
+import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
+import com.todorank.hlw.domain.todo_type_list.service.TodoTypeListService;
 import com.todorank.hlw.domain.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
