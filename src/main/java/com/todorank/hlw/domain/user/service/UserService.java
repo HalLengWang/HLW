@@ -39,7 +39,7 @@ public class UserService {
                 .nickname(nickname)
                 .intro(String.format("반갑습니다! %s입니다~", nickname))
                 .build();
-        return this.userRepository.save(user);
+        this.userRepository.save(user);
     }
 
     public SiteUser getUser(String username) {
