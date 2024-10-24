@@ -11,19 +11,6 @@
 <!-- 네비게이션바 -->
 <nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
 
-<!--<div class="navbar">
-    &lt;!&ndash;<div class="user">이상수 - 골드</div>
-    <div class="menu">
-        <a href="#">홈</a> |
-        <a href="#">업무</a> |
-        <a href="#">프로필</a> |
-        <a href="#">로그인 / 로그아웃</a>
-        <div class="textfield">
-            <input type="text" class="search-box" placeholder="Search in site">
-            <img class="ic-search" src="/lens.png" alt="검색 아이콘"/>
-        </div>
-    </div>&ndash;&gt;
-</div>-->
 <form class="card" th:object="${todoCardForm}" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <div class="header">ToDo Card</div>

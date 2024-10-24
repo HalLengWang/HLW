@@ -14,14 +14,7 @@
 <nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
 
 <div class="to-do-list">
-    <!--&lt;!&ndash; 상단 바 &ndash;&gt;
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title5">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>-->
+
 
     <!-- ToDo List 제목 바 -->
     <div class="_1">
@@ -36,13 +29,14 @@
             <div class="title-search">제목</div>
             <div class="textfield2">
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled />
+                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text" id="title-input"
-                           class="text" placeholder="title search" th:value="${todoList.title}" readonly />
+                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text"
+                           id="title-input"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly/>
                     <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
-                           class="text" placeholder="title search" th:value="${todoList.title}" disabled />
+                           class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
                 </th:block>
             </div>
         </div>
@@ -98,7 +92,8 @@
 
         <div class="frame-427318997">
             <div class="frame-427318974" th:each="todoCard : ${paging}">
-                <a th:href="@{|/todo_card/detail/${todoCard.id}|}" style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                <a th:href="@{|/todo_card/detail/${todoCard.id}|}"
+                   style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
                     <img class="group5" src="/group.png" alt="Group Icon"/>
                     <div class="_5-km" th:text="${todoCard.title}"></div>
                     <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
@@ -131,24 +126,19 @@
         <!-- 페이징처리 끝 -->
 
         <!-- 버튼들 -->
-        <button class="button2" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">ToDO-Card 수정</div>
-        </button>
-        <a class="button3" sec:authorize="isAuthenticated()"
-           th:if="${username == #authentication.getPrincipal().getUsername()}"
-           th:href="@{|/todo_card/create?id=${todoList.id}|}">
-            <div class="title6">ToDO-Card 등록</div>
-        </a>
-        <button class="button4" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">회고 등록</div>
-        </button>
+        <th:block sec:authorize="isAuthenticated()"
+                  th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
+                <div class="title6">ToDO-Card 등록</div>
+            </a>
+            <button class="button3" onclick='btnClick()'
+                    th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
+                <div class="title6">회고 등록</div>
+            </button>
+        </th:block>
     </div>
 
-
-
-<!-- 회고 바 -->
+    <!-- 회고 바 -->
     <th:block th:if="${todoList.remembrance != null}">
         <th:block sec:authorize="isAuthenticated()">
             <div class="_3"
@@ -457,3 +447,4 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
