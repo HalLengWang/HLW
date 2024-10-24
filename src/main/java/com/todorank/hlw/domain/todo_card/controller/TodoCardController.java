@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.todo_card.controller;
 
+import com.todorank.hlw.domain.score.sevice.ScoreService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
@@ -7,11 +8,15 @@ import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import com.todorank.hlw.domain.todo_type_list.service.TodoTypeListService;
+import com.todorank.hlw.domain.user.entity.SiteUser;
+import com.todorank.hlw.domain.user.repository.UserRepository;
 import com.todorank.hlw.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,7 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-
+import org.springframework.security.core.Authentication;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/todo_card")
@@ -29,6 +34,8 @@ public class TodoCardController {
     private final TodoTypeListService todoTypeListService;
     private final TodoListService todoListService;
     private final UserService userService;
+    private final ScoreService scoreService;
+    private final UserRepository userRepository;
 
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
@@ -93,6 +100,7 @@ public class TodoCardController {
         if (bindingResult.hasErrors()) {
             return "todo_card_read_create_page";
         }
+
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         if (todoCard == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 데이터입니다.");
@@ -100,8 +108,29 @@ public class TodoCardController {
         if (!todoCard.getTodoList().getUser().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
+
         TodoTypeList type = this.todoTypeListService.getOne(todoCardForm.getCategory());
+
+        todoCard.setCompletion(todoCardForm.getCompletion()); // 체크박스 상태 반영
+        todoCard.setExecution(todoCardForm.getExecution()); // 진행률 상태 반영
         this.todoCardService.modify(todoCardForm, todoCard, type);
+
+        // 완료 여부가 true일 경우 점수 추가
+        if (todoCardForm.getCompletion() != null && todoCardForm.getCompletion()) {
+            scoreService.deleteScoreByTodoCardId(cardId);
+            // 완료 점수 추가
+            scoreService.addScoreForCompletion(cardId, userRepository.findByusername(principal.getName()).get(), type);
+        } else if (todoCardForm.getCompletion() != null && !todoCardForm.getCompletion()) {
+            // 완료 여부가 false일 경우 점수 삭제
+            scoreService.deleteScoreByTodoCardId(cardId);
+        }
+
+        // 진행률 점수 추가 (체크박스가 체크되지 않은 경우)
+        if (todoCardForm.getExecution() != null && todoCardForm.getExecution() > 0 &&
+                (todoCardForm.getCompletion() == null || !todoCardForm.getCompletion())) {
+            scoreService.addScoreForExecution(cardId, userRepository.findByusername(principal.getName()).get(), todoCardForm.getExecution());
+        }
+
         model.addAttribute("success", true);
         return "redirect:/todo_card/detail/" + cardId;
     }

@@ -56,6 +56,8 @@ public class TodoCardService {
                 .todoTypeList(type)
                 .build();
         this.todoCardRepository.save(modCard);
+        // completion 상태를 로그로 출력
+        System.out.println("Updated completion status: " + modCard.getCompletion());
     }
 
     public void delete(TodoCard todoCard) {

@@ -9,12 +9,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +45,7 @@ public class TodoCard extends BaseEntity {
 
     private Integer execution;
 
-    @OneToOne(mappedBy = "todoCard")
+
+    @OneToOne(mappedBy = "todoCard", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Score score;
 }

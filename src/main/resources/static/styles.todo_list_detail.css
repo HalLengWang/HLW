@@ -455,6 +455,18 @@
 .button4:hover {
     background-color: #F07A7A; /* 호버 시 진한 색상 */
 }
+.score-display {
+    margin-top: 100px; /* 점수를 아래로 내리기 위한 여백 조정 (원하는 숫자로 변경 가능) */
+    margin-left: 250px;
+    display: inline-block; /* 인라인 블록으로 설정하여 위치를 조정 */
+    font-weight: bold; /* 점수를 굵게 표시 */
+    color: #007bff; /* 원하는 색상 설정 */
+    font-size: 36px; /* 점수 글씨 크기 설정 */
+}
+
+
+
+
 .frame-427318978 {
   background: #d9d9d9;
   border-radius: 100px;

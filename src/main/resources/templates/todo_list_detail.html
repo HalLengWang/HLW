@@ -129,6 +129,7 @@
                 th:if="${username == #authentication.getPrincipal().getUsername()}">
             <div class="title6">회고 등록</div>
         </button>
+        <span class="score-display">점수: <span th:text="${score}">0</span></span>
     </div>
 
     <!-- 회고 바 -->
