@@ -7,11 +7,14 @@
 
 body {
     background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
+    /* 화면 전체에 맞게 설정 */
+    width: 100%;
+}
+
+.navbar {
+    width: 100%;
+    /* container 관련 스타일 제거 */
 }
 
 /* Top Bar */
@@ -70,6 +73,8 @@ body {
     width: 100%;
     max-width: 600px;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .label {
     font-size: 16px;
@@ -116,9 +121,11 @@ body {
 .buttons {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 100%; /* 버튼 영역도 전체 너비로 확장 */
     max-width: 600px;
     margin-top: 20px;
+    margin-left: auto; /* 가운데 정렬 */
+    margin-right: auto;
 }
 .exit-button {
     font-size: 16px;
@@ -131,3 +138,15 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
 }
+
+.navbar {
+    width: 100%; /* 화면 전체 너비로 설정 */
+    max-width: 100%; /* 최대 너비 제한을 해제 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+

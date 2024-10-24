@@ -5,75 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo Card</title>
     <link rel="stylesheet" type="text/css" href="/todo_card_read_create.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="navbar">
-    <div class="user">이상수 - 골드</div>
-    <div class="menu">
-        <a href="#">홈</a> |
-        <a href="#">업무</a> |
-        <a href="#">프로필</a> |
-        <a href="#">로그인 / 로그아웃</a>
-        <div class="textfield">
-            <input type="text" class="search-box" placeholder="Search in site">
-            <img class="ic-search" src="/lens.png" alt="검색 아이콘"/>
-        </div>
-    </div>
-</div>
-<form class="card" th:object="${todoCardForm}" th:action="@{/todo_card/create}" method="post">
-    <input type="hidden" th:value="${todoListId}" name="id"/>
-    <div class="header">ToDo Card</div>
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
 
+
+<form class="card" th:object="${todoCardForm}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <div class="header">ToDo Card</div>
     <div class="content">
         <div class="time-section">
             <div class="time">
                 <p>시간</p>
                 <label for="startDateTime">시작 시간</label>
-                <input type="datetime-local" th:field="*{startDateTime}">
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="datetime-local" th:field="*{startDateTime}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="datetime-local" th:field="*{startDateTime}" disabled="disabled"/>
+                </th:block>
             </div>
             <br/>
             <div class="time">
                 <label for="endDateTime">종료 시간</label>
-                <input type="datetime-local" th:field="*{endDateTime}">
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="datetime-local" th:field="*{endDateTime}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="datetime-local" th:field="*{endDateTime}" disabled="disabled"/>
+                </th:block>
             </div>
             <div class="complete">
                 </br>
-                <div class="checkbox"><input type="checkbox" th:field="*{completion}">완료 여부</div>
+                <div class="checkbox">
+                    <th:block sec:authorize="isAuthenticated()">
+                        <input type="checkbox" th:field="*{completion}"
+                               th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>완료 여부
+                    </th:block>
+                    <th:block sec:authorize="isAnonymous()">
+                        <input type="checkbox" th:field="*{completion}" disabled="disabled"/>완료 여부
+                    </th:block>
+                </div>
             </div>
+            <!-- 진행도 텍스트 -->
+            <div class="progress-label">
+                <p id="progress text">진행도</p>
+            </div>
+            <!-- 슬라이더 -->
             <div class="progress">
-                <label for="execution">진행도</label>
-                <input type="range" min="0" max="100"
-                       oninput="updateProgressValue(this.value)" th:field="*{execution}">
-                <p id="progress-value">0%</p>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="range" min="0" max="100" th:field="*{execution}"
+                           oninput="updateProgressValue(this.value)" id="execution-range"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}" style="width: 100%;" name="execution" value="0"/>
+                </th:block>
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="range" min="0" max="100" th:field="*{execution}"
+                           oninput="updateProgressValue(this.value)" id="execution-range"
+                           disabled="disabled" style="width: 100%;" />
+                </th:block>
             </div>
+            <!-- 서버에서 받은 execution 값을 표시 -->
+            <p id="progress-value" th:text="${todoCardForm.execution} + '%'" style="text-align: center; margin-top: 5px;"></p>
         </div>
-
 
         <div class="category">
             <p>할일 종류 리스트</p>
-            <div th:each="todoType : ${todoTypeList}">
-                <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}">
-                <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
-            </div>
+            <th:block sec:authorize="isAuthenticated()">
+                <div th:each="todoType : ${todoTypeList}">
+                    <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}"
+                           th:disabled="${username != #authentication.getPrincipal().getUsername()}">
+                    <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
+                </div>
+            </th:block>
+            <th:block sec:authorize="isAnonymous()">
+                <div th:each="todoType : ${todoTypeList}">
+                    <input type="radio" th:field="*{category}" th:value="${todoType.id}" th:id="${todoType.id}"
+                           disabled="disabled">
+                    <label th:for="${todoType.id}" th:text="${todoType.typeName}"></label><br>
+                </div>
+            </th:block>
         </div>
     </div>
 
     <div class="memo-content">
         <label for="title">제목</label>
-        <input type="text" id="title" placeholder="title" th:field="*{title}">
+        <th:block sec:authorize="isAuthenticated()">
+            <input type="text" id="title" placeholder="title" th:field="*{title}"
+                   th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <input type="text" id="title" placeholder="title" th:field="*{title}"
+                   disabled="disabled"/>
+        </th:block>
 
         <label for="memo">메모</label>
-        <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"></textarea>
+        <th:block sec:authorize="isAuthenticated()">
+            <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"
+                      th:disabled="${username != #authentication.getPrincipal().getUsername()}"></textarea>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <textarea id="memo" placeholder="메모 내용을 입력하세요." th:field="*{memo}"
+                      disabled="disabled"></textarea>
+        </th:block>
     </div>
-
-    <button class="save-btn" type="submit">저장</button>
+    <div class="save-btn-container"
+         sec:authorize="isAuthenticated()"
+         th:if="${username == #authentication.getPrincipal().getUsername()}">
+        <th:block th:if="${mode == 'create'}">
+            <input type="hidden" th:value="${todoListId}" name="id"/>
+            <button class="save-btn" type="submit" onclick="return confirmSave();">저장</button>
+        </th:block>
+        <th:block th:if="${mode == 'detail'}">
+            <input type="hidden" th:value="${cardId}" name="id"/>
+            <button class="save-btn" type="submit" onclick="return confirmSave();">수정</button>
+            <button class="save-btn" type="button" onclick="submitDeleteForm();">삭제</button>
+        </th:block>
+    </div>
 </form>
 
 </body>
 </html>
 
-<script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 리스너의 작업
+        const errorMessages = /*[[${errorMessages}]]*/ [];
+        if (errorMessages.length > 0) {
+            alert(errorMessages.join("\n"));
+        }
+    });
     function updateProgressValue(value) {
-        document.getElementById("progress-value").textContent = value + "%";
+        // 슬라이더 값을 실시간으로 업데이트
+        document.getElementById("progress-value").innerText = value + "%";
+    }
+    function confirmSave() {
+        // 사용자에게 저장 확인을 위한 alert 창을 띄움
+        return confirm("저장하시겠습니까?");
+    }
+    function submitDeleteForm() {
+        if (confirm("삭제하시겠습니까?")) {
+            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.card');
+            var cardId = /*[[${cardId}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+
+            form.action = `/todo_card/delete/` + cardId;  // 삭제 요청을 보낼 경로
+            form.submit();
+        }
     }
 </script>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

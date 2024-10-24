@@ -1,3 +1,6 @@
+.navbar {
+  position: fixed;
+}
 .to-do-list,
 .to-do-list * {
   box-sizing: border-box;
@@ -10,7 +13,7 @@
 }
 ._3 {
   width: 1420px; /* 고정 너비 */
-  height: 2117px; /* 고정 높이 */
+  min-height: 2117px; /* 고정 높이 */
   position: absolute; /* 절대 위치 */
   left: 50%; /* 부모 요소의 중앙 위치 */
   top: 2278px; /* 상단 위치 */
@@ -18,7 +21,19 @@
   overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 }
 
-.button {
+.frame-427318997 {
+  display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center; /* 중앙 정렬 */
+    justify-content: flex-start;
+    width: 863px;
+    position: absolute;
+    left: 50%; /* 부모 요소의 중앙 위치 */
+    top: 250px; /* 필요한 경우 이 값 조정 */
+    transform: translateX(-50%); /* 요소를 왼쪽으로 50% 이동시켜 중앙 정렬 */
+}
+.button-delete {
     display: flex;
     flex-direction: column; /* 세로 방향 정렬 */
     gap: 12px; /* 요소 간 간격 */
@@ -35,11 +50,36 @@
     cursor: pointer; /* 커서 모양 */
     text-align: center; /* 텍스트 중앙 정렬 */
     left: 1070px; /* 절대 위치 조정 */
-    top: 1969px; /* 절대 위치 조정 */
+    top: 880px; /* 절대 위치 조정 */
     color: white; /* 글씨 색상 흰색으로 설정 */
     font-size: 18px; /* 글씨 크기 설정 */
 }
-.button:hover {
+.button-delete:hover {
+    background-color: #F07A7A; /* 호버 시 진한 색상 */
+}
+
+.button-save {
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    gap: 12px; /* 요소 간 간격 */
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 가운데 정렬 */
+    flex-shrink: 0; /* 크기 축소 방지 */
+    position: relative; /* 포지션을 상대적으로 설정 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    background-color: #F7A6A6; /* 배경 색상 */
+    width: 240px; /* 가로 크기 */
+    height: 48px; /* 세로 크기 */
+    border-radius: 6px; /* 둥근 모서리 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 커서 모양 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    left: 810px; /* 절대 위치 조정 */
+    top: 833px; /* 절대 위치 조정 */
+    color: white; /* 글씨 색상 흰색으로 설정 */
+    font-size: 18px; /* 글씨 크기 설정 */
+}
+.button-save:hover {
     background-color: #F07A7A; /* 호버 시 진한 색상 */
 }
 
@@ -154,63 +194,7 @@
   align-items: center;
   justify-content: flex-start;
 }
-.div3 {
-  border: none;  /* 테두리 없애기 */
-  width: 1250px !important;  /* 너비 설정 */
-  height: 176px;  /* 고정된 높이 설정 */
-  padding: 5px;  /* 내부 여백 설정 */
-  font-size: 18px;  /* 글씨 크기 설정 */
-  line-height: 1.2;  /* 줄 간격 조절 */
-  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
-  position: absolute; /* 위치 조정 */
-  left: 67px;  /* 위치 설정 */
-  top: 1340px; /* 위치 설정 */
 
-  box-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
-    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
-    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
-    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
-
-  overflow: hidden;  /* 내용 넘침 숨김 */
-}
-
-.div4 {
-  color: rgba(0, 0, 0, 0.4);
-  text-align: left;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 20px;
-  line-height: 48px;
-  font-weight: 500;
-  position: absolute;
-  left: 16px;
-  top: 21px;
-  width: 310px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.div5 {
-  border: none;  /* 테두리 없애기 */
-  width: 1250px;  /* 너비 설정 */
-  height: 176px;  /* 고정된 높이 설정 */
-  padding: 5px;  /* 내부 여백 설정 */
-  font-size: 18px;  /* 글씨 크기 설정 */
-  line-height: 1.2;  /* 줄 간격 조절 */
-  box-sizing: border-box;  /* 패딩 포함 크기 계산 */
-  position: absolute; /* 위치 조정 */
-  left: 63px;  /* 위치 설정 */
-  top: 1071px; /* 위치 설정 */
-
-  box-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.05),   /* 아래쪽 그림자 */
-    0 -2px 10px rgba(0, 0, 0, 0.05),  /* 위쪽 그림자 */
-    2px 0 10px rgba(0, 0, 0, 0.05),   /* 오른쪽 그림자 */
-    -2px 0 10px rgba(0, 0, 0, 0.05);  /* 왼쪽 그림자 */
-
-  overflow: hidden;  /* 내용 넘침 숨김 */
-}
 
 .div6 {
   color: rgba(0, 0, 0, 0.42);
@@ -405,7 +389,7 @@
     justify-content: center; /* 수평 중앙 정렬 */
     position: absolute; /* 절대 위치 설정 */
     left: 758px; /* X 좌표 */
-    top: 977px; /* Y 좌표 */
+    top: 1050px; /* Y 좌표 */
     overflow: hidden; /* 넘치는 내용 숨김 */
     background-color: #F7A6A6; /* 배경 색상 */
     width: 240px; /* 가로 크기 */
@@ -428,7 +412,7 @@
     justify-content: center; /* 수평 중앙 정렬 */
     position: absolute; /* 절대 위치 설정 */
     left: 1017px; /* X 좌표 */
-    top: 977px; /* Y 좌표 */
+    top: 1050px; /* Y 좌표 */
     overflow: hidden; /* 넘치는 내용 숨김 */
     background-color: #F7A6A6; /* 배경 색상 */
     width: 240px; /* 가로 크기 */
@@ -480,18 +464,10 @@
   justify-content: center;
 }
 ._1-min {
-  color: #817f7f;
-  text-align: left;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 53px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+ font-size: 20px;
+   font-weight: 500;
+   color: #817f7f;
+   text-align: right;
 }
 .frame-427318975 {
   background: #d9d9d9;
@@ -603,18 +579,17 @@
 }
 .frame-427318974 {
   background: #d9d9d9;
-  border-radius: 100px;
-  padding: 28px 60px 28px 60px;
-  display: flex;
-  flex-direction: row;
-  gap: 300px;
-  align-items: center;
-  justify-content: flex-start;
-  width: 1093px;
-  height: 98px;
-  position: absolute;
-  left: 164px;
-  top: 262px;
+    border-radius: 100px;
+    padding: 28px 60px 28px 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    width: 894px;
+    height: 126px;
+    position: relative;
 }
 .group5 {
   flex-shrink: 0;
@@ -624,18 +599,11 @@
   overflow: visible;
 }
 ._5-km {
-  color: #000000;
-  text-align: center;
-  font-family: "Roboto-Medium", sans-serif;
-  font-size: 30px;
-  line-height: 22px;
-  font-weight: 500;
-  position: relative;
-  width: 291px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-grow: 1;
+    font-size: 30px;
+    font-weight: 500;
+    color: #000;
+    text-align: center;
 }
 .to-do-list-detail-bar {
   background: rgba(247, 166, 166, 0.6);
@@ -668,7 +636,7 @@
   width: 400px;
   position: absolute;
   left: 857px; /* 검색창의 위치 조정 */
-  top: 174px; /* 검색창의 위치 조정 */
+  top: 150px; /* 검색창의 위치 조정 */
   position: relative; /* 아이콘을 내부에 위치시키기 위해 relative 설정 */
 }
 
@@ -1048,7 +1016,7 @@ input[type="text"] {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 1000px;
+    top: 1100px;
     list-style: none; /* 리스트 점 제거 */
     padding: 0;
 }
@@ -1096,30 +1064,12 @@ input[type="text"] {
     z-index: 10; /* 다른 요소 위에 표시되도록 설정 */
 }
 
-.div3, .div5 {
-    border: none;
-    width: 1250px !important;
-    height: 176px;
-    padding: 5px;
-    font-size: 18px;
-    line-height: 1.2;
-    box-sizing: border-box;
-    position: absolute;
-    left: 67px;
-    box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.05),
-        0 -2px 10px rgba(0, 0, 0, 0.05),
-        2px 0 10px rgba(0, 0, 0, 0.05),
-        -2px 0 10px rgba(0, 0, 0, 0.05);
-    overflow: visible; /* 이모지가 잘리지 않도록 설정 */
-}
-
 .pagination1 {
     display: flex;
     justify-content: center; /* 중앙 정렬 */
     list-style: none;
     padding: 0;
-    margin-top: 1590px; /* div3 하단과의 간격 */
+    margin-top: 1470px; /* div3 하단과의 간격 */
     position: relative;
 }
 
@@ -1169,9 +1119,51 @@ input[type="text"] {
     background-color: #F07A7A; /* 호버 시 진한 색상 */
 }
 
+.comments-container {
+    position: absolute;
+    left: 50px;
+    top: 1070px; /* 더 위로 위치 조정 */
+    width: 100%;
+    max-width: 1280px; /* 댓글 영역의 너비를 고정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 10px;
+    border: 1px solid #ddd; /* 경계선 추가 */
+    border-radius: 5px;
+    height: 500px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 댓글이 많아지면 스크롤 생김 */
+}
 
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 댓글 간의 간격 설정 */
+}
 
+.comment-item {
+    min-height: 52.5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    display: flex;  /*플렉스 박스 사용 */
+    justify-content: space-between;  /*요소 간의 간격을 조정 */
+    align-items: center; /*수직 정렬 */
+    padding: 5px 10px; /* 댓글 내용의 패딩 추가 */
+}
 
+.delete-button {
+    background-color: transparent; /* 배경색 없음 */
+    border: none; /* 테두리 없음 */
+    border-radius: 50%; /* 동그라미 형태 */
+    width: 40px; /* 너비 */
+    height: 40px; /* 높이 */
+    font-size: 20px; /* 글자 크기 */
+    color: red; /* 텍스트 색상 */
+    cursor: pointer; /* 커서 모양 변경 */
+    margin-left: 30px; /* 왼쪽 여백 */
+}
 
+.delete-button:hover {
+    background-color: rgba(255, 0, 0, 0.2); /* 호버 시 배경색 */
 
-
+}

@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>할랭왕</title>
     <link href="/styles.todo_list_detail.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
+<!--네비게이션바-->
+<nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
+
 <div class="to-do-list">
-    <!-- 상단 바 -->
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title5">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>
 
     <!-- ToDo List 제목 바 -->
     <div class="_1">
@@ -23,15 +21,22 @@
             <div class="container">
                 <div class="title2">ToDo List</div>
             </div>
-            <img class="vector-2003" src="vector-2002.svg"/>
         </div>
 
         <!-- 검색 필드 -->
         <div class="container-title-search">
             <div class="title-search">제목</div>
             <div class="textfield2">
-                <input type="text" class="text" placeholder="title search">
-                <img class="ic-search2" src="/search.png" alt="Search">
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text"
+                           id="title-input"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly/>
+                    <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
+                           class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
+                </th:block>
             </div>
         </div>
 
@@ -76,7 +81,6 @@
             <div class="container">
                 <div class="title2">ToDo Card</div>
             </div>
-            <img class="vector-2002" src="vector-2001.svg"/>
         </div>
 
         <!-- 검색 박스 및 ToDo 카드 -->
@@ -85,66 +89,71 @@
             <img class="ic-search" src="/search.png" alt="Search">
         </div>
 
-        <div class="frame-427318974">
-            <img class="group5" src="/group.png"/>
-            <div class="_5-km">런닝 5km</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318970">
-            <img class="group4" src="/group.png"/>
-            <div class="div12">밥 세끼 먹기</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318971">
-            <img class="group3" src="/group.png"/>
-            <div class="div11">깃허브 공부하기</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318975">
-            <img class="group2" src="/group.png"/>
-            <div class="to-do-card-4">ToDo Card 4</div>
-            <div class="_1-min">1min</div>
-        </div>
-        <div class="frame-427318978">
-            <img class="group" src="/group.png"/>
-            <div class="to-do-card-5">ToDo Card 5</div>
-            <div class="_1-min">1min</div>
+        <div class="frame-427318997">
+            <div class="frame-427318974" th:each="todoCard : ${paging}">
+                <a th:href="@{|/todo_card/detail/${todoCard.id}|}"
+                   style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                    <img class="group5" src="/group.png" alt="Group Icon"/>
+                    <div class="_5-km" th:text="${todoCard.title}"></div>
+                    <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+                </a>
+            </div>
         </div>
 
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=-1">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="?page=0">1</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=1">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
+        <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    class="page-item">
+                    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
 
         <!-- 버튼들 -->
-        <button class="button2" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">ToDO-Card 수정</div>
-        </button>
-        <a class="button3" sec:authorize="isAuthenticated()"
-           th:if="${username == #authentication.getPrincipal().getUsername()}"
-           th:href="@{|/todo_card/create?id=${todoList.id}|}">
-            <div class="title6">ToDO-Card 등록</div>
-        </a>
-        <button class="button4" sec:authorize="isAuthenticated()"
-                th:if="${username == #authentication.getPrincipal().getUsername()}">
-            <div class="title6">회고 등록</div>
-        </button>
+        <th:block sec:authorize="isAuthenticated()"
+                  th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
+                <div class="title6">ToDO-Card 등록</div>
+            </a>
+            <button class="button3" onclick='btnClick()'
+                    th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
+                <div class="title6">회고 등록</div>
+            </button>
+        </th:block>
     </div>
 
     <!-- 회고 바 -->
-    <div class="_3">
+    <!-- 회고 바 -->
+    <th:block th:if="${todoList.remembrance != null}">
+        <th:block sec:authorize="isAuthenticated()">
+            <div class="_3"
+                 th:style="${username == #authentication.getPrincipal().getUsername() or todoList.remembrance.isPublic == true ? '' : 'display: none;'}">
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <div class="_3"
+                 th:style="${todoList.remembrance.isPublic == false ? 'display: none;' : ''}">
+        </th:block>
+    </th:block>
+    <th:block th:if="${todoList.remembrance == null}">
+        <div class="_3" id="remembrance_div" style="display: none;">
+    </th:block>
+    <form class="remembrance_form" th:object="${remembranceForm}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="bar">
             <div class="container">
                 <div class="title2">회고</div>
@@ -154,75 +163,85 @@
 
         <!-- 회고 제목 및 내용 -->
         <div class="div10">제목</div>
-        <div class="div9">오늘의 회고</div>
-        <div class="div8">공개</div>
+        <th:block sec:authorize="isAuthenticated()">
+            <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요."
+                   th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
+            <div class="div8">
+                <input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}"
+                       th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>공개
+            </div>
+            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요."
+                      th:disabled="${username != #authentication.getPrincipal().getUsername()}"></textarea>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <input type="text" class="div9" th:field="*{title}" placeholder="제목을 입력해주세요." disabled="disabled"/>
+            <div class="div8">
+                <input type="checkbox" style='zoom:2.8;' th:field="*{isPublic}" disabled="disabled"/>공개
+            </div>
+            <textarea class="div7" style="resize:none;" th:field="*{content}" placeholder="제목을 입력해주세요."
+                      disabled="disabled"></textarea>
+        </th:block>
 
-        <div class="div7">
-            <div class="to-do-list-a">
-                이번 주 ToDo List를 돌아보니, 많은 일을 완료할 수 있었지만 몇 가지
-                목표는 미루게 되었습니다. 특히, 프로젝트 A는 계획대로 진행되지 않아
-                아쉬웠습니다.
-                <br/>
-                대신, 업무 중간에 갑작스럽게 생긴 미팅 덕분에 팀원들과의 소통이
-                원활해졌고, 이는 결과적으로 좋은 성과로 이어졌습니다.
-                <br/>
-                다음 주에는 목표를 더 구체적으로 설정하고, 우선순위를 명확히 하여
-                효율성을 높여보려고 합니다.
-                <br/>
-                작은 성취라도 기록하며 동기부여를 잃지 않도록 노력하겠습니다.
-                <br/>
-                이번 회고를 통해 다음 주에 더 나은 계획을 세우고 싶습니다.
+        <th:block sec:authorize="isAuthenticated()" th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <th:block th:if="${todoList.remembrance == null}">
+                <button class="button-delete" type="button" onclick="submitSaveForm();">
+                    <div class="title6">저장</div>
+                </button>
+            </th:block>
+            <th:block th:if="${todoList.remembrance != null}">
+                <button class="button-delete" type="button" onclick="submitDeleteForm();">
+                    <div class="title6">삭제</div>
+                </button>
+                <button class="button-save" type="button" onclick="submitModifyForm();">
+                    <div class="title6">수정</div>
+                </button>
+            </th:block>
+        </th:block>
+    </form>
+
+    <!-- 댓글과 이모티콘 -->
+    <div class="div6">댓글</div>
+
+    <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
+    <th:block th:if="${comments != null}">
+        <div class="comments-container">
+            <div class="comments-list" th:each="comment : ${comments}">
+                <div class="comment-item">
+                    <div class="comment-content">
+                        <span th:text="${comment.user.nickname + ' :'}">작성자</span>
+                        <span th:text="${comment.content}">내용</span>
+                    </div>
+                    <button sec:authorize="isAuthenticated()"
+                            th:if="${comment.user.username == #authentication.getPrincipal().getUsername() or username == #authentication.getPrincipal().getUsername()}"
+                            class="delete-button" type="button"
+                            th:onclick="'submitDeleteComment(' + ${comment.id} + ')'">
+                        <span>&times;</span> <!-- 동그라미 안에 X -->
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- 댓글과 이모티콘 -->
-        <div class="div6">댓글</div>
-
-        <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
-        <div class="reactions" style="position: absolute; right: 120px; top: 1015px;">
-            <span onclick="increaseCount(this)">👍 <span class="count">3</span></span>
-            <span onclick="increaseCount(this)">👎 <span class="count">4</span></span>
-            <span onclick="increaseCount(this)">❤️ <span class="count">5</span></span>
+    </th:block>
+    <th:block th:if="${comments == null}">
+        <div class="comments-container">
+            <div class="comments-list">
+                <div class="comment-item">
+                    <span>댓글이 비어있습니다.</span>
+                </div>
+            </div>
         </div>
-        <div class="div5">
-            <div class="div4">엄준식 짱짱맨</div>
-        </div>
+    </th:block>
 
-        <!-- reactions를 div3 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
-        <div class="reactions" style="position: absolute; right: 120px; top: 1280px;">
-            <span onclick="increaseCount(this)">👍 <span class="count">6</span></span>
-            <span onclick="increaseCount(this)">👎 <span class="count">7</span></span>
-            <span onclick="increaseCount(this)">❤️ <span class="count">8</span></span>
-        </div>
-        <div class="div3">
-            <div class="div4">엄준식 짱짱맨</div>
-        </div>
-
-        <ul class="pagination1 justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=-1">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="?page=0">1</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="?page=1">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
-
+    <th:block sec:authorize="isAuthenticated()">
         <!-- 댓글 입력 필드 -->
         <textarea class="input-field3" placeholder="댓글을 입력하세요"></textarea>
         <div class="div2">댓글등록</div>
 
         <!-- 등록 버튼 -->
-        <button class="button">
+        <button class="button" type="button" onclick="submitSaveComment();">
             <div class="title6">등록</div>
         </button>
-    </div>
+    </th:block>
 </div>
 </body>
 </html>
@@ -234,3 +253,198 @@
         countElement.textContent = count + 1;
     }
 </script>
+
+<!--회고 영역 숨기기-->
+<script>
+    function btnClick() {
+        const mydiv = document.getElementById('remembrance_div');
+        if(mydiv.style.display === 'none') {
+            mydiv.style.display = 'block';
+        }else {
+            mydiv.style.display = 'none';
+        }
+    }
+</script>
+
+<!--리스트 제목 비동기 수정-->
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        const titleInput = document.getElementById("title-input");
+        let originalValue = titleInput.value;
+        let isEnterKeyPressed = false;  // 엔터키를 눌렀는지 확인하는 플래그
+
+        titleInput.addEventListener("click", function() {
+            titleInput.removeAttribute('readonly');
+            titleInput.focus();
+        });
+
+       function handleInput() {
+            if (titleInput.value.trim() === "") {
+                alert("제목이 비어있습니다.");
+                titleInput.value = originalValue;
+                titleInput.setAttribute('readonly', true);
+            } else {
+                if (titleInput.value !== originalValue) {
+                    alert("제목이 변경되었습니다.");
+                    sendUpdatedValue(titleInput.value);
+                }
+                titleInput.setAttribute('readonly', true);
+            }
+        }
+
+        titleInput.addEventListener("blur", function() {
+            if (!isEnterKeyPressed) {  // 엔터가 눌리지 않은 경우에만 blur 처리
+                handleInput();
+            }
+            isEnterKeyPressed = false;  // 다음 이벤트에서 엔터 플래그 초기화
+        });
+
+        // 엔터 키를 눌렀을 때 handleInput 호출
+        titleInput.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                isEnterKeyPressed = true;
+                handleInput();
+                titleInput.blur(); // 엔터를 누른 후 input을 비활성화
+            }
+        });
+
+        function sendUpdatedValue(updatedValue) {
+            /*<![CDATA[*/
+            const xhr = new XMLHttpRequest();
+            const url = "/todo_list/modify/" + /*[[${todoList.id}]]*/;
+
+            // CSRF 토큰 가져오기
+            const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+            const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            // CSRF 토큰 헤더 추가
+            xhr.setRequestHeader(header, token);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    originalValue = response.updatedTitle || updatedValue;  // 서버 응답에 title 값이 있는 경우 사용
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    alert("권한이 없거나 오류가 발생했습니다.");
+                }
+            };
+
+            const requestData = "title=" + encodeURIComponent(updatedValue);
+            xhr.send(requestData);
+            /*]]>*/
+        }
+    });
+</script>
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 리스너의 작업
+        const errorMessages = /*[[${errorMessages}]]*/ [];
+        if (errorMessages.length > 0) {
+            alert(errorMessages.join("\n"));
+        }
+    });
+    function submitSaveForm() {
+        if (confirm("저장하시겠습니까?")) {
+            // 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값 (타임리프에서 listId를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance/create/` + listId;  // 요청을 보낼 경로
+            form.submit();
+        }
+    }
+    function submitModifyForm() {
+        if (confirm("수정하시겠습니까?")) {
+            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance/modify/` + listId;  // 삭제 요청을 보낼 경로
+            form.submit();
+        }
+    }
+    function submitDeleteForm() {
+        if (confirm("삭제하시겠습니까?")) {
+            // 삭제 확인을 받은 후 action URL을 변경하고 폼을 제출
+            var form = document.querySelector('form.remembrance_form');
+            var listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 cardId 값 (타임리프에서 cardId를 JavaScript 변수로 전달)
+
+            form.action = `/remembrance/delete/` + listId;  // 삭제 요청을 보낼 경로
+            form.submit();
+        }
+    }
+</script>
+
+<script th:inline="javascript">
+    async function submitSaveComment() {
+        if (confirm("저장하시겠습니까?")) {
+            const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+            const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+            // 댓글 내용과 listId 가져오기
+            const commentContent = document.querySelector('.input-field3').value;
+            const listId = /*[[${todoList.id}]]*/ 'default-id';  // 서버에서 넘어온 listId 값
+
+            // 댓글 내용이 비어있으면 경고
+            if (!commentContent.trim()) {
+                return alert("댓글 내용을 입력하세요.");
+            }
+
+            try {
+                // 댓글 내용과 listId를 비동기적으로 전송
+                const response = await fetch(`/remembrance_comment/create/` + listId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                         [header]: token
+                    },
+                    body: JSON.stringify({ id: listId, content: commentContent })  // id와 content만 전송
+                });
+
+                if (response.ok) {
+                    alert('댓글이 성공적으로 저장되었습니다.');
+                    location.reload();  // 성공 시 페이지 새로고침
+                } else {
+                    alert('댓글 저장에 실패했습니다.');
+                }
+            } catch (error) {
+                alert('댓글 저장 중 오류가 발생했습니다.');
+                console.error('Error:', error);  // 오류 출력
+            }
+        }
+    }
+    async function submitDeleteComment(commentId) {
+        if (confirm("댓글을 삭제하시겠습니까?")) {
+            const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+            const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+
+            try {
+                // 댓글 ID를 비동기적으로 전송
+                const response = await fetch(`/remembrance_comment/delete/${commentId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        [header]: token
+                    }
+                });
+
+                if (response.ok) {
+                    alert('댓글이 성공적으로 삭제되었습니다.');
+                    location.reload();  // 성공 시 페이지 새로고침
+                } else {
+                    alert('댓글 삭제에 실패했습니다.');
+                }
+            } catch (error) {
+                alert('댓글 삭제 중 오류가 발생했습니다.');
+                console.error('Error:', error);  // 오류 출력
+            }
+        }
+    }
+</script>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.*;
+
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -15,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class SiteUser extends BaseEntity {
     @Column(unique = true)
     private String username;
@@ -31,5 +34,7 @@ public class SiteUser extends BaseEntity {
     private String intro;
 
     private String nickname;
+
+    private String thumbnailImg;
 
 }

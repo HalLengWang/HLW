@@ -8,25 +8,20 @@
     <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
 <div class="to-do-list">
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title3">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>
 
     <div class="section">
         <div class="container">
             <div class="title2">ToDo List</div>
         </div>
-        <img class="vector-200" src="vector-2000.svg"/>
     </div>
 
-    <div class="textfield">
-        <div class="text">ToDo List Search</div>
-        <img class="ic-search" src="/search.png"/>
+    <div class="search-box2">
+        <input type="text" placeholder="ToDo List Search">
+        <img src="/lens.png" alt="검색 아이콘" class="ic-search">
     </div>
 
     <div class="frame-427318974">
@@ -39,13 +34,11 @@
         </div>
     </div>
 
-    <div class="primary" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 등록</div>
-    </div>
-
-    <div class="primary2" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 수정</div>
-    </div>
+    <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
+        <a class="primary" th:href="@{|/todo_list/create/${userId}|}">
+            <div class="title">ToDoList 등록</div>
+        </a>
+    </th:block>
 
     <div class="frame-427318977">
         <!-- 페이징처리 시작 -->
@@ -72,13 +65,10 @@
         <!-- 페이징처리 끝 -->
     </div>
 
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title3">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>
 </div>
 </body>
 </html>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

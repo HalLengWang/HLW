@@ -33,4 +33,21 @@ public class TodoListService {
     public List<TodoList> getLists(SiteUser user) {
         return this.todoListRepository.findByUser(user);
     }
+
+    // github 코드 create, modify
+    public TodoList create(SiteUser user) {
+        TodoList todoList = TodoList.builder()
+                .title("제목 없음")
+                .user(user)
+                .build();
+        this.todoListRepository.save(todoList);
+        return todoList;
+    }
+
+    public void modify(TodoList todoList, String title) {
+        TodoList modified = todoList.toBuilder()
+                .title(title)
+                .build();
+        this.todoListRepository.save(modified);
+    }
 }
