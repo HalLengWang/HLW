@@ -15,7 +15,10 @@ public class ScoreService {
 
     @Transactional
     public void create(TodoCard todoCard, SiteUser user) {
-        Integer scoreValue = todoCard.getExecution() * todoCard.getTodoTypeList().getRatio();
+        Integer scoreValue = 0;
+        if (todoCard.getCompletion()) {
+            scoreValue = todoCard.getExecution() * todoCard.getTodoTypeList().getRatio();
+        }
         Score score = Score.builder()
                 .score(scoreValue)
                 .todoCard(todoCard)
