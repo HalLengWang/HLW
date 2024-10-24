@@ -54,7 +54,8 @@ public class TodoListController {
 
     @GetMapping("/detail/{id}")
     public String create(@PathVariable(value = "id") Long list_id, Model model,
-                         @RequestParam(value = "page", defaultValue = "0") int page) {
+                         @RequestParam(value = "page", defaultValue = "0") int page,
+                         RemembranceForm remembranceForm) {
         TodoList todoList = this.todoListService.getTodoList(list_id);
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
