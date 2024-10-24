@@ -1,7 +1,6 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
 import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
-import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;

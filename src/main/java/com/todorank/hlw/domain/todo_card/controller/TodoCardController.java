@@ -4,6 +4,7 @@ import com.todorank.hlw.domain.score.service.ScoreService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
+import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
@@ -50,6 +51,7 @@ public class TodoCardController {
         List<TodoTypeList> typeList = this.todoTypeListService.getList();
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
+        // github 코드 2줄
         model.addAttribute("username", todoList.getUser().getUsername());
         model.addAttribute("mode", "create");
         return "todo_card_read_create_page";
@@ -80,6 +82,7 @@ public class TodoCardController {
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 
+    // github 코드 getmapping 1개, postmapping 2개
     @GetMapping("/detail/{id}")
     public String todoCardDetail(TodoCardForm todoCardForm, @PathVariable(value = "id") Long cardId,
                                  Model model, Principal principal) {
@@ -104,14 +107,10 @@ public class TodoCardController {
 
     @PostMapping("/detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
                                  @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
-                    .stream()
-                    .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.toList()));
-            return "redirect:/todo_card/detail/" + cardId;
+            return "todo_card_read_create_page";
         }
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         if (todoCard == null) {
@@ -144,4 +143,5 @@ public class TodoCardController {
         this.todoCardService.delete(todoCard);
         return "redirect:/todo_list/detail/" + listId;
     }
+
 }

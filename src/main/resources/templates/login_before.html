@@ -7,15 +7,23 @@
   <link rel="stylesheet" href="/styles.login_before.css">
 </head>
 <body>
+
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
 <div class="div">
-  <div class="top-bar">
+  <!--<div class="top-bar">
     <div class="rectangle-4137"></div>
     <div class="title">할랭왕</div>
     <div class="navigation">
-      <div class="tab">로그인</div>
-      <div class="tab">회원가입</div>
+      <a th:href="@{/user/login}">
+        <div class="tab">로그인</div>
+      </a>
+      <a th:href="@{/user/signup}">
+        <div class="tab">회원가입</div>
+      </a>
     </div>
-  </div>
+  </div>-->
 
   <div class="ranking-container">
     <div class="ranking-bar">
@@ -164,4 +172,10 @@
 </div>
 </body>
 </html>
+
+
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

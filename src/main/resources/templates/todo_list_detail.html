@@ -10,138 +10,135 @@
     <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
-<!--div class="to-do-list"-->
-<!-- 상단 바 -->
-<div class="top-bar">
-    <div class="rectangle-4137"></div>
-    <div class="title5">할랭왕</div>
-    <div class="navigation">
-        <div class="tab">로그아웃</div>
-    </div>
-</div>
+<!--네비게이션바-->
+<nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
 
-<!-- ToDo List 제목 바 -->
-<div class="_1">
-    <div class="to-do-list-bar">
-        <div class="container">
-            <div class="title2">ToDo List</div>
-        </div>
-        <img class="vector-2003" src="vector-2002.svg"/>
-    </div>
+<div class="to-do-list">
 
-    <!-- 검색 필드 -->
-    <div class="container-title-search">
-        <div class="title-search">제목</div>
-        <div class="textfield2">
-            <th:block sec:authorize="isAnonymous()">
-                <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
-            </th:block>
-            <th:block sec:authorize="isAuthenticated()">
-                <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text" id="title-input"
-                       class="text" placeholder="title search" th:value="${todoList.title}" readonly/>
-                <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
-                       class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
-            </th:block>
-        </div>
-    </div>
-
-    <div class="container2">
-        <div class="container3">
-            <div class="title4">시간표(TimeTable)</div>
-            <div class="y-axis">Percentage</div>
-            <div class="graph">
-                <div class="ellipse-95"></div>
-                <div class="ellipse-96"></div>
-                <div class="ellipse-97"></div>
+    <!-- ToDo List 제목 바 -->
+    <div class="_1">
+        <div class="to-do-list-bar">
+            <div class="container">
+                <div class="title2">ToDo List</div>
             </div>
-            <div class="x-axis">Tasks</div>
         </div>
-    </div>
 
-    <!-- 메트릭 및 시간표 -->
-    <div class="list">
-        <div class="row">
-            <div class="metric">
-                <div class="title3">Completed Tasks</div>
-                <div class="data">60</div>
-                <div class="change">+10%</div>
+        <!-- 검색 필드 -->
+        <div class="container-title-search">
+            <div class="title-search">제목</div>
+            <div class="textfield2">
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text"
+                           id="title-input"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly/>
+                    <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
+                           class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
+                </th:block>
             </div>
-            <div class="metric">
-                <div class="title3">Pending Tasks</div>
-                <div class="data">30</div>
-                <div class="change">-5%</div>
+        </div>
+
+        <div class="container2">
+            <div class="container3">
+                <div class="title4">시간표(TimeTable)</div>
+                <div class="y-axis">Percentage</div>
+                <div class="graph">
+                    <div class="ellipse-95"></div>
+                    <div class="ellipse-96"></div>
+                    <div class="ellipse-97"></div>
+                </div>
+                <div class="x-axis">Tasks</div>
             </div>
-            <div class="metric">
-                <div class="title3">In Progress Tasks</div>
-                <div class="data">10</div>
-                <div class="change">0%</div>
+        </div>
+
+        <!-- 메트릭 및 시간표 -->
+        <div class="list">
+            <div class="row">
+                <div class="metric">
+                    <div class="title3">Completed Tasks</div>
+                    <div class="data">60</div>
+                    <div class="change">+10%</div>
+                </div>
+                <div class="metric">
+                    <div class="title3">Pending Tasks</div>
+                    <div class="data">30</div>
+                    <div class="change">-5%</div>
+                </div>
+                <div class="metric">
+                    <div class="title3">In Progress Tasks</div>
+                    <div class="data">10</div>
+                    <div class="change">0%</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- ToDo List 상세 바 -->
-<div class="_2">
-    <div class="to-do-list-detail-bar">
-        <div class="container">
-            <div class="title2">ToDo Card</div>
+    <!-- ToDo List 상세 바 -->
+    <div class="_2">
+        <div class="to-do-list-detail-bar">
+            <div class="container">
+                <div class="title2">ToDo Card</div>
+            </div>
         </div>
-        <img class="vector-2002" src="vector-2001.svg"/>
-    </div>
 
-    <!-- 검색 박스 및 ToDo 카드 -->
-    <div class="search-box2">
-        <input class="textfield" type="text" placeholder="ToDo Card List Search">
-        <img class="ic-search" src="/search.png" alt="Search">
-    </div>
+        <!-- 검색 박스 및 ToDo 카드 -->
+        <div class="search-box2">
+            <input class="textfield" type="text" placeholder="ToDo Card List Search">
+            <img class="ic-search" src="/search.png" alt="Search">
+        </div>
 
-    <div class="frame-427318997">
-        <div class="frame-427318974" th:each="todoCard : ${paging}">
-            <a th:href="@{|/todo_card/detail/${todoCard.id}|}" style="display: flex; align-items: center; width: 100%;">
-                <img class="group5" src="/group.png" alt="Group Icon"/>
-                <div class="_5-km" th:text="${todoCard.title}"></div>
-                <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+        <div class="frame-427318997">
+            <div class="frame-427318974" th:each="todoCard : ${paging}">
+                <a th:href="@{|/todo_card/detail/${todoCard.id}|}"
+                   style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                    <img class="group5" src="/group.png" alt="Group Icon"/>
+                    <div class="_5-km" th:text="${todoCard.title}"></div>
+                    <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 페이징처리 시작 -->
+        <div th:if="${!paging.isEmpty()}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{|?page=${paging.number-1}|}">
+                        <span>이전</span>
+                    </a>
+                </li>
+                <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                    th:classappend="${page == paging.number} ? 'active'"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                    class="page-item">
+                    <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- 페이징처리 끝 -->
+
+        <!-- 버튼들 -->
+        <th:block sec:authorize="isAuthenticated()"
+                  th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
+                <div class="title6">ToDO-Card 등록</div>
             </a>
-        </div>
+            <button class="button3" onclick='btnClick()'
+                    th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
+                <div class="title6">회고 등록</div>
+            </button>
+        </th:block>
     </div>
 
-    <!-- 페이징처리 시작 -->
-    <div th:if="${!paging.isEmpty()}">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a class="page-link"
-                   th:href="@{|?page=${paging.number-1}|}">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
-                th:classappend="${page == paging.number} ? 'active'"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}"
-                class="page-item">
-                <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
-            </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- 페이징처리 끝 -->
-
-    <!-- 버튼들 -->
-    <th:block sec:authorize="isAuthenticated()"
-              th:if="${username == #authentication.getPrincipal().getUsername()}">
-        <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
-            <div class="title6">ToDO-Card 등록</div>
-        </a>
-        <button class="button3" onclick='btnClick()' th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
-            <div class="title6">회고 등록</div>
-        </button>
-    </th:block>
-</div>
-
-<!-- 회고 바 -->
+    <!-- 회고 바 -->
+    <!-- 회고 바 -->
     <th:block th:if="${todoList.remembrance != null}">
         <th:block sec:authorize="isAuthenticated()">
             <div class="_3"
@@ -246,11 +243,9 @@
         </button>
     </th:block>
 </div>
-<!--/div-->
 </body>
 </html>
 
-<!--추천, 싫어요 숫자 증가-->
 <script>
     function increaseCount(element) {
         const countElement = element.querySelector(".count");
@@ -449,3 +444,7 @@
         }
     }
 </script>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
