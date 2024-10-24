@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.todo_card.controller;
 
+import com.todorank.hlw.domain.score.service.ScoreService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
@@ -31,6 +32,7 @@ public class TodoCardController {
     private final TodoCardService todoCardService;
     private final TodoTypeListService todoTypeListService;
     private final TodoListService todoListService;
+    private final ScoreService scoreService;
     private final UserService userService;
 
     @GetMapping("/create")
@@ -70,7 +72,11 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
         }
         TodoTypeList type = todoTypeListService.getOne(todoCardForm.getCategory());
-        this.todoCardService.create(todoCardForm, type, todoList);
+        TodoCard todoCard = this.todoCardService.create(todoCardForm, type, todoList);
+        if (todoCardForm.getCompletion()) {
+            this.scoreService.create(todoCard, this.userService.getUser(principal.getName()));
+        }
+
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 
@@ -115,7 +121,9 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         TodoTypeList type = this.todoTypeListService.getOne(todoCardForm.getCategory());
-        this.todoCardService.modify(todoCardForm, todoCard, type);
+        TodoCard todoCard1 = this.todoCardService.modify(todoCardForm, todoCard, type);
+
+        this.scoreService.modify(todoCard1);
         model.addAttribute("success", true);
         return "redirect:/todo_card/detail/" + cardId;
     }
@@ -132,6 +140,7 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         Long listId = todoCard.getTodoList().getId();
+        this.scoreService.delete(todoCard.getScore());
         this.todoCardService.delete(todoCard);
         return "redirect:/todo_list/detail/" + listId;
     }
