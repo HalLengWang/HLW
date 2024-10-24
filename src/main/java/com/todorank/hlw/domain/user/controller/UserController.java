@@ -94,10 +94,6 @@ public class UserController {
         return "login_after";
     }
 
-    // 프로필 수정 -> 홈버튼 클릭시 login_after 페이지로 이동
-
-
-
 
 }
 

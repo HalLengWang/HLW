@@ -92,22 +92,6 @@
         }
     }
 
-    function previewImage2(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        const output = document.getElementById('profile-img person');
-        const fileNameDisplay = document.getElementById('file-name');
-
-        reader.onload = function() {
-            output.src = reader.result;
-        };
-        if (file) {
-            reader.readAsDataURL(file);
-            fileNameDisplay.textContent = file.name;
-        } else {
-            fileNameDisplay.textContent = "선택된 파일 없음";
-        }
-    }
 
     function updateNickname(event) {
         const nicknameDisplay = document.getElementById('nickname-display');

@@ -15,11 +15,6 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    /*@GetMapping("/")
-    public String root() {
-        return "login_after";
-    }*/
-
     // login_after로 getmapping시
     private final UserService userService;
 
