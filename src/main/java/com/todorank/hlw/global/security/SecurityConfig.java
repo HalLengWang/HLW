@@ -75,5 +75,4 @@ public class SecurityConfig {
     public RestTemplate restTemplate() {
         return new RestTemplate(); // RestTemplate 빈 등록
     }
-
 }
