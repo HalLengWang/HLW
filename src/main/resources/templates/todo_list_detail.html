@@ -28,13 +28,14 @@
             <div class="title-search">제목</div>
             <div class="textfield2">
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled />
+                    <input type="text" class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text" id="title-input"
-                           class="text" placeholder="title search" th:value="${todoList.title}" readonly />
+                    <input th:if="${#authentication.getPrincipal().getUsername() == username}" type="text"
+                           id="title-input"
+                           class="text" placeholder="title search" th:value="${todoList.title}" readonly/>
                     <input th:if="${#authentication.getPrincipal().getUsername() != username}" type="text"
-                           class="text" placeholder="title search" th:value="${todoList.title}" disabled />
+                           class="text" placeholder="title search" th:value="${todoList.title}" disabled/>
                 </th:block>
             </div>
         </div>
@@ -90,7 +91,8 @@
 
         <div class="frame-427318997">
             <div class="frame-427318974" th:each="todoCard : ${paging}">
-                <a th:href="@{|/todo_card/detail/${todoCard.id}|}" style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                <a th:href="@{|/todo_card/detail/${todoCard.id}|}"
+                   style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
                     <img class="group5" src="/group.png" alt="Group Icon"/>
                     <div class="_5-km" th:text="${todoCard.title}"></div>
                     <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
@@ -122,19 +124,21 @@
         </div>
         <!-- 페이징처리 끝 -->
 
-    <!-- 버튼들 -->
-    <th:block sec:authorize="isAuthenticated()"
-              th:if="${username == #authentication.getPrincipal().getUsername()}">
-        <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
-            <div class="title6">ToDO-Card 등록</div>
-        </a>
-        <button class="button3" onclick='btnClick()' th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
-            <div class="title6">회고 등록</div>
-        </button>
-    </th:block>
-</div>
+        <!-- 버튼들 -->
+        <th:block sec:authorize="isAuthenticated()"
+                  th:if="${username == #authentication.getPrincipal().getUsername()}">
+            <a class="button4" th:href="@{|/todo_card/create?id=${todoList.id}|}">
+                <div class="title6">ToDO-Card 등록</div>
+            </a>
+            <button class="button3" onclick='btnClick()'
+                    th:style="${todoList.remembrance != null ? 'display: none;' : ''}">
+                <div class="title6">회고 등록</div>
+            </button>
+        </th:block>
+    </div>
 
-<!-- 회고 바 -->
+    <!-- 회고 바 -->
+    <!-- 회고 바 -->
     <th:block th:if="${todoList.remembrance != null}">
         <th:block sec:authorize="isAuthenticated()">
             <div class="_3"
@@ -154,6 +158,7 @@
             <div class="container">
                 <div class="title2">회고</div>
             </div>
+            <img class="vector-200" src="vector-2000.svg"/>
         </div>
 
         <!-- 회고 제목 및 내용 -->
@@ -194,8 +199,8 @@
         </th:block>
     </form>
 
-        <!-- 댓글과 이모티콘 -->
-        <div class="div6">댓글</div>
+    <!-- 댓글과 이모티콘 -->
+    <div class="div6">댓글</div>
 
     <!-- reactions를 div5 외부로 이동하고 오른쪽 정렬 및 위로 이동 -->
     <th:block th:if="${comments != null}">
