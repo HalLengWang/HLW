@@ -43,21 +43,20 @@
             </div>
         </div>
     </div>
-
     <div class="ranking-list">
         <div class="list2"></div>
         <div class="container3">
             <div class="title7">
-        <span>
-          <span class="title-7-span">RanKings</span>
-          <span class="title-7-span2">🏆</span>
-        </span>
+            <span>
+                <span class="title-7-span">RanKings</span>
+                <span class="title-7-span2">🏆</span>
+            </span>
             </div>
         </div>
         <div class="list3">
             <div class="row">
                 <div class="item2">
-                    <a th:href="@{/todo_list/list/1}">
+                    <a th:href="@{/todo_list/list/12}">
                         <div class="frame">
                             <div class="icon">🥇</div>
                         </div>
@@ -67,7 +66,7 @@
                         <div class="subtitle2">이상수</div>
                     </a>
                     <div class="subtitle3">
-                        <a th:href="@{/test/10}">일간 랭킹 순위 보러가기</a>
+                        <a th:href="@{/ranking/list}">일간 랭킹 순위 보러가기</a>
                     </div>
                 </div>
                 <div class="item2">
@@ -80,7 +79,9 @@
                         </div>
                     </a>
                     <div class="subtitle2">한태호</div>
-                    <div class="subtitle4">주간 랭킹 순위 보러가기</div>
+                    <div class="subtitle4">
+                        <a th:href="@{/ranking/list}">주간 랭킹 순위 보러가기</a>
+                    </div>
                 </div>
                 <div class="item2">
                     <a th:href="@{/todo_list/list/3}">
@@ -92,7 +93,9 @@
                         </div>
                     </a>
                     <div class="subtitle2">이은규</div>
-                    <div class="subtitle4">월간 랭킹 순위 보러가기</div>
+                    <div class="subtitle4">
+                        <a th:href="@{/ranking/list}">월간 랭킹 순위 보러가기</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,7 +110,10 @@
                             <div class="icon2">🥇</div>
                         </div>
                         <div class="frame-427318906">
-                            <div class="title4">이상수</div>
+                            <td th:text="${user.nickname}">
+                                <div class="title4"></div>
+                            </td>
+
                             <div class="subtitle">9:00 AM</div>
                         </div>
                         <div class="subtitle5">1등</div>
@@ -137,12 +143,14 @@
                         <div class="subtitle5">3등</div>
                     </div>
                 </div>
-                <button class="button">
+                <a th:href="@{/ranking/list}" class="button">
                     <div class="title6">순위 더 보기</div>
-                </button>
+                </a>
             </div>
         </div>
     </div>
+
+
 
     <div class="todo-list-serach">
         <div class="container2">
