@@ -31,6 +31,7 @@ public class UserService {
     // 프로필 정보 두줄 추가
     @Value("${default.thumbnail}")  // 기본 프로필 이미지 경로를 설정 (application.yml 또는 application.properties에 설정)
     private String defaultThumbnail;
+    
     public void create(String username, String password, String email, String nickname) {
         SiteUser user = SiteUser.builder()
                 .username(username)
@@ -39,7 +40,7 @@ public class UserService {
                 .nickname(nickname)
                 .intro(String.format("반갑습니다! %s입니다~", nickname))
                 .build();
-        return this.userRepository.save(user);
+        this.userRepository.save(user);
     }
 
     public SiteUser getUser(String username) {
