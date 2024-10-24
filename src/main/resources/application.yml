@@ -31,3 +31,7 @@ spring:
       org.hibernate.orm.jdbc.bind: TRACE
       org.hibernate.orm.jdbc.extract: TRACE
       org.springframework.transaction.interceptor: TRACE
+
+# 프로필 기본 이미지
+default:
+  thumbnail: profile_basic.png

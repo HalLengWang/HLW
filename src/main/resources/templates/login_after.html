@@ -1,23 +1,25 @@
 <link rel="stylesheet" href="/styles.login_after.css">
 <div class="div">
-    <div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title11">할랭왕</div>
-        <div class="navigation">
-            <div class="tab" sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></div>
-            <div class="tab" sec:authorize="isAuthenticated()"><a th:href="@{/user/logout}">로그아웃</a></div>
-            <div class="tab"><a th:href="@{/user/signup}">회원가입</a></div>
-        </div>
-    </div>
+    <!-- 네비게이션바 -->
+    <nav th:replace="~{navbar :: navbarFragment}"></nav>
 
     <div class="profile-bar" sec:authorize="isAuthenticated()">
         <div class="avatar">
             <div class="frame-427318985">
-                <img class="person" src="/profile_basic.png"/>
+                <a th:href="@{/user/profile_modify}">
+                    <img class="person" th:if="${user.thumbnailImg != null}"
+                         th:src="@{|/file/${user.thumbnailImg}|}"
+                         alt="프로필 이미지"/>
+
+                    <!-- thumbnailImg가 없는 경우 기본 이미지 사용 -->
+                    <img class="person" th:if="${user.thumbnailImg == null}"
+                         src="/profile_basic.png"
+                         alt="기본 프로필 이미지"/>
+                </a>
             </div>
         </div>
         <div class="frame-427318994">
-            <div class="title10">name</div>
+            <div class="title10" th:text="${user.nickname}">닉네임</div>
         </div>
         <div class="person2">
             <img class="medal" src="/medal.png"/>
@@ -69,28 +71,31 @@
                     </div>
                 </div>
                 <div class="item2">
-                    <div class="frame">
-                        <div class="icon">🥇</div>
-                    </div>
-                    <div class="frame-4273189062">
-                        <div class="title8">주간 랭킹 1위</div>
-                    </div>
+                    <a th:href="@{/todo_list/list/2}">
+                        <div class="frame">
+                            <div class="icon">🥈</div>
+                        </div>
+                        <div class="frame-4273189062">
+                            <div class="title8">주간 랭킹 1위</div>
+                        </div>
+                    </a>
                     <div class="subtitle2">한태호</div>
                     <div class="subtitle4">주간 랭킹 순위 보러가기</div>
                 </div>
                 <div class="item2">
-                    <div class="frame">
-                        <div class="icon">🥇</div>
-                    </div>
-                    <div class="frame-4273189062">
-                        <div class="title8">월간 랭킹 1위</div>
-                    </div>
+                    <a th:href="@{/todo_list/list/3}">
+                        <div class="frame">
+                            <div class="icon">🥉</div>
+                        </div>
+                        <div class="frame-4273189062">
+                            <div class="title8">월간 랭킹 1위</div>
+                        </div>
+                    </a>
                     <div class="subtitle2">이은규</div>
                     <div class="subtitle4">월간 랭킹 순위 보러가기</div>
                 </div>
             </div>
         </div>
-        <img class="vector-2007" src="vector-2006.svg"/>
         <div class="list4">
             <div class="container4">
                 <div class="title9">일간 랭킹</div>
@@ -106,7 +111,6 @@
                             <div class="subtitle">9:00 AM</div>
                         </div>
                         <div class="subtitle5">1등</div>
-                        <img class="vector-2008" src="vector-2007.svg"/>
                     </div>
                 </div>
                 <div class="row">
@@ -119,7 +123,6 @@
                             <div class="subtitle">11:30 AM</div>
                         </div>
                         <div class="subtitle5">2등</div>
-                        <img class="vector-2009" src="vector-2008.svg"/>
                     </div>
                 </div>
                 <div class="row">
@@ -132,14 +135,12 @@
                             <div class="subtitle">3:00 PM</div>
                         </div>
                         <div class="subtitle5">3등</div>
-                        <img class="vector-20010" src="vector-2009.svg"/>
                     </div>
                 </div>
                 <button class="button">
                     <div class="title6">순위 더 보기</div>
                 </button>
             </div>
-            <img class="vector-20011" src="vector-20010.svg"/>
         </div>
     </div>
 
@@ -153,7 +154,6 @@
                 <div class="title6">검색하기</div>
             </button>
         </div>
-        <img class="vector-2006" src="vector-2005.svg"/>
     </div>
 
     <div class="todo-list">
@@ -168,7 +168,6 @@
                         <div class="subtitle">제목 : 오늘의 보성녹차왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-200" src="vector-2000.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -181,7 +180,6 @@
                         <div class="subtitle">제목 : 오늘의 발표왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-2002" src="vector-2001.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -194,7 +192,6 @@
                         <div class="subtitle">제목 : 오늘의 배드민턴왕</div>
                         <div class="subtitle">댓글 / 추천 수</div>
                     </div>
-                    <img class="vector-2003" src="vector-2002.svg"/>
                 </div>
             </div>
             <div class="row">
@@ -206,14 +203,17 @@
                         <div class="title4">Prepare for client pitch</div>
                         <div class="subtitle">Deadline: Tomorrow</div>
                     </div>
-                    <img class="vector-2004" src="vector-2003.svg"/>
                 </div>
             </div>
         </div>
-        <img class="vector-2005" src="vector-2004.svg"/>
     </div>
 
     <div class="_11-12-13-14-15-16-17-18-19-20">
         &lt; 이전 | 11 12 13 14 15 16 17 18 19 20 | 다음 &gt;
     </div>
 </div>
+
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

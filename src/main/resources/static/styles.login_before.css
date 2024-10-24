@@ -4,7 +4,7 @@
 }
 .div {
   background: #ffffff;
-  padding: 80px 0px 0px 0px;
+  padding: 160px 0px 0px 0px; /* 헤더 높이만큼 padding-top을 추가 */
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -24,12 +24,17 @@
   flex-shrink: 0; /* 줄어들지 않도록 설정 */
   width: 1420px; /* 고정 너비 */
   height: 80px; /* 높이 */
-  position: absolute; /* 절대 위치 */
+  position: fixed; /* fixed로 변경하여 항상 상단에 고정 */
   left: 50%; /* 부모 요소의 중앙 위치 */
   top: 0; /* 위쪽 위치 */
   transform: translateX(-50%); /* 왼쪽으로 50% 이동시켜 중앙 정렬 */
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12); /* 그림자 */
-  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+  z-index: 1000; /* 겹치지 않게 z-index 추가 */
+}
+
+.login-container {
+  margin-top: 160px; /* 헤더 높이만큼 마진을 추가 */
+  /* 나머지 스타일은 유지 */
 }
 
 .rectangle-4137 {
