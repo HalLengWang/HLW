@@ -31,6 +31,7 @@ public class UserService {
     // 프로필 정보 두줄 추가
     @Value("${default.thumbnail}")  // 기본 프로필 이미지 경로를 설정 (application.yml 또는 application.properties에 설정)
     private String defaultThumbnail;
+    
     public void create(String username, String password, String email, String nickname) {
         SiteUser user = SiteUser.builder()
                 .username(username)
