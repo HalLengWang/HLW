@@ -9,20 +9,6 @@
 <body>
 <!-- 네비게이션바 -->
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
-<!--<header class="navbar">
-    <div class="back-link">&lt; 프로필</div>
-    <nav class="menu">
-        <div class="nav-links">
-            <a href="/user/login_after">홈</a>
-            <a href="#">업무</a>
-            <a href="/login_before">로그아웃</a>
-        </div>
-        <div class="search-box">
-            <input type="text" placeholder="Search in site">
-            <img src="/lens.png" alt="검색 아이콘" class="ic-search">
-        </div>
-    </nav>
-</header>-->
 
 <section class="profile-container">
     <form th:action="@{/user/profile_modify}" method="post" enctype="multipart/form-data">
