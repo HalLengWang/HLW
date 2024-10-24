@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,12 +20,13 @@
   <div class="ranking-container">
     <div class="ranking-bar">
       <div class="title2">
-                <span>
-                    <span class="title-2-span">RanKings</span>
-                    <span class="title-2-span2">🏆</span>
-                </span>
+        <span>
+          <span class="title-2-span">RanKings</span>
+          <span class="title-2-span2">🏆</span>
+        </span>
       </div>
     </div>
+
     <div class="ranking-list">
       <div class="row">
         <div class="item">
@@ -35,8 +36,8 @@
           <div class="frame-427318906">
             <div class="title3">일간 랭킹 1위</div>
           </div>
-          <div class="subtitle">이상수</div>
-          <div class="subtitle2">일간 랭킹 순위 보러가기</div>
+          <div class="subtitle" th:text="${topDailyUser.nickname}">이상수</div>
+          <div class="subtitle2" th:text="${topDailyUser.totalScore}">점수: 1000</div>
         </div>
         <div class="item">
           <div class="frame">
@@ -45,8 +46,8 @@
           <div class="frame-427318906">
             <div class="title3">주간 랭킹 1위</div>
           </div>
-          <div class="subtitle">한태호</div>
-          <div class="subtitle3">주간 랭킹 순위 보러가기</div>
+          <div class="subtitle" th:text="${topWeeklyUser.nickname}">한태호</div>
+          <div class="subtitle2" th:text="${topWeeklyUser.totalScore}">점수: 900</div>
         </div>
         <div class="item">
           <div class="frame">
@@ -55,8 +56,8 @@
           <div class="frame-427318906">
             <div class="title3">월간 랭킹 1위</div>
           </div>
-          <div class="subtitle">이은규</div>
-          <div class="subtitle3">월간 랭킹 순위 보러가기</div>
+          <div class="subtitle" th:text="${topMonthlyUser.nickname}">이은규</div>
+          <div class="subtitle2" th:text="${topMonthlyUser.totalScore}">점수: 850</div>
         </div>
       </div>
     </div>
@@ -66,40 +67,16 @@
         <div class="title4">일간 랭킹</div>
       </div>
       <div class="list">
-        <div class="row">
+        <div th:each="user, iterStat : ${dailyRankedUsers}" class="row">
           <div class="item2">
             <div class="frame2">
-              <div class="icon2">🥇</div>
+              <div class="icon2" th:text="${iterStat.index + 1 == 1 ? '🥇' : iterStat.index + 1 == 2 ? '🥈' : '🥉'}"></div>
             </div>
             <div class="frame-4273189062">
-              <div class="title5">이상수</div>
-              <div class="subtitle4">9:00 AM</div>
+              <div class="title5" th:text="${user.nickname}"></div>
+              <div class="subtitle4" th:text="${user.rankTime}">9:00 AM</div>
             </div>
-            <div class="subtitle5">1등</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="item2">
-            <div class="frame2">
-              <div class="icon2">🥈</div>
-            </div>
-            <div class="frame-4273189062">
-              <div class="title5">유지훈</div>
-              <div class="subtitle4">11:30 AM</div>
-            </div>
-            <div class="subtitle5">2등</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="item3">
-            <div class="frame2">
-              <div class="icon2">🥉</div>
-            </div>
-            <div class="frame-4273189062">
-              <div class="title5">박승수</div>
-              <div class="subtitle4">3:00 PM</div>
-            </div>
-            <div class="subtitle5">3등</div>
+            <div class="subtitle5" th:text="${iterStat.index + 1 + '등'}"></div>
           </div>
         </div>
         <button class="button">
@@ -187,3 +164,4 @@
 </div>
 </body>
 </html>
+
