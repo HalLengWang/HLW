@@ -90,10 +90,8 @@ public class UserController {
 
         // 수정된 사용자 정보를 모델에 추가하여 다시 렌더링할 때 반영
         model.addAttribute("user", siteUser);
-        /*return "redirect:/user/profile_modify";*/
         return "login_after";
     }
 
 
 }
-

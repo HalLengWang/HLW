@@ -12,13 +12,6 @@
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 
 <div class="to-do-list">
-    <!--<div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title3">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>-->
 
     <div class="section">
         <div class="container">
@@ -31,11 +24,6 @@
         <img src="/lens.png" alt="검색 아이콘" class="ic-search">
     </div>
 
-    <!--    <div class="textfield">
-            <div class="text">ToDo List Search</div>
-            <img class="ic-search" src="/search.png"/>
-        </div>-->
-
     <div class="frame-427318974">
         <div class="frame-427318969" th:each="todoList : ${paging}">
             <a th:href="@{|/todo_list/detail/${todoList.id}|}" style="display: flex; align-items: center; width: 100%;">
@@ -46,13 +34,11 @@
         </div>
     </div>
 
-    <div class="primary" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 등록</div>
-    </div>
-
-    <div class="primary2" sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
-        <div class="title">ToDoList 수정</div>
-    </div>
+    <th:block sec:authorize="isAuthenticated()" th:if="${#authentication.getPrincipal().getUsername() == userName}">
+        <a class="primary" th:href="@{|/todo_list/create/${userId}|}">
+            <div class="title">ToDoList 등록</div>
+        </a>
+    </th:block>
 
     <div class="frame-427318977">
         <!-- 페이징처리 시작 -->
@@ -79,13 +65,6 @@
         <!-- 페이징처리 끝 -->
     </div>
 
-    <!--<div class="top-bar">
-        <div class="rectangle-4137"></div>
-        <div class="title3">할랭왕</div>
-        <div class="navigation">
-            <div class="tab">로그아웃</div>
-        </div>
-    </div>-->
 </div>
 </body>
 </html>

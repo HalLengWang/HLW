@@ -3,6 +3,7 @@ package com.todorank.hlw.domain.user.service;
 import com.todorank.hlw.domain.user.entity.SiteUser;
 import com.todorank.hlw.domain.user.form.UserCreateForm;
 import com.todorank.hlw.domain.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.Optional;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -24,10 +27,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     // 프로필 정보 두줄 추가
     @Value("${default.thumbnail}")  // 기본 프로필 이미지 경로를 설정 (application.yml 또는 application.properties에 설정)
     private String defaultThumbnail;
-
+    
     public void create(String username, String password, String email, String nickname) {
         SiteUser user = SiteUser.builder()
                 .username(username)
@@ -42,8 +46,15 @@ public class UserService {
     public SiteUser getUser(String username) {
         return this.userRepository.findByusername(username).orElse(null);
     }
+
     public SiteUser getUser(Long id) {
         return this.userRepository.findById(id).orElse(null);
+    }
+
+
+
+    private Optional<SiteUser> findByUsername(String username) {
+        return userRepository.findByusername(username);
     }
 
     // 프로필
@@ -77,26 +88,4 @@ public class UserService {
         }
         userRepository.save(user);
     }
-
-    // 프로필 -> 회원가입 시 thumbnail 기본값
-    /*@Value("${default.thumbnail}")
-    private String defaultThumbnail;
-
-    public SiteUser registerUser(UserCreateForm form) {
-        SiteUser siteUser= new SiteUser();
-        siteUser.setUsername(form.getUsername());
-        siteUser.setPassword(passwordEncoder.encode(form.getPassword()));
-
-        // thumbnail 값이 없으면 설정 파일에서 기본 값 가져오기
-        if (form.getThumbnail() == null || form.getThumbnail().isEmpty()) {
-            siteUser.setThumbnailImg(defaultThumbnail);
-        } else {
-            siteUser.setThumbnailImg(form.getThumbnail());
-        }
-
-        return userRepository.save(siteUser);
-    }*/
-
-
-
 }

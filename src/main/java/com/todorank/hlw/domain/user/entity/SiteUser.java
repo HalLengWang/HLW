@@ -3,7 +3,12 @@ package com.todorank.hlw.domain.user.entity;
 import com.todorank.hlw.global.jpa.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.*;
+
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -31,4 +36,5 @@ public class SiteUser extends BaseEntity {
     private String nickname;
 
     private String thumbnailImg;
+
 }

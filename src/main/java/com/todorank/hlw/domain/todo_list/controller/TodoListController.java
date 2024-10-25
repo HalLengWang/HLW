@@ -1,7 +1,6 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
 import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
-import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -48,14 +47,15 @@ public class TodoListController {
         model.addAttribute("paging", todoLists);
         model.addAttribute("page", page);
         model.addAttribute("userName", user.getUsername());
-        model.addAttribute("id", userId);
+        model.addAttribute("userId", userId);
         return "todo_list";
     }
 
     @GetMapping("/detail/{id}")
-    public String create(@PathVariable(value = "id") Long list_id, Model model,
-                         @RequestParam(value = "page", defaultValue = "0") int page) {
-        TodoList todoList = this.todoListService.getTodoList(list_id);
+    public String detail(@PathVariable(value = "id") Long listId, Model model,
+                         @RequestParam(value = "page", defaultValue = "0") int page,
+                         RemembranceForm remembranceForm) {
+        TodoList todoList = this.todoListService.getTodoList(listId);
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "존재하지 않는 리스트 입니다.");
         }
@@ -79,7 +79,6 @@ public class TodoListController {
         return "todo_list_detail";
     }
 
-    // github 코드 getmapping create{id}, modify{id}
     @GetMapping("/create/{id}")
     @PreAuthorize("isAuthenticated()")
     public String create(@PathVariable(value = "id") Long userId, Principal principal) {
@@ -109,5 +108,4 @@ public class TodoListController {
         response.put("updatedTitle", title);
         return ResponseEntity.ok(response);
     }
-
 }
