@@ -27,8 +27,8 @@ public class TodoCardService {
                 .todoList(todoList)
                 .title(todoCardForm.getTitle())
                 .memo(todoCardForm.getMemo())
-                .startDateTime(todoCardForm.getStartDateTime())
-                .endDateTime(todoCardForm.getEndDateTime())
+                .startTime(todoCardForm.getStartTime())
+                .endTime(todoCardForm.getEndTime())
                 .completion(todoCardForm.getCompletion())
                 .execution(todoCardForm.getExecution())
                 .todoTypeList(type)
@@ -39,7 +39,7 @@ public class TodoCardService {
 
     public Page<TodoCard> getPage(TodoList todoList, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.asc("startDateTime"));
+        sorts.add(Sort.Order.asc("startTime"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.todoCardRepository.findByTodoList(todoList, pageable);
     }
@@ -53,8 +53,8 @@ public class TodoCardService {
         TodoCard modCard = todoCard.toBuilder()
                 .title(todoCardForm.getTitle())
                 .memo(todoCardForm.getMemo())
-                .startDateTime(todoCardForm.getStartDateTime())
-                .endDateTime(todoCardForm.getEndDateTime())
+                .startTime(todoCardForm.getStartTime())
+                .endTime(todoCardForm.getEndTime())
                 .completion(todoCardForm.getCompletion())
                 .execution(todoCardForm.getExecution())
                 .todoTypeList(type)

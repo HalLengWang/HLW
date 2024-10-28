@@ -19,24 +19,24 @@
         <div class="time-section">
             <div class="time">
                 <p>시간</p>
-                <label for="startDateTime">시작 시간</label>
+                <label for="startTime">시작 시간</label>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input type="datetime-local" th:field="*{startDateTime}"
+                    <input type="time" th:field="*{startTime}"
                            th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
                 </th:block>
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="datetime-local" th:field="*{startDateTime}" disabled="disabled"/>
+                    <input type="time" th:field="*{startTime}" disabled="disabled"/>
                 </th:block>
             </div>
             <br/>
             <div class="time">
-                <label for="endDateTime">종료 시간</label>
+                <label for="endTime">종료 시간</label>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input type="datetime-local" th:field="*{endDateTime}"
+                    <input type="time" th:field="*{endTime}"
                            th:disabled="${username != #authentication.getPrincipal().getUsername()}"/>
                 </th:block>
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="datetime-local" th:field="*{endDateTime}" disabled="disabled"/>
+                    <input type="time" th:field="*{endTime}" disabled="disabled"/>
                 </th:block>
             </div>
             <div class="complete">

@@ -95,7 +95,7 @@
                    style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
                     <img class="group5" src="/group.png" alt="Group Icon"/>
                     <div class="_5-km" th:text="${todoCard.title}"></div>
-                    <div class="_1-min" th:text="${#temporals.format(todoCard.startDateTime, 'HH:mm')}"></div>
+                    <div class="_1-min" th:text="${#temporals.format(todoCard.startTime, 'HH:mm')}"></div>
                 </a>
             </div>
         </div>
