@@ -1,8 +1,10 @@
 package com.todorank.hlw.domain.todo_card.controller;
 
+import com.todorank.hlw.domain.score.service.ScoreService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.form.TodoCardForm;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
+import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.service.TodoListService;
 import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
@@ -31,6 +33,7 @@ public class TodoCardController {
     private final TodoCardService todoCardService;
     private final TodoTypeListService todoTypeListService;
     private final TodoListService todoListService;
+    private final ScoreService scoreService;
     private final UserService userService;
 
     @GetMapping("/create")
@@ -48,6 +51,7 @@ public class TodoCardController {
         List<TodoTypeList> typeList = this.todoTypeListService.getList();
         model.addAttribute("todoTypeList", typeList);
         model.addAttribute("todoListId", list_id);
+        // github 코드 2줄
         model.addAttribute("username", todoList.getUser().getUsername());
         model.addAttribute("mode", "create");
         return "todo_card_read_create_page";
@@ -70,10 +74,15 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "올바르지 못한 접근 입니다.");
         }
         TodoTypeList type = todoTypeListService.getOne(todoCardForm.getCategory());
-        this.todoCardService.create(todoCardForm, type, todoList);
+        TodoCard todoCard = this.todoCardService.create(todoCardForm, type, todoList);
+
+        this.scoreService.create(todoCard, this.userService.getUser(principal.getName()));
+
+
         return String.format("redirect:/todo_list/detail/%s", list_id);
     }
 
+    // github 코드 getmapping 1개, postmapping 2개
     @GetMapping("/detail/{id}")
     public String todoCardDetail(TodoCardForm todoCardForm, @PathVariable(value = "id") Long cardId,
                                  Model model, Principal principal) {
@@ -91,21 +100,17 @@ public class TodoCardController {
         todoCardForm.setCategory(todoCard.getTodoTypeList().getId());
         todoCardForm.setTitle(todoCard.getTitle());
         todoCardForm.setCompletion(todoCard.getCompletion());
-        todoCardForm.setEndDateTime(todoCard.getEndDateTime());
-        todoCardForm.setStartDateTime(todoCard.getStartDateTime());
+        todoCardForm.setEndTime(todoCard.getEndTime());
+        todoCardForm.setStartTime(todoCard.getStartTime());
         return "todo_card_read_create_page";
     }
 
     @PostMapping("/detail/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String todoCardModify(@Valid TodoCardForm todoCardForm, BindingResult bindingResult,
                                  @PathVariable(value = "id") Long cardId, Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessages", bindingResult.getAllErrors()
-                    .stream()
-                    .map(ObjectError::getDefaultMessage)
-                    .collect(Collectors.toList()));
-            return "redirect:/todo_card/detail/" + cardId;
+            return "todo_card_read_create_page";
         }
         TodoCard todoCard = this.todoCardService.getCard(cardId);
         if (todoCard == null) {
@@ -115,7 +120,9 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         TodoTypeList type = this.todoTypeListService.getOne(todoCardForm.getCategory());
-        this.todoCardService.modify(todoCardForm, todoCard, type);
+        TodoCard todoCard1 = this.todoCardService.modify(todoCardForm, todoCard, type);
+
+        this.scoreService.modify(todoCard1);
         model.addAttribute("success", true);
         return "redirect:/todo_card/detail/" + cardId;
     }
@@ -132,7 +139,9 @@ public class TodoCardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         Long listId = todoCard.getTodoList().getId();
+        this.scoreService.delete(todoCard.getScore());
         this.todoCardService.delete(todoCard);
         return "redirect:/todo_list/detail/" + listId;
     }
+
 }

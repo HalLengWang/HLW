@@ -1,5 +1,6 @@
 package com.todorank.hlw.domain.todo_list.service;
 
+import com.todorank.hlw.domain.todo_list.DTO.TodoListDTO;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
 import com.todorank.hlw.domain.todo_list.repository.TodoListRepository;
 import com.todorank.hlw.domain.user.entity.SiteUser;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class TodoListService {
         return this.todoListRepository.findByUser(user);
     }
 
+    // github 코드 create, modify
     public TodoList create(SiteUser user) {
         TodoList todoList = TodoList.builder()
                 .title("제목 없음")
@@ -47,5 +50,17 @@ public class TodoListService {
                 .title(title)
                 .build();
         this.todoListRepository.save(modified);
+    }
+
+    public boolean updateExecuteDate(TodoList todoList, LocalDate date) {
+        TodoList modList = todoList.toBuilder()
+                .executeDate(date)
+                .build();
+        try {
+            this.todoListRepository.save(modList);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

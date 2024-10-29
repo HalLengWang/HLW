@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -35,9 +36,9 @@ public class TodoCard extends BaseEntity {
     @Column(columnDefinition = "text")
     private String memo;
 
-    private LocalDateTime startDateTime;
+    private LocalTime startTime;
 
-    private LocalDateTime endDateTime;
+    private LocalTime endTime;
 
     private Boolean completion;
 

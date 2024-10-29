@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @SuperBuilder(toBuilder = true)
@@ -22,6 +24,9 @@ public class TodoList extends BaseEntity {
     private SiteUser user;
 
     private String title;
+
+    //@Column(unique = true)
+    private LocalDate executeDate;
 
     @OneToOne(mappedBy = "todoList")
     private Remembrance remembrance;

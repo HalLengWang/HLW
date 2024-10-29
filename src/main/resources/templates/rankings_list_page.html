@@ -7,20 +7,22 @@
     <link rel="stylesheet" href="/rankings_list_page.css">
 </head>
 <body>
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
 <!-- 상단 네비게이션 -->
-<div class="top-bar">
+<!--<div class="top-bar">
     <div class="title6">할랭왕</div>
     <div class="navigation">
         <div class="tab2">로그인</div>
         <div class="tab2">회원가입</div>
-        <!-- 검색 박스 -->
+        &lt;!&ndash; 검색 박스 &ndash;&gt;
         <div class="search-box">
             <input type="text" placeholder="Search in site">
             <img src="/lens.png" alt="검색 아이콘" class="ic-search">
         </div>
-
     </div>
-</div>
+</div>-->
 
 <!-- 타이틀 섹션 -->
 <div class="frame-427318932">
@@ -35,94 +37,15 @@
 
 <!-- 랭킹 리스트 -->
 <div class="list">
-    <div class="row">
+    <!-- 사용자 정보를 반복문으로 동적으로 생성 -->
+    <div th:each="user, iterStat : ${rankedUsers}" class="row">
         <div class="rank-item">
-            <div class="icon">🥇</div>
-            <div class="title2">JohnDoe</div>
+            <div class="icon" th:text="${iterStat.index + 1} + '️⃣'"></div>
+            <div class="title2" th:text="${user.nickname}">사용자 닉네임</div> <!-- 사용자 닉네임 -->
         </div>
         <div class="score-container">
-            <div class="score">500</div>
-            <div class="score-change">+77</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">🥈</div>
-            <div class="title2">JaneSmith</div>
-        </div>
-        <div class="score-container">
-            <div class="score">495</div>
-            <div class="score-change">+70</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">🥉</div>
-            <div class="title2">SamWilliams</div>
-        </div>
-        <div class="score-container">
-            <div class="score">493</div>
-            <div class="score-change">+80</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">4️⃣</div>
-            <div class="title2">AlexBrown</div>
-        </div>
-        <div class="score-container">
-            <div class="score">470</div>
-            <div class="score-change">+85</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">5️⃣</div>
-            <div class="title2">EmilyClark</div>
-        </div>
-        <div class="score-container">
-            <div class="score">375</div>
-            <div class="score-change">+65</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">6️⃣</div>
-            <div class="title2">ChrisTaylor</div>
-        </div>
-        <div class="score-container">
-            <div class="score">370</div>
-            <div class="score-change">+32</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">7️⃣</div>
-            <div class="title2">OliviaGreen</div>
-        </div>
-        <div class="score-container">
-            <div class="score">355</div>
-            <div class="score-change">+33</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">8️⃣</div>
-            <div class="title2">MichaelLee</div>
-        </div>
-        <div class="score-container">
-            <div class="score">321</div>
-            <div class="score-change">+22</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="rank-item">
-            <div class="icon">9️⃣</div>
-            <div class="title2">SarahDavis</div>
-        </div>
-        <div class="score-container">
-            <div class="score">300</div>
-            <div class="score-change">+21</div>
+            <div class="score" th:text="${user.totalScore}">점수</div> <!-- 사용자 점수 -->
+            <div class="score-change">+0</div> <!-- 변화량은 필요에 따라 추가 -->
         </div>
     </div>
 </div>
@@ -133,3 +56,8 @@
 </div>
 </body>
 </html>
+
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

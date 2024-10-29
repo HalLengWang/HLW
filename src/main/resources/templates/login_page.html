@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-<div class="header">
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<!--<div class="header">
     <div class="left-section">
         <img src="/profile_basic.png" alt="Profile Icon" class="profile-icon">
         <div class="title">로그인 페이지</div>
@@ -16,7 +19,7 @@
         <div class="tab">홈</div>
         <div class="tab">업무</div>
     </div>
-</div>
+</div>-->
 
 <div class="login-container">
     <form class="login-form" th:action="@{/user/login}" method="post">
@@ -39,3 +42,8 @@
 </div>
 </body>
 </html>
+
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

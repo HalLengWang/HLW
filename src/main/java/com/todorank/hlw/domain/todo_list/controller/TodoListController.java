@@ -1,7 +1,6 @@
 package com.todorank.hlw.domain.todo_list.controller;
 
 import com.todorank.hlw.domain.remembrance.form.RemembranceForm;
-import com.todorank.hlw.domain.remembrance_comment.service.RemembranceCommentService;
 import com.todorank.hlw.domain.todo_card.entity.TodoCard;
 import com.todorank.hlw.domain.todo_card.service.TodoCardService;
 import com.todorank.hlw.domain.todo_list.entity.TodoList;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,4 +109,25 @@ public class TodoListController {
         response.put("updatedTitle", title);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/update-execute-date")
+    @PreAuthorize("isAuthenticated()")
+    @ResponseBody
+    public Map<String, Object> updateExecuteDate(@RequestBody Map<String, Object> request, Principal principal) {
+        Long todoListId = Long.parseLong(request.get("id").toString());
+        TodoList todoList = this.todoListService.getTodoList(todoListId);
+        if (todoList == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "리스트가 없습니다.");
+        }
+        if (!principal.getName().equals(todoList.getUser().getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
+        }
+        LocalDate newDate = (LocalDate) request.get("executeDate");
+        boolean success = this.todoListService.updateExecuteDate(todoList, newDate);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", success);
+        return response;
+    }
+
 }

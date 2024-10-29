@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="retrospective_from_page.css">
 </head>
 <body>
+<!-- 네비게이션바 -->
+<nav th:replace="~{navbar :: navbarFragment}" style="width: 100%;"></nav>
+
 <!-- Top Bar -->
-<div class="top-bar">
+<!--<div class="top-bar">
     <div class="title3">할랭왕</div>
     <div class="navigation">
         <div class="tab">로그아웃</div>
@@ -17,7 +20,7 @@
             <img src="/lens.png" alt="검색 아이콘" class="ic-search">
         </div>
     </div>
-</div>
+</div>-->
 
 <!-- Section Header -->
 <div class="section">
@@ -45,3 +48,7 @@
 </div>
 </body>
 </html>
+<script th:src="@{/bootstrap.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

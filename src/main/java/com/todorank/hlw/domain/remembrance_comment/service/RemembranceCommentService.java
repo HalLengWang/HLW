@@ -20,4 +20,12 @@ public class RemembranceCommentService {
                 .build();
         this.remembranceCommentRepository.save(comment);
     }
+
+    public RemembranceComment getComment(Long id) {
+        return this.remembranceCommentRepository.findById(id).orElse(null);
+    }
+
+    public void delete(RemembranceComment comment) {
+        this.remembranceCommentRepository.delete(comment);
+    }
 }
