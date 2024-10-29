@@ -50,7 +50,7 @@
                     <th:block sec:authorize="isAuthenticated()">
                         <input th:if="${#authentication.getPrincipal().getUsername() == username}"
                                type="date" th:value="${todoList.executeDate}"
-                               onchange="updateExecuteDate(this.value, [[${todoList.id}]])"/>
+                               th:onchange="updateExecuteDate(this.value, [[${todoList.id}]])"/>
                         <input th:if="${#authentication.getPrincipal().getUsername() != username}"
                                type="date" th:value="${todoList.executeDate}" disabled/>
                     </th:block>
@@ -148,7 +148,6 @@
         </th:block>
     </div>
 
-    <!-- 회고 바 -->
     <!-- 회고 바 -->
     <th:block th:if="${todoList.remembrance != null}">
         <th:block sec:authorize="isAuthenticated()">
@@ -353,7 +352,8 @@
     function updateExecuteDate(newDate, todoId) {
         const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
         const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
-        fetch(`/todo_list/update-execute-date/`, {
+
+        fetch(`/todo_list/update-execute-date`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

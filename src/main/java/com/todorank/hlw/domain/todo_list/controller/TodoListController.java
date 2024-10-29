@@ -122,7 +122,7 @@ public class TodoListController {
         if (!principal.getName().equals(todoList.getUser().getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
-        LocalDate newDate = (LocalDate) request.get("executeDate");
+        LocalDate newDate = LocalDate.parse(request.get("executeDate").toString());
         boolean success = this.todoListService.updateExecuteDate(todoList, newDate);
 
         Map<String, Object> response = new HashMap<>();
