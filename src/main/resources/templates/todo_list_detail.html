@@ -43,7 +43,18 @@
         <div class="container2">
             <div class="container3">
                 <div class="title4">시간표(TimeTable)</div>
-                <div class="y-axis">Percentage</div>
+                <div class="y-axis">실행일
+                    <th:block sec:authorize="isAnonymous()">
+                        <input type="date" th:value="${todoList.executeDate}" disabled/>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <input th:if="${#authentication.getPrincipal().getUsername() == username}"
+                               type="date" th:value="${todoList.executeDate}"
+                               onchange="updateExecuteDate(this.value, [[${todoList.id}]])"/>
+                        <input th:if="${#authentication.getPrincipal().getUsername() != username}"
+                               type="date" th:value="${todoList.executeDate}" disabled/>
+                    </th:block>
+                </div>
                 <div class="graph">
                     <div class="ellipse-95"></div>
                     <div class="ellipse-96"></div>
@@ -338,7 +349,29 @@
         }
     });
 </script>
-
+<script th:inline="javascript">
+    function updateExecuteDate(newDate, todoId) {
+        const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+        const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
+        fetch(`/todo_list/update-execute-date/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                [header]: token
+            },
+            body: JSON.stringify({ executeDate: newDate, id: todoId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log("날짜가 변경되었습니다");
+            } else {
+                console.error("날짜 변경에 실패했습니다.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    }
+</script>
 <script th:inline="javascript">
     document.addEventListener("DOMContentLoaded", function() {
         // 첫 번째 리스너의 작업

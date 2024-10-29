@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,5 +50,17 @@ public class TodoListService {
                 .title(title)
                 .build();
         this.todoListRepository.save(modified);
+    }
+
+    public boolean updateExecuteDate(TodoList todoList, LocalDate date) {
+        TodoList modList = todoList.toBuilder()
+                .executeDate(date)
+                .build();
+        try {
+            this.todoListRepository.save(modList);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
