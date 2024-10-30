@@ -29,7 +29,7 @@
             <a th:href="@{|/todo_list/detail/${todoList.id}|}" style="display: flex; align-items: center; width: 100%;">
                 <img class="group" src="/group.png" alt="Group Icon"/>
                 <div class="list-1" th:text="${todoList.title}"></div>
-                <div class="_1-min" th:text="${#temporals.format(todoList.createdDate, 'yyyy-MM-dd')}"></div>
+                <div class="_1-min" th:if="${todoList.executeDate != null}" th:text="${#temporals.format(todoList.executeDate, 'yyyy-MM-dd')}"></div>
             </a>
         </div>
     </div>
