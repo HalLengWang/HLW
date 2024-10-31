@@ -1,24 +1,32 @@
-## 서비스명
+## 할랭왕
 
 ### 서비스 설명
 
-<br />
-- 블라블라
-<br/>
+- 할랭왕은 할 일 + 랭킹 + 왕을 합친 말로, TODO List와 랭킹 기능을 합친 서비스 입니다
+- TODO List로 할 일을 기록하고, 완료하면 점수를 추출해 랭킹에 반영합니다.
 
 
 ## 🛠 개발환경
-- ..
+- Java
+- Spring
+- SpringBoot
+  
+- MariaDB
+- JQuery
+- JPA
+  
+- HTML / CSS
+- JavaScript
+- Thymeleaf
 
-<br/>
-<br/>
+- ERDCloud
+- Figma
+- Git / GitHub
 
 ## ☁️ ERD
 
 ![사진명](사진url)
 
-<br>
-<br>
 
 ## 👀 시연영상
 [![이미지 텍스트](스크린샷 이미지)](유투브링크)
