@@ -1,13 +1,12 @@
 package com.todorank.hlw.domain.todo_card.form;
 
-import com.todorank.hlw.domain.todo_type_list.entity.TodoTypeList;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -20,13 +19,13 @@ public class TodoCardForm {
 
     private String memo;
 
-    @NotNull(message = "시작일을 정해주세요")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime startDateTime;
+    @NotNull(message = "시작시간을 정해주세요")
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime startTime;
 
-    @NotNull(message = "마감일을 정해주세요")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime endDateTime;
+    @NotNull(message = "마감시간을 정해주세요")
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
     private Boolean completion;
 

@@ -100,8 +100,8 @@ public class TodoCardController {
         todoCardForm.setCategory(todoCard.getTodoTypeList().getId());
         todoCardForm.setTitle(todoCard.getTitle());
         todoCardForm.setCompletion(todoCard.getCompletion());
-        todoCardForm.setEndDateTime(todoCard.getEndDateTime());
-        todoCardForm.setStartDateTime(todoCard.getStartDateTime());
+        todoCardForm.setEndTime(todoCard.getEndTime());
+        todoCardForm.setStartTime(todoCard.getStartTime());
         return "todo_card_read_create_page";
     }
 
