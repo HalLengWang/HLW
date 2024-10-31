@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface TodoListRepository extends JpaRepository<TodoList, Long> {
     List<TodoList> findByUser(SiteUser user);
     Page<TodoList> findByUser(SiteUser user, Pageable pageable);
-    Optional<TodoList> findByExecuteDate(LocalDate executeDate);
+    Optional<TodoList> findByUserAndExecuteDate(SiteUser user, LocalDate executionDate);
 }

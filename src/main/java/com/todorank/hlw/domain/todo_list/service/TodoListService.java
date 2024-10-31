@@ -38,11 +38,11 @@ public class TodoListService {
 
     // github 코드 create, modify
     public TodoList create(SiteUser user) {
-        Optional<TodoList> optionalTodoList = this.todoListRepository.findByExecuteDate(LocalDate.now());
+        Optional<TodoList> optionalTodoList = this.todoListRepository.findByUserAndExecuteDate(user, LocalDate.now());
         int i = 0;
         while (optionalTodoList.isPresent()) {
             i++;
-            optionalTodoList = this.todoListRepository.findByExecuteDate(LocalDate.now().plusDays(i));
+            optionalTodoList = this.todoListRepository.findByUserAndExecuteDate(user, LocalDate.now().plusDays(i));
         }
         TodoList todoList = TodoList.builder()
                 .title("제목 없음")
@@ -60,7 +60,11 @@ public class TodoListService {
         this.todoListRepository.save(modified);
     }
 
-    public boolean updateExecuteDate(TodoList todoList, LocalDate date) {
+    public boolean updateExecuteDate(SiteUser user, TodoList todoList, LocalDate date) {
+        Optional<TodoList> optionalTodoList = this.todoListRepository.findByUserAndExecuteDate(user, date);
+        if (optionalTodoList.isPresent()) {
+            return false;
+        }
         TodoList modList = todoList.toBuilder()
                 .executeDate(date)
                 .build();

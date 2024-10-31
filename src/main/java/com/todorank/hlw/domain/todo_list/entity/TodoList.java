@@ -25,7 +25,6 @@ public class TodoList extends BaseEntity {
 
     private String title;
 
-    @Column(unique = true)
     private LocalDate executeDate;
 
     @OneToOne(mappedBy = "todoList")

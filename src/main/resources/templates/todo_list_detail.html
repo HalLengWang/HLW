@@ -49,7 +49,7 @@
                     </th:block>
                     <th:block sec:authorize="isAuthenticated()">
                         <input th:if="${#authentication.getPrincipal().getUsername() == username}"
-                               type="date" th:value="${todoList.executeDate}"
+                               type="date" th:value="${todoList.executeDate}" id="todo_list_execute_date"
                                th:onchange="updateExecuteDate(this.value, [[${todoList.id}]])"/>
                         <input th:if="${#authentication.getPrincipal().getUsername() != username}"
                                type="date" th:value="${todoList.executeDate}" disabled/>
@@ -353,6 +353,10 @@
         const token = document.querySelector('meta[name="_csrf"]').getAttribute("content");
         const header = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
 
+        // 정확히 일치하는 input 요소를 선택
+        const inputElement = document.getElementById("todo_list_execute_date");
+        const originalDate = /*[[${todoList.executeDate}]]*/;
+
         fetch(`/todo_list/update-execute-date`, {
             method: 'POST',
             headers: {
@@ -364,12 +368,17 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                console.log("날짜가 변경되었습니다");
+                alert("날짜가 변경되었습니다");
             } else {
-                console.error("날짜 변경에 실패했습니다.");
+                alert(data.message || "날짜 변경에 실패했습니다.");
+                // 날짜가 중복된 경우 input 요소를 원래 날짜로 복원합니다.
+                inputElement.value = originalDate;
             }
         })
-        .catch(error => console.error("Error:", error));
+        .catch(error => {
+            console.error("Error:", error);
+            inputElement.value = originalDate;
+        });
     }
 </script>
 <script th:inline="javascript">

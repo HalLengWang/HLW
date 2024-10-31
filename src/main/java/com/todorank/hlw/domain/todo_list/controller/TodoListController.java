@@ -116,14 +116,18 @@ public class TodoListController {
     public Map<String, Object> updateExecuteDate(@RequestBody Map<String, Object> request, Principal principal) {
         Long todoListId = Long.parseLong(request.get("id").toString());
         TodoList todoList = this.todoListService.getTodoList(todoListId);
+        SiteUser user = this.userService.getUser(principal.getName());
         if (todoList == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "리스트가 없습니다.");
+        }
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "유저가 없습니다.");
         }
         if (!principal.getName().equals(todoList.getUser().getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "권한이 없습니다.");
         }
         LocalDate newDate = LocalDate.parse(request.get("executeDate").toString());
-        boolean success = this.todoListService.updateExecuteDate(todoList, newDate);
+        boolean success = this.todoListService.updateExecuteDate(user, todoList, newDate);
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", success);
