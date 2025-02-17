@@ -36,9 +36,7 @@
   - [회원가입 페이지](#회원가입-페이지)
   - [로그인 페이지](#로그인-페이지)
   - [프로필 페이지](#프로필-페이지)
-  - [ToDo List 페이지](#ToDo-List-페이지)
-  - [ToDo Card 페이지](#ToDO-Card-페이지)
-  - [회고 페이지](#회고-페이지)
+  - [ToDo List ToDo-Card 회고 페이지](#ToDo-List-ToDo-Card-회고-페이지)
   - [랭킹 페이지](#랭킹-페이지)
 - [[6] 트러블 슈팅](#6-트러블-슈팅)
   - [트러블 슈팅 1](#트러블-슈팅-1) 
@@ -260,7 +258,7 @@ DB
 - 썸네일, 자기소개, 닉네임, 이메일 조회 및 수정 기능
 - 점수(일간, 주간, 월간) 및 랭킹(일간, 주간, 월간) 조회 기능
 
-## ToDo List, ToDo Card, 회고 페이지
+## ToDo List ToDo Card 회고 페이지
 ![image](https://github.com/user-attachments/assets/0901ee31-5987-4fa4-9f9c-d38021ca91a9)
 ![image](https://github.com/user-attachments/assets/a975e809-49a2-456a-acb8-bea9f3bcefad)
 - ToDo List 작성, 조회, 수정 기능
