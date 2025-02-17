@@ -53,13 +53,14 @@
 
 # [1] 프로젝트 설명
 
+## 프로젝트 설명
 - 할랭왕은 할 일 + 랭킹 + 왕을 합친 말로, TODO List와 랭킹 기능을 합친 서비스 입니다
 - TODO List로 할 일을 기록하고, 완료하면 점수를 추출해 랭킹에 반영합니다.
 
 ## 개발 기간
 - 2024.10.07 ~ 2024.10.25
 
-## 개발환경
+## 개발 환경
 
 * 환경 & IDE
   - 운영체제 : <img src="https://img.shields.io/badge/Window 11-43B02A?style=flat-square&logo=Window 11&logoColor=white"/>
@@ -78,7 +79,7 @@
   - DB username: root
   - 데이터베이스 이름 : hlw_dev
  
-## 기술스택
+## 기술 스택
 
 Version Control
 <!-- Git -->
