@@ -33,8 +33,8 @@
   - [회원가입 페이지](#회원가입-페이지)
   - [로그인 페이지](#로그인-페이지)
   - [프로필 페이지](#프로필-페이지)
-  - [ToDoList 페이지](#ToDOList-페이지)
-  - [ToDoCard 페이지](#ToDOCard-페이지)
+  - [ToDo List 페이지](#ToDOList-페이지)
+  - [ToDo Card 페이지](#ToDOCard-페이지)
   - [회고 페이지](#회고-페이지)
   - [랭킹 페이지](#랭킹-페이지)
 - [[6] 트러블 슈팅](#6-트러블-슈팅)
@@ -105,7 +105,7 @@ FrontEnd Technologies
 <!-- Thymeleaf -->
   - <img src="https://img.shields.io/badge/Thymeleaf-61DAFB?style=for-the-badge&logo=Thymeleaf&logoColor=white">
 <!-- BootStrap -->
-<img src="https://img.shields.io/badge/BootStrap-DC382D?style=for-the-badge&logo=BootStrap&logoColor=white"> 
+  - <img src="https://img.shields.io/badge/BootStrap-DC382D?style=for-the-badge&logo=BootStrap&logoColor=white"> 
 
 DB
 <!-- MariaDB -->
@@ -348,6 +348,22 @@ A. 이슈 내역
 - 카카오 로그인 시 email에 카카오 계정의 고유 번호가 저장되게 수정했습니다.
 
 - SecurityConfig에서 클라이언트 아이디를 사용하여 카카오 로그아웃 URL을 생성하고, 로그아웃 시 세션과 쿠키가 종료되도록 수정했습니다.
+
+<div align="right">
+  
+[목차로 이동](#목차)
+
+</div>
+
+# [7] 개선 목표
+
+<div align="right">
+  
+[목차로 이동](#목차)
+
+</div>
+
+# [8] 프로젝트 후기
 
 <div align="right">
   
